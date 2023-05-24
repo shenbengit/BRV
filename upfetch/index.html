@@ -683,7 +683,7 @@
   
   
     <li class="md-nav__item">
-      <a href="https://github.com/liangjingkanji/BRV/blob/master/docs/issues.md" class="md-nav__link">
+      <a href="../issues/" class="md-nav__link">
         FAQ
       </a>
     </li>
@@ -771,13 +771,11 @@
 
   <h1>Upfetch</h1>
 
-<p>本章节说的拉取更多不是上拉加载更多, 而是下拉加载更多. 常见的应用场景就是聊天界面下拉取加载历史记录</p>
-<p><br>
-例如聊天记录界面, 最新的消息在底部, 下拉列表会触发加载下一页. 这种需求在BRV中只需要一行代码(扩展自<a href="https://github.com/scwang90/SmartRefreshLayout">SmartRefreshLayout</a>)</p>
-<p><br></p>
+<p>The section discusses the concept of loading more by pulling down, not by pulling up. A common use case is loading previous chat history in a chat interface.</p>
+<p>For example, in a chat history screen, the latest messages are at the bottom, and pulling down the list triggers loading the next page. In BRV, achieving this behavior requires just one line of code, which is an extension of <a href="https://github.com/scwang90/SmartRefreshLayout">SmartRefreshLayout</a>.</p>
 <p><img src="https://i.loli.net/2021/08/14/J9ZEOlKGHsQygwV.gif" width="250"/></p>
 <blockquote>
-<p>向下拉取加载更多其实本质上是将rv反转, 再将内容布局反转(此时内容布局就是正常显示的).</p>
+<p>Loading more by pulling down is essentially achieved by reversing the RecyclerView and reversing the layout of the content view (which is now displayed normally).</p>
 </blockquote>
 <p><div class="highlight"><pre><span></span><code><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onActivityCreated</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span><span class="w"> </span><span class="n">Bundle?)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">super</span><span class="p">.</span><span class="na">onActivityCreated</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
@@ -789,16 +787,16 @@
 <span class="hll"><span class="w">    </span><span class="n">page</span><span class="p">.</span><span class="na">upFetchEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 </span>
 <span class="w">    </span><span class="n">page</span><span class="p">.</span><span class="na">onRefresh</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// 模拟网络请求2秒后成功</span>
+<span class="w">        </span><span class="c1">// Simulating a network request that succeeds after 2 seconds</span>
 <span class="w">        </span><span class="n">postDelayed</span><span class="p">({</span>
 <span class="w">            </span><span class="kd">val</span><span class="w"> </span><span class="nv">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span><span class="p">()</span>
 <span class="w">            </span><span class="n">addData</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="p">}</span>
 <span class="w">        </span><span class="p">},</span><span class="w"> </span><span class="m">1000</span><span class="p">)</span>
-<span class="w">    </span><span class="p">}.</span><span class="na">showLoading</span><span class="p">()</span><span class="w"> </span><span class="c1">//  加载中(缺省页)</span>
+<span class="w">    </span><span class="p">}.</span><span class="na">showLoading</span><span class="p">()</span><span class="w"> </span><span class="c1">// Show loading state (default page)</span>
 <span class="p">}</span>
 </code></pre></div>
-除了高亮的一个属性设置, 其他代码和正常一样</p>
-<p>布局代码</p>
+Except for the highlighted property, the rest of the code remains the same as usual.</p>
+<p>Layout code:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;com.drake.brv.PageRefreshLayout</span>
 <span class="w">    </span><span class="na">android:id=</span><span class="s">&quot;@+id/page&quot;</span>
 <span class="w">    </span><span class="na">android:layout_width=</span><span class="s">&quot;match_parent&quot;</span>
@@ -812,12 +810,12 @@
 <span class="w">        </span><span class="na">app:reverseLayout=</span><span class="s">&quot;true&quot;</span>
 <span class="w">        </span><span class="na">app:stackFromEnd=</span><span class="s">&quot;true&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 
-<span class="w">    </span><span class="cm">&lt;!--stackFromEnd=true 防止UpFetch时数据不满一屏幕的时候, 对齐底部而不是顶部--&gt;</span>
-<span class="w">    </span><span class="cm">&lt;!--reverseLayout=true rv数据排列顺序反转--&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!--stackFromEnd=true ensures that when using UpFetch, the data aligns to the bottom instead of the top if it doesn&#39;t fill the screen--&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!--reverseLayout=true reverses the order of the data in the RecyclerView--&gt;</span>
 
 <span class="nt">&lt;/com.drake.brv.PageRefreshLayout&gt;</span>
 </code></pre></div>
-<p>使用<code>app:page_upFetchEnabled</code>属性也可以配置</p>
+<p>You can also use the <code>app:page_upFetchEnabled</code> attribute to configure the behavior.</p>
 
 
 

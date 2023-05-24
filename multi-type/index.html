@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#adding-multiple-types" class="md-skip">
           Skip to content
         </a>
       
@@ -259,30 +259,30 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    添加多类型
+  <a href="#adding-multiple-types" class="md-nav__link">
+    Adding Multiple Types
   </a>
   
-    <nav class="md-nav" aria-label="添加多类型">
+    <nav class="md-nav" aria-label="Adding Multiple Types">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    多对多
+  <a href="#many-to-many" class="md-nav__link">
+    Many-to-Many
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    一对多
+  <a href="#one-to-many" class="md-nav__link">
+    One-to-Many
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    接口实现
+  <a href="#interface-implementation" class="md-nav__link">
+    Interface Implementation
   </a>
   
 </li>
@@ -293,8 +293,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    区分类型
+  <a href="#differentiating-types" class="md-nav__link">
+    Differentiating Types
   </a>
   
 </li>
@@ -751,7 +751,7 @@
   
   
     <li class="md-nav__item">
-      <a href="https://github.com/liangjingkanji/BRV/blob/master/docs/issues.md" class="md-nav__link">
+      <a href="../issues/" class="md-nav__link">
         FAQ
       </a>
     </li>
@@ -828,30 +828,30 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    添加多类型
+  <a href="#adding-multiple-types" class="md-nav__link">
+    Adding Multiple Types
   </a>
   
-    <nav class="md-nav" aria-label="添加多类型">
+    <nav class="md-nav" aria-label="Adding Multiple Types">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    多对多
+  <a href="#many-to-many" class="md-nav__link">
+    Many-to-Many
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    一对多
+  <a href="#one-to-many" class="md-nav__link">
+    One-to-Many
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    接口实现
+  <a href="#interface-implementation" class="md-nav__link">
+    Interface Implementation
   </a>
   
 </li>
@@ -862,8 +862,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    区分类型
+  <a href="#differentiating-types" class="md-nav__link">
+    Differentiating Types
   </a>
   
 </li>
@@ -888,10 +888,10 @@
 
   <h1>Multi-type</h1>
 
-<p>在BRV中创建多类型非常简单, 通过多次调用<code>addType()</code>来添加多个类型即可</p>
-<h2 id="_1">添加多类型<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<h3 id="_2">多对多<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<p>即列表数据集合中的每个数据类型都对应一个Item类型</p>
+<p>In BRV, creating multiple types is very simple. You can add multiple types by calling <code>addType()</code> multiple times.</p>
+<h2 id="adding-multiple-types">Adding Multiple Types<a class="headerlink" href="#adding-multiple-types" title="Permanent link">&para;</a></h2>
+<h3 id="many-to-many">Many-to-Many<a class="headerlink" href="#many-to-many" title="Permanent link">&para;</a></h3>
+<p>Each data type in the list corresponds to an item type.</p>
 <div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">Model</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_1</span><span class="p">)</span>
@@ -899,12 +899,12 @@
 
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span>
 </code></pre></div>
-<h3 id="_3">一对多<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>即列表数据集合中数据类型都是一样, 但是根据数据类中的某个字段不同来添加不同Item类型</p>
-<p><div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
+<h3 id="one-to-many">One-to-Many<a class="headerlink" href="#one-to-many" title="Permanent link">&para;</a></h3>
+<p>All data types in the list are the same, but different item types are added based on a specific field in the data class.</p>
+<div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">Model</span><span class="o">&gt;</span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// 使用年龄来作为判断返回不同的布局</span>
+<span class="w">        </span><span class="c1">// Use age to determine different layouts</span>
 <span class="w">        </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="m">23</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_1</span>
@@ -917,10 +917,10 @@
 
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span>
 </code></pre></div>
-当前<code>addType</code>的大括号内的<code>this</code>就是你指定的泛型, 所以我们直接通过<code>Model.age</code>来判断返回不同的多类型</p>
-<h3 id="_4">接口实现<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>接口类型是可以addType一个类型, 然后由可以添加N个其子类作为models的数据. 接口具体实现由不同的子类不同实现</p>
-<p>示例</p>
+<p>The lambda inside the <code>addType</code> represents the specified generic type, so we can directly use <code>Model.age</code> to determine different types.</p>
+<h3 id="interface-implementation">Interface Implementation<a class="headerlink" href="#interface-implementation" title="Permanent link">&para;</a></h3>
+<p>You can add a type for an interface and then add multiple subclasses of that interface as data models. Each subclass can implement the interface differently.</p>
+<p>Example:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nc">BaseInterfaceModel</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">text</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span>
 <span class="p">}</span>
@@ -933,75 +933,76 @@
 <span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">text</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">otherText</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>构建示例数据</p>
+<p>Create sample data:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getData</span><span class="p">():</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">Any</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// 在Model中也可以绑定数据</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">List</span><span class="p">(</span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">InterfaceModel1</span><span class="p">(</span><span class="s">&quot;item </span><span class="si">$</span><span class="n">it</span><span class="s">&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">+</span>
 <span class="w">            </span><span class="n">List</span><span class="p">(</span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">InterfaceModel2</span><span class="p">(</span><span class="nb">it</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;item </span><span class="si">${</span><span class="m">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">it</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">+</span>
 <span class="w">            </span><span class="n">List</span><span class="p">(</span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">InterfaceModel3</span><span class="p">(</span><span class="s">&quot;item </span><span class="si">${</span><span class="m">6</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">it</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>声明列表</p>
-<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="n">binding</span><span class="p">.</span><span class="na">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">BaseInterfaceModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_interface_type</span><span class="p">)</span>
-<span class="w">            </span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">item</span><span class="p">.</span><span class="na">onClick</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">toast</span><span class="p">(</span><span class="s">&quot;点击文本&quot;</span><span class="p">)</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">        </span><span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span><span class="p">()</span>
+<p>Declare the list:</p>
+<div class="highlight"><pre><span></span><code><span class="n">binding</span><span class="p">.</span><span class="na">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">BaseInterfaceModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_interface_type</span><span class="p">)</span>
+<span class="w">    </span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">item</span><span class="p">.</span><span class="na">onClick</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">toast</span><span class="p">(</span><span class="s">&quot;Click on the text&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span><span class="p">()</span>
 </code></pre></div>
-<p>这里只是演示简单的文本, 具体可以编写更加复杂的业务逻辑</p>
-<h2 id="_5">区分类型<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>上面章节提到每个Item类型的数据类型, 所以我们取数据类来进行业务逻辑时需要根据不同类型做不同处理</p>
-<p>根据<code>itemViewType</code>区分类型</p>
+<p>This is just a simple example with text. You can implement more complex business logic based on your requirements.</p>
+<h2 id="differentiating-types">Differentiating Types<a class="headerlink" href="#differentiating-types" title="Permanent link">&para;</a></h2>
+<p>As mentioned in the previous sections, each item type has its corresponding data type. Therefore, when performing business logic on the data, we need to handle different types differently.</p>
+<p>Differentiate types based on <code>itemViewType</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">SimpleModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_simple</span><span class="p">)</span>
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">ItemSimpleBinding2</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_simple</span><span class="p">)</span>
 <span class="w">    </span><span class="n">onBind</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">when</span><span class="p">(</span><span class="n">itemViewType</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_simple</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">getBinding</span><span class="o">&lt;</span><span class="n">ItemSimpleBinding</span><span class="o">&gt;</span><span class="p">().</span><span class="na">tvName</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;文本内容&quot;</span>
+<span class="w">                </span><span class="n">getBinding</span><span class="o">&lt;</span><span class="n">ItemSimpleBinding</span><span class="o">&gt;</span><span class="p">().</span><span class="na">tvName</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Text content&quot;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">            </span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_simple_2</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">getBinding</span><span class="o">&lt;</span><span class="n">ItemSimpleBinding2</span><span class="o">&gt;</span><span class="p">().</span><span class="na">tvName</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;类型2-文本内容&quot;</span>
+<span class="w">                </span><span class="n">getBinding</span><span class="o">&lt;</span><span class="n">ItemSimpleBinding2</span><span class="o">&gt;</span><span class="p">().</span><span class="na">tvName</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Type 2 - Text content&quot;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span><span class="p">()</span>
 </code></pre></div>
-<p>根据<code>getBinding()</code>区分类型
+<p>Differentiate types based on <code>getBinding()</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">SimpleModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_simple</span><span class="p">)</span>
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">ItemComplexBinding</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_simple</span><span class="p">)</span>
 <span class="w">    </span><span class="n">onBind</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">viewBinding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getBinding</span><span class="o">&lt;</span><span class="n">ViewBinding</span><span class="o">&gt;</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">is</span><span class="w"> </span><span class="n">ItemSimpleBinding</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">viewBinding</span><span class="p">.</span><span class="na">tvName</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;文本内容&quot;</span>
+<span class="w">                </span><span class="n">viewBinding</span><span class="p">.</span><span class="na">tvName</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Text content&quot;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">            </span><span class="k">is</span><span class="w"> </span><span class="n">ItemComplexBinding</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">viewBinding</span><span class="p">.</span><span class="na">tvName</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;类型2-文本内容&quot;</span>
+<span class="w">                </span><span class="n">viewBinding</span><span class="p">.</span><span class="na">tvName</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Type 2 - Text content&quot;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span><span class="p">()</span>
-</code></pre></div></p>
-<p>根据<code>getModel()</code>区分类型
-<div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div>
+<p>Differentiate types based on <code>getModel()</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span>
+
+<span class="p">{</span>
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">SimpleModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_simple</span><span class="p">)</span>
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">ItemComplexBinding</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_simple</span><span class="p">)</span>
 <span class="w">    </span><span class="n">onBind</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getModel</span><span class="o">&lt;</span><span class="kt">Any</span><span class="o">&gt;</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">is</span><span class="w"> </span><span class="n">ChatModel</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">model</span><span class="p">.</span><span class="na">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;消息内容&quot;</span>
+<span class="w">                </span><span class="n">model</span><span class="p">.</span><span class="na">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Message content&quot;</span>
 <span class="w">                </span><span class="n">model</span><span class="p">.</span><span class="na">notifyChange</span><span class="p">()</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">            </span><span class="k">is</span><span class="w"> </span><span class="n">CommentModel</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">model</span><span class="p">.</span><span class="na">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;评论内容&quot;</span>
+<span class="w">                </span><span class="n">model</span><span class="p">.</span><span class="na">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Comment content&quot;</span>
 <span class="w">                </span><span class="n">model</span><span class="p">.</span><span class="na">notifyChange</span><span class="p">()</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span><span class="p">()</span>
-</code></pre></div></p>
+</code></pre></div>
 
 
 

@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#animation-types" class="md-skip">
           Skip to content
         </a>
       
@@ -620,15 +620,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    动画类型
+  <a href="#animation-types" class="md-nav__link">
+    Animation Types
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    自定义列表动画
+  <a href="#custom-list-animation" class="md-nav__link">
+    Custom List Animation
   </a>
   
 </li>
@@ -724,7 +724,7 @@
   
   
     <li class="md-nav__item">
-      <a href="https://github.com/liangjingkanji/BRV/blob/master/docs/issues.md" class="md-nav__link">
+      <a href="../issues/" class="md-nav__link">
         FAQ
       </a>
     </li>
@@ -801,15 +801,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    动画类型
+  <a href="#animation-types" class="md-nav__link">
+    Animation Types
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    自定义列表动画
+  <a href="#custom-list-animation" class="md-nav__link">
+    Custom List Animation
   </a>
   
 </li>
@@ -834,56 +834,56 @@
 
   <h1>List Animation</h1>
 
-<p>列表动画只是实现列表Item出现的动画</p>
-<h2 id="_1">动画类型<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>通过函数快速设置BRV自带的几种动画类型</p>
+<p>List Animation is used to add animations to the appearance of list items.</p>
+<h2 id="animation-types">Animation Types<a class="headerlink" href="#animation-types" title="Permanent link">&para;</a></h2>
+<p>You can quickly set several built-in animation types provided by BRV using the following function:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">fun</span><span class="w"> </span><span class="nf">setAnimation</span><span class="p">(</span><span class="n">animationType</span><span class="p">:</span><span class="w"> </span><span class="n">AnimationType</span><span class="p">)</span>
 </code></pre></div>
-<p>使用<code>AnimationType</code>枚举</p>
+<p>The available animation types are specified using the <code>AnimationType</code> enum:</p>
 <table>
 <thead>
 <tr>
-<th>枚举</th>
-<th>动画描述</th>
+<th>Enum</th>
+<th>Animation Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>ALPHA</td>
-<td>渐变</td>
+<td>Fade-in animation</td>
 </tr>
 <tr>
 <td>SCALE</td>
-<td>缩放动</td>
+<td>Scale animation</td>
 </tr>
 <tr>
 <td>SLIDE_BOTTOM</td>
-<td>底部滑入</td>
+<td>Slide-in from the bottom</td>
 </tr>
 <tr>
 <td>SLIDE_LEFT</td>
-<td>左侧滑入</td>
+<td>Slide-in from the left</td>
 </tr>
 <tr>
 <td>SLIDE_RIGHT</td>
-<td>右侧滑入</td>
+<td>Slide-in from the right</td>
 </tr>
 </tbody>
 </table>
-<h2 id="_2">自定义列表动画<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>如果默认的动画无法满足你, 你可以参考自带的<code>ItemAnimation</code>子类动画来自定义你要的动画效果</p>
+<h2 id="custom-list-animation">Custom List Animation<a class="headerlink" href="#custom-list-animation" title="Permanent link">&para;</a></h2>
+<p>If the default animations are not sufficient for your needs, you can customize the desired animation effect by referring to the built-in subclasses of <code>ItemAnimation</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">fun</span><span class="w"> </span><span class="nf">setAnimation</span><span class="p">(</span><span class="n">itemAnimation</span><span class="p">:</span><span class="w"> </span><span class="n">ItemAnimation</span><span class="p">)</span>
 </code></pre></div>
-<p>这里以<code>AlphaItemAnimation</code>源码示例</p>
+<p>Here is an example using the source code of <code>AlphaItemAnimation</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">AlphaItemAnimation</span><span class="w"> </span><span class="nd">@JvmOverloads</span><span class="w"> </span><span class="k">constructor</span><span class="p">(</span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">mFrom</span><span class="p">:</span><span class="w"> </span><span class="kt">Float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DEFAULT_ALPHA_FROM</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ItemAnimation</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onItemEnterAnimation</span><span class="p">(</span><span class="n">view</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">ObjectAnimator</span><span class="p">.</span><span class="na">ofFloat</span><span class="p">(</span><span class="n">view</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;alpha&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">mFrom</span><span class="p">,</span><span class="w"> </span><span class="m">1f</span><span class="p">).</span><span class="na">setDuration</span><span class="p">(</span><span class="m">300</span><span class="p">).</span><span class="na">start</span><span class="p">()</span><span class="w"> </span><span class="c1">// 渐变动画</span>
+<span class="w">        </span><span class="n">ObjectAnimator</span><span class="p">.</span><span class="na">ofFloat</span><span class="p">(</span><span class="n">view</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;alpha&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">mFrom</span><span class="p">,</span><span class="w"> </span><span class="m">1f</span><span class="p">).</span><span class="na">setDuration</span><span class="p">(</span><span class="m">300</span><span class="p">).</span><span class="na">start</span><span class="p">()</span><span class="w"> </span><span class="c1">// Fade-in animation</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="kd">companion</span><span class="w"> </span><span class="kd">object</span><span class="w"> </span><span class="err">{</span>
 
-<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">DEFAULT_ALPHA_FROM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0f</span><span class="w"> </span><span class="c1">// 初始透明度</span>
+<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">DEFAULT_ALPHA_FROM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0f</span><span class="w"> </span><span class="c1">// Initial opacity</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>

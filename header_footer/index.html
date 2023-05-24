@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#partial-empty-state-for-the-list" class="md-skip">
           Skip to content
         </a>
       
@@ -334,15 +334,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    列表局部缺省页
+  <a href="#partial-empty-state-for-the-list" class="md-nav__link">
+    Partial Empty State for the List
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    函数
+  <a href="#functions" class="md-nav__link">
+    Functions
   </a>
   
 </li>
@@ -724,7 +724,7 @@
   
   
     <li class="md-nav__item">
-      <a href="https://github.com/liangjingkanji/BRV/blob/master/docs/issues.md" class="md-nav__link">
+      <a href="../issues/" class="md-nav__link">
         FAQ
       </a>
     </li>
@@ -801,15 +801,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    列表局部缺省页
+  <a href="#partial-empty-state-for-the-list" class="md-nav__link">
+    Partial Empty State for the List
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    函数
+  <a href="#functions" class="md-nav__link">
+    Functions
   </a>
   
 </li>
@@ -834,17 +834,19 @@
 
   <h1>Header/Footer Layout</h1>
 
-<p><img src="https://s2.loli.net/2022/04/24/JgSrqjWAP26b8x5.gif" width="250"/></p>
+<p>The provided code demonstrates how to add header and footer layouts to a RecyclerView using the BRV library:</p>
 <ol>
-<li>头布局和脚布局在rv中算作一个item, 所以计算<code>position</code>的时候应当考虑其中</li>
-<li>头布局和脚布局也需要使用<code>addType</code>函数添加类型</li>
+<li>Both the header and footer layouts are considered as items within the RecyclerView, so when calculating the position, you need to take them into account.</li>
+<li>You need to use the <code>addType</code> function to add types for the header and footer layouts.</li>
 </ol>
+<p>Here's an example of how to add header and footer layouts using BRV:</p>
 <div class="highlight"><pre><span></span><code><span class="n">binding</span><span class="p">.</span><span class="na">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">Model</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_simple</span><span class="p">)</span>
 
 <span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * BRV的数据集 = Header + Footer + Models</span>
-<span class="cm">     * 所以本质上他们都是一组多类型而已, 分出来只是为了方便替换Models而不影响Header和Footer</span>
+<span class="cm">     * The BRV data set = Header + Footer + Models</span>
+<span class="cm">     * So essentially, the header and footer layouts are just another group of multiple types.</span>
+<span class="cm">     * Separating them out is to facilitate the replacement of Models without affecting the Header and Footer.</span>
 <span class="cm">     */</span>
 
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">Header</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_header</span><span class="p">)</span>
@@ -854,59 +856,57 @@
 <span class="n">binding</span><span class="p">.</span><span class="na">rv</span><span class="p">.</span><span class="na">bindingAdapter</span><span class="p">.</span><span class="na">addHeader</span><span class="p">(</span><span class="n">Header</span><span class="p">(),</span><span class="w"> </span><span class="n">animation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
 <span class="n">binding</span><span class="p">.</span><span class="na">rv</span><span class="p">.</span><span class="na">bindingAdapter</span><span class="p">.</span><span class="na">addFooter</span><span class="p">(</span><span class="n">Footer</span><span class="p">(),</span><span class="w"> </span><span class="n">animation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
 </code></pre></div>
-<p>不使用上面介绍的方法实现联动列表的Header还有以下解决方案</p>
+<p>If you don't want the default page to overlap with the header, you can use the following solutions:</p>
 <ol>
-<li>如果你不想缺省页覆盖Header请使用CoordinatorLayout来实现Header效果, 因为<code>PageRefreshLayout</code>的缺省页功能会导致整个列表可能都会被缺省页遮挡</li>
-<li>如果只是不想Header或者Footer干扰BRV可以使用<a href="https://developer.android.com/reference/androidx/recyclerview/widget/ConcatAdapter">ConcatAdapter</a>实现</li>
-<li>使用<code>ScrollView/NestedScrollView</code>嵌套rv也可以实现Header但会导致其失去复用item效果, 列表存在大量数据可能会造成卡顿(如果数据量小可以忽略)</li>
+<li>If you don't want the default page to cover the header, you can use the <code>CoordinatorLayout</code> to implement the header effect. The default page functionality of <code>PageRefreshLayout</code> can cause the entire list to be covered by the default page.</li>
+<li>If you only want to prevent the header or footer from interfering with BRV, you can use <a href="https://developer.android.com/reference/androidx/recyclerview/widget/ConcatAdapter">ConcatAdapter</a> to achieve it.</li>
+<li>You can use a <code>ScrollView/NestedScrollView</code> to nest the RecyclerView to implement the header, but it will cause the RecyclerView to lose the item reuse effect. If there is a large amount of data in the list, it may cause lag (if the data volume is small, this can be ignored).</li>
 </ol>
-<p><br></p>
-<h2 id="_1">列表局部缺省页<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>如果你使用<code>CoordinatorLayout</code>方案来解决缺省页覆盖头部问题, 但是希望页面顶部开始下拉刷新</p>
-<p>请参考demo中的<code>PageNestedHeaderFragment</code>实现代码. 手动指定缺省页避免覆盖头部</p>
-<div class="highlight"><pre><span></span><code><span class="o">&lt;</span><span class="n">com</span><span class="p">.</span><span class="na">drake</span><span class="p">.</span><span class="na">brv</span><span class="p">.</span><span class="na">PageRefreshLayout</span>
-<span class="w">    </span><span class="n">android</span><span class="p">:</span><span class="n">id</span><span class="o">=</span><span class="s">&quot;@+id/page&quot;</span>
-<span class="w">    </span><span class="n">android</span><span class="p">:</span><span class="n">layout_width</span><span class="o">=</span><span class="s">&quot;match_parent&quot;</span>
-<span class="w">    </span><span class="n">android</span><span class="p">:</span><span class="n">layout_height</span><span class="o">=</span><span class="s">&quot;match_parent&quot;</span>
-<span class="w">    </span><span class="n">app</span><span class="p">:</span><span class="n">page_rv</span><span class="o">=</span><span class="s">&quot;@id/rv&quot;</span>
-<span class="w">    </span><span class="n">app</span><span class="p">:</span><span class="n">page_state</span><span class="o">=</span><span class="s">&quot;@id/state&quot;</span><span class="o">&gt;</span>
+<h2 id="partial-empty-state-for-the-list">Partial Empty State for the List<a class="headerlink" href="#partial-empty-state-for-the-list" title="Permanent link">&para;</a></h2>
+<p>If you are using the <code>CoordinatorLayout</code> solution to address the issue of the empty state overlapping the header, but you want the pull-to-refresh to start from the top of the page, you can refer to the implementation code in the demo's <code>PageNestedHeaderFragment</code>. Manually specify the empty state to avoid overlapping the header.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;com.drake.brv.PageRefreshLayout</span>
+<span class="w">    </span><span class="na">android:id=</span><span class="s">&quot;@+id/page&quot;</span>
+<span class="w">    </span><span class="na">android:layout_width=</span><span class="s">&quot;match_parent&quot;</span>
+<span class="w">    </span><span class="na">android:layout_height=</span><span class="s">&quot;match_parent&quot;</span>
+<span class="w">    </span><span class="na">app:page_rv=</span><span class="s">&quot;@id/rv&quot;</span>
+<span class="w">    </span><span class="na">app:page_state=</span><span class="s">&quot;@id/state&quot;</span><span class="nt">/&gt;</span>
 </code></pre></div>
 <ol>
-<li><code>app:page_rv</code> 指定嵌套的rv</li>
-<li><code>app:page_state</code> 指定嵌套的缺省页</li>
+<li>Use the <code>app:page_rv</code> attribute to specify the nested RecyclerView.</li>
+<li>Use the <code>app:page_state</code> attribute to specify the nested empty state.</li>
 </ol>
-<h2 id="_2">函数<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>函数</th>
-<th>描述</th>
+<th>Function</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>addHeader / addFooter</td>
-<td>添加头布局/脚布局</td>
+<td>Add a header layout or a footer layout.</td>
 </tr>
 <tr>
 <td>removeHeader / removeFooter</td>
-<td>删除头布局/脚布局</td>
+<td>Remove the header layout or the footer layout.</td>
 </tr>
 <tr>
 <td>removeHeaderAt / removeFooterAt</td>
-<td>删除指定索引的头布局/脚布局</td>
+<td>Remove the header layout or the footer layout at the specified index.</td>
 </tr>
 <tr>
 <td>clearHeader / clearFooter</td>
-<td>清除全部头布局/脚布局</td>
+<td>Clear all header layouts or footer layouts.</td>
 </tr>
 <tr>
 <td>isHeader / isFooter</td>
-<td>指定索引是否是头布局/脚布局</td>
+<td>Check if the specified index is a header layout or a footer layout.</td>
 </tr>
 <tr>
 <td>headerCount / footerCount</td>
-<td>头布局/脚布局数量</td>
+<td>Get the count of header layouts or footer layouts.</td>
 </tr>
 </tbody>
 </table>

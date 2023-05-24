@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#sticky-grid" class="md-skip">
           Skip to content
         </a>
       
@@ -364,8 +364,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    网格悬停
+  <a href="#sticky-grid" class="md-nav__link">
+    Sticky Grid
   </a>
   
 </li>
@@ -717,7 +717,7 @@
   
   
     <li class="md-nav__item">
-      <a href="https://github.com/liangjingkanji/BRV/blob/master/docs/issues.md" class="md-nav__link">
+      <a href="../issues/" class="md-nav__link">
         FAQ
       </a>
     </li>
@@ -794,8 +794,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    网格悬停
+  <a href="#sticky-grid" class="md-nav__link">
+    Sticky Grid
   </a>
   
 </li>
@@ -820,16 +820,13 @@
 
   <h1>Hover</h1>
 
-<p align="center"><img src="https://i.loli.net/2021/08/14/4wUngbV2qZFAf5H.gif" width="250"/></p>
-
-<p>通过实现接口<code>ItemHover</code></p>
+<p>To achieve the sticky header effect, you can implement the <code>ItemHover</code> interface:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">HoverHeaderModel</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ItemHover</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// 返回值决定是否悬停</span>
 <span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">itemHover</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>然后这个Item就会悬停在顶部了</p>
-<p>完整示例</p>
+<p>By setting <code>itemHover</code> to <code>true</code>, the item will stick to the top.</p>
+<p>Here's a complete example:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onActivityCreated</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span><span class="w"> </span><span class="n">Bundle?)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">super</span><span class="p">.</span><span class="na">onActivityCreated</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
 
@@ -838,22 +835,22 @@
 <span class="w">        </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">HoverHeaderModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_hover_header</span><span class="p">)</span>
 <span class="w">        </span><span class="n">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span><span class="p">()</span>
 
-<span class="w">        </span><span class="c1">// 点击事件</span>
+<span class="w">        </span><span class="c1">// Click event</span>
 <span class="w">        </span><span class="n">onClick</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">item</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">itemViewType</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_hover_header</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">toast</span><span class="p">(</span><span class="s">&quot;悬停条目&quot;</span><span class="p">)</span>
-<span class="w">                </span><span class="k">else</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">toast</span><span class="p">(</span><span class="s">&quot;普通条目&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_hover_header</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">toast</span><span class="p">(</span><span class="s">&quot;Sticky item&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="k">else</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">toast</span><span class="p">(</span><span class="s">&quot;Regular item&quot;</span><span class="p">)</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="c1">// 可选项, 粘性监听器</span>
+<span class="w">        </span><span class="c1">// Optional: Sticky listener</span>
 <span class="w">        </span><span class="n">onHoverAttachListener</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">object</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">OnHoverAttachListener</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="c1">// 黏住顶部的时候, v表示指定悬停的itemView对象</span>
+<span class="w">            </span><span class="c1">// When attaching to the top, v represents the sticky itemView</span>
 <span class="w">            </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">attachHover</span><span class="p">(</span><span class="n">v</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="n">ViewCompat</span><span class="p">.</span><span class="na">setElevation</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="m">10F</span><span class="p">)</span>
 <span class="w">            </span><span class="p">}</span>
 
-<span class="w">            </span><span class="c1">// 从顶部分离的时候</span>
+<span class="w">            </span><span class="c1">// When detaching from the top</span>
 <span class="w">            </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">detachHover</span><span class="p">(</span><span class="n">v</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="n">ViewCompat</span><span class="p">.</span><span class="na">setElevation</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="m">0F</span><span class="p">)</span>
 <span class="w">            </span><span class="p">}</span>
@@ -863,19 +860,19 @@
 <span class="p">}</span>
 </code></pre></div>
 <blockquote>
-<p>不同于大部分悬停框架, BRV无需特殊处理支持全部的点击事件</p>
+<p>Unlike most sticky frameworks, BRV doesn't require special handling to support all click events.</p>
 </blockquote>
-<p>[BindingAdapter] 判断当前位置是否属于悬停</p>
+<p>[BindingAdapter]: Determine if the current position belongs to a sticky item</p>
 <div class="highlight"><pre><span></span><code><span class="kd">fun</span><span class="w"> </span><span class="nf">isHover</span><span class="p">(</span><span class="n">position</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">):</span><span class="w"> </span><span class="kt">Boolean</span>
 </code></pre></div>
-<h2 id="_1">网格悬停<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>Demo截图</p>
+<h2 id="sticky-grid">Sticky Grid<a class="headerlink" href="#sticky-grid" title="Permanent link">&para;</a></h2>
+<p>Demo screenshot:</p>
 <p><img src="https://i.loli.net/2021/08/14/4CfDnegM2kOi8WK.png" width="250"/></p>
-<p>可以看到图片中悬停的item比普通的item要宽两倍, 这里需要确定悬停的Item的动态<code>SpanSize</code>, 所以不能直接使用<code>grid(3)</code>而是需要手动创建<code>HoverGridLayoutManager</code></p>
+<p>As shown in the image, the sticky item is twice as wide as regular items. To achieve this, you need to dynamically determine the <code>SpanSize</code> of the sticky item, so you can't directly use <code>grid(3)</code>. Instead, you need to create a <code>HoverGridLayoutManager</code> manually:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">layoutManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HoverGridLayoutManager</span><span class="p">(</span><span class="n">requireContext</span><span class="p">(),</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
 <span class="n">layoutManager</span><span class="p">.</span><span class="na">spanSizeLookup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">object</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">GridLayoutManager</span><span class="p">.</span><span class="na">SpanSizeLookup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getSpanSize</span><span class="p">(</span><span class="n">position</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">):</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">rv</span><span class="p">.</span><span class="na">bindingAdapter</span><span class="p">.</span><span class="na">isHover</span><span class="p">(</span><span class="n">position</span><span class="p">))</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="c1">// 具体的业务逻辑由你确定</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">rv</span><span class="p">.</span><span class="na">bindingAdapter</span><span class="p">.</span><span class="na">isHover</span><span class="p">(</span><span class="n">position</span><span class="p">))</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="c1">// Specific business logic should be determined by you</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 <span class="n">rv</span><span class="p">.</span><span class="na">layoutManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">layoutManager</span>

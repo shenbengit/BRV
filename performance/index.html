@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#main-thread-data-readwrite" class="md-skip">
           Skip to content
         </a>
       
@@ -319,43 +319,43 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    主线程读写数据
+  <a href="#main-thread-data-readwrite" class="md-nav__link">
+    Main Thread Data Read/Write
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    嵌套列表
+  <a href="#nested-lists" class="md-nav__link">
+    Nested Lists
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    视图添加/删除
+  <a href="#view-additionremoval" class="md-nav__link">
+    View Addition/Removal
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    高速滑动节流
+  <a href="#fast-scroll-throttling" class="md-nav__link">
+    Fast Scroll Throttling
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    固定布局优化
+  <a href="#fixed-layout-optimization" class="md-nav__link">
+    Fixed Layout Optimization
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    列表唯一标识
+  <a href="#unique-item-identifiers" class="md-nav__link">
+    Unique Item Identifiers
   </a>
   
 </li>
@@ -752,7 +752,7 @@
   
   
     <li class="md-nav__item">
-      <a href="https://github.com/liangjingkanji/BRV/blob/master/docs/issues.md" class="md-nav__link">
+      <a href="../issues/" class="md-nav__link">
         FAQ
       </a>
     </li>
@@ -829,43 +829,43 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    主线程读写数据
+  <a href="#main-thread-data-readwrite" class="md-nav__link">
+    Main Thread Data Read/Write
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    嵌套列表
+  <a href="#nested-lists" class="md-nav__link">
+    Nested Lists
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    视图添加/删除
+  <a href="#view-additionremoval" class="md-nav__link">
+    View Addition/Removal
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    高速滑动节流
+  <a href="#fast-scroll-throttling" class="md-nav__link">
+    Fast Scroll Throttling
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    固定布局优化
+  <a href="#fixed-layout-optimization" class="md-nav__link">
+    Fixed Layout Optimization
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    列表唯一标识
+  <a href="#unique-item-identifiers" class="md-nav__link">
+    Unique Item Identifiers
   </a>
   
 </li>
@@ -890,44 +890,43 @@
 
   <h1>Smooth Scrolling</h1>
 
-<p>首先希望你已经阅读过rv基础的<a href="../lifecycle/">生命周期</a>, 正常情况下列表并不使用本章的优化方法也不会卡顿</p>
+<p>First of all, I assume you have already read the <a href="../lifecycle/">lifecycle</a> documentation on the basics of RecyclerView. Under normal circumstances, the list should not experience lag even without implementing the optimization methods discussed in this chapter.</p>
 <blockquote>
-<p>BRV并没有对RecyclerView存在卡顿影响, 这里介绍的都是RecyclerView的优化点, 未提及的请自行搜索或补充</p>
+<p>BRV does not have any performance impact on RecyclerView. The optimization points mentioned here are specific to RecyclerView. For other optimizations, please refer to additional resources or suggestions.</p>
 </blockquote>
-<p>性能优化主要是避免滑动列表时频繁耗时操作, 而onBind就是滑动列表过程中频繁触发的回调</p>
-<h2 id="_1">主线程读写数据<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>SharePreference(简称sp)是Android自带的键值存储工具, 虽然允许方便地在主线程读写本地数据但是性能堪忧 <br>
-如果你在onBind里面读取体积较大的sp会导致列表卡顿甚至引起应用ANR</p>
-<p>网上可能大部分推荐使用MMKV来取代, 但我推荐基于MMKV封装的更高效/方便的<a href="https://github.com/liangjingkanji/Serialize">Serialze</a>来取代</p>
-<h2 id="_2">嵌套列表<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>在使用rv嵌套rv时应当在onCreate回调中为内嵌的rv设置视图(使用<code>rv.setup</code>), 这是为了避免同一类型反复创建rv导致内存消耗.  而嵌套的rv数据可以在onBind中绑定数据, 使用<code>rv.models</code></p>
+<p>Performance optimization is mainly about avoiding time-consuming operations during list scrolling, and <code>onBind</code> is a callback that gets triggered frequently during the scrolling process.</p>
+<h2 id="main-thread-data-readwrite">Main Thread Data Read/Write<a class="headerlink" href="#main-thread-data-readwrite" title="Permanent link">&para;</a></h2>
+<p>SharePreferences (referred to as sp) is a built-in key-value storage tool in Android. Although it allows convenient data read/write on the main thread, its performance is not satisfactory. If you read large-sized sp data in <code>onBind</code>, it can lead to list lagging or even ANR (Application Not Responding) issues.</p>
+<p>While many suggestions online recommend using MMKV as an alternative, I recommend using <a href="https://github.com/liangjingkanji/Serialize">Serialze</a>, which is a more efficient and convenient wrapper based on MMKV.</p>
+<h2 id="nested-lists">Nested Lists<a class="headerlink" href="#nested-lists" title="Permanent link">&para;</a></h2>
+<p>When using a RecyclerView within another RecyclerView, it is advisable to set the view for the nested RecyclerView in the <code>onCreate</code> callback (using <code>rv.setup</code>). This helps avoid excessive creation of RecyclerView instances of the same type, which can lead to increased memory consumption. The data for the nested RecyclerView can be bound in <code>onBind</code> using <code>rv.models</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">SimpleModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_simple</span><span class="p">)</span>
 
 <span class="w">    </span><span class="n">onCreate</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">findView</span><span class="o">&lt;</span><span class="n">RecyclerView</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">rv_check_mode</span><span class="p">)</span>
-<span class="w">        </span><span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 视图在onCreate可以避免列表滑动过程反复回调</span>
+<span class="w">        </span><span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// Setting the view in onCreate avoids repeated callbacks during list scrolling</span>
 <span class="w">            </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">NestedModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_simple_nested</span><span class="p">)</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="n">onBind</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">rv</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">findView</span><span class="o">&lt;</span><span class="n">RecyclerView</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">rv_check_mode</span><span class="p">)</span>
-<span class="w">        </span><span class="n">rv</span><span class="p">.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getModel</span><span class="o">&lt;</span><span class="n">Model</span><span class="o">&gt;</span><span class="p">().</span><span class="na">listNested</span><span class="w"> </span><span class="c1">// 只有onBind才能获取到数据</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">findView</span><span class="o">&lt;</span><span class="n">RecyclerView</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">rv_check_mode</span><span class="p">)</span>
+<span class="w">        </span><span class="n">rv</span><span class="p">.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getModel</span><span class="o">&lt;</span><span class="n">Model</span><span class="o">&gt;</span><span class="p">().</span><span class="na">listNested</span><span class="w"> </span><span class="c1">// Only onBind can access the data</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>由于被嵌套的rv是无法复用item, 所以建议使用recycledViewPool来复用, 具体请搜索关键词</p>
-<p>如果被嵌套的列表非常简单其实也无需考虑其复用优化, 甚至你直接使用addView动态添加可能会比嵌套列表更简单</p>
-<h2 id="_3">视图添加/删除<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>要避免频繁操作主线程耗时的视图addView/removeView等操作</p>
+<p>Since the nested RecyclerView cannot reuse items, it is recommended to use <code>recycledViewPool</code> for recycling. You can search for specific keywords for more details.</p>
+<p>If the nested list is very simple, you may not need to consider reuse optimization. In fact, dynamically adding views using <code>addView</code> might be simpler than using a nested list.</p>
+<h2 id="view-additionremoval">View Addition/Removal<a class="headerlink" href="#view-additionremoval" title="Permanent link">&para;</a></h2>
+<p>To avoid frequent main thread operations such as <code>addView</code> and <code>removeView</code> on views, it is recommended to:</p>
 <ol>
-<li>建议使用visibility控制视图显示或隐藏</li>
-<li>判断数据避免反复addView, 视图已经addView情况下赋值而不是remove</li>
-<li>如果只是添加图标建议使用<a href="https://github.com/liangjingkanji/spannable">Spannable</a>构建图文混排直接赋值给TextView</li>
+<li>Use <code>visibility</code> to control view visibility.</li>
+<li>Check if the view has already been added before adding it again. If the view is already added, assign the value instead of removing it.</li>
+<li>If you are only adding icons, consider using <a href="https://github.com/liangjingkanji/spannable">Spannable</a> to construct text with mixed graphics, and directly assign it to a TextView.</li>
 </ol>
-<h2 id="_4">高速滑动节流<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p>实现原理很像自动搜索节流, 延迟到一定时间后item依然显示在屏幕之上才加载数据, 因为高速滑动列表可能大部分item只会停留在屏幕很短时间并不需要加载数据</p>
+<h2 id="fast-scroll-throttling">Fast Scroll Throttling<a class="headerlink" href="#fast-scroll-throttling" title="Permanent link">&para;</a></h2>
+<p>The implementation principle is similar to automatic search throttling. Delay the data loading until a certain time has passed and the item is still visible on the screen. This is because during fast scrolling, most items are displayed on the screen for a very short time and do not require data loading.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">SimpleModel</span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nv">name</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;BRV&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ItemBind</span><span class="p">,</span><span class="w"> </span><span class="n">ItemAttached</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">itemVisible</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
@@ -941,33 +940,36 @@
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onBind</span><span class="p">(</span><span class="n">holder</span><span class="p">:</span><span class="w"> </span><span class="n">BindingAdapter</span><span class="p">.</span><span class="na">BindingViewHolder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">holder</span><span class="p">.</span><span class="na">itemView</span><span class="p">.</span><span class="na">postDelayed</span><span class="p">({</span>
+
+
+<span class="w"> </span><span class="n">holder</span><span class="p">.</span><span class="na">itemView</span><span class="p">.</span><span class="na">postDelayed</span><span class="p">({</span>
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">itemVisible</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                  </span><span class="c1">// 500ms 以后依然可见才会触发加载</span>
+<span class="w">                </span><span class="c1">// Trigger loading only if the item is still visible after 500ms</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">},</span><span class="w"> </span><span class="m">500</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="p">}</span>
 </code></pre></div>
-<p>如果你使用的Glide你还可以阅读<a href="https://muyangmin.github.io/glide-docs-cn/int/recyclerview.html">RecyclerView预加载图片</a>, 可以显著减少用户滑动图片列表时看到的加载中数量</p>
-<h2 id="_5">固定布局优化<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>如果列表所有item的宽高不会因为适配器(Adapter)动态改变, 那么可以使用<code>setHasFixedSize(true)</code>来减少测绘次数提高性能</p>
-<h2 id="_6">列表唯一标识<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<p>通过为item配置唯一ID提高列表使用<code>notifyDataSetChanged()</code>时的排序性能</p>
+<p>If you use Glide for image loading, you can also refer to <a href="https://muyangmin.github.io/glide-docs-cn/int/recyclerview.html">Glide Preloading in RecyclerView</a>, which can significantly reduce the number of "loading" images visible to users when scrolling through an image list.</p>
+<h2 id="fixed-layout-optimization">Fixed Layout Optimization<a class="headerlink" href="#fixed-layout-optimization" title="Permanent link">&para;</a></h2>
+<p>If the width and height of all items in the list do not change dynamically due to adapter modifications, you can use <code>setHasFixedSize(true)</code> to reduce the number of layout calculations and improve performance.</p>
+<h2 id="unique-item-identifiers">Unique Item Identifiers<a class="headerlink" href="#unique-item-identifiers" title="Permanent link">&para;</a></h2>
+<p>Improve the performance of using <code>notifyDataSetChanged()</code> by assigning unique IDs to items in the list.</p>
 <div class="highlight"><pre><span></span><code><span class="n">binding</span><span class="p">.</span><span class="na">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">setHasStableIds</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="c1">// 启用唯一ID</span>
+<span class="w">    </span><span class="n">setHasStableIds</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="c1">// Enable unique IDs</span>
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">UserModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_user</span><span class="p">)</span>
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span><span class="p">()</span>
 </code></pre></div>
-<p>数据模型实现<code>ItemStableId</code></p>
+<p>The data model should implement <code>ItemStableId</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">UserModel</span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nv">userId</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ItemStableId</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getItemId</span><span class="p">():</span><span class="w"> </span><span class="kt">Long</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">userId</span><span class="w"> </span><span class="c1">// 返回列表中唯一ID</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">userId</span><span class="w"> </span><span class="c1">// Return the unique ID in the list</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
+<p>I hope these optimizations help improve the performance of your RecyclerView. Let me know if you have any more questions!</p>
 
 
 

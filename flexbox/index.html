@@ -683,7 +683,7 @@
   
   
     <li class="md-nav__item">
-      <a href="https://github.com/liangjingkanji/BRV/blob/master/docs/issues.md" class="md-nav__link">
+      <a href="../issues/" class="md-nav__link">
         FAQ
       </a>
     </li>
@@ -771,13 +771,13 @@
 
   <h1>Flexbox Layout</h1>
 
-<p>BRV对于伸缩布局的实现可以自行添加Google开源库 <a href="https://github.com/google/flexbox-layout">flexbox-layout</a></p>
-<p>添加依赖</p>
+<p>To implement flexible layouts in BRV, you can add the Google open-source library <a href="https://github.com/google/flexbox-layout">flexbox-layout</a>.</p>
+<p>Add the dependency to your project:</p>
 <div class="highlight"><pre><span></span><code><span class="n">dependencies</span><span class="w"> </span><span class="o">{</span>
 <span class="w">    </span><span class="n">implementation</span><span class="w"> </span><span class="s1">&#39;com.google.android.flexbox:flexbox:3.0.0&#39;</span>
 <span class="o">}</span>
 </code></pre></div>
-<p>然后创建列表</p>
+<p>Then, create a list:</p>
 <p><img src="https://i.loli.net/2021/08/14/KYkHmyCrDogiLsS.png" width="250"/></p>
 <div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">layoutManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FlexboxLayoutManager</span><span class="p">(</span><span class="n">activity</span><span class="p">)</span>
 
@@ -785,6 +785,7 @@
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">FlexTagModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_flex_tag</span><span class="p">)</span>
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span><span class="p">()</span>
 </code></pre></div>
+<p>In this example, <code>FlexboxLayoutManager</code> is set as the layout manager for the <code>RecyclerView</code>. You can then use the <code>setup</code> function to configure your list, specifying the type and layout resource for the items. Finally, assign the data to the <code>models</code> property to populate the list.</p>
 
 
 

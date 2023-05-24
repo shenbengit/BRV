@@ -16,7 +16,7 @@
         <link rel="prev" href="../net/">
       
       
-        <link rel="next" href="../component/">
+        <link rel="next" href="../issues/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.14">
@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#introduction" class="md-skip">
           Skip to content
         </a>
       
@@ -695,30 +695,30 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    前言
+  <a href="#introduction" class="md-nav__link">
+    Introduction
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    使用
+  <a href="#usage" class="md-nav__link">
+    Usage
   </a>
   
-    <nav class="md-nav" aria-label="使用">
+    <nav class="md-nav" aria-label="Usage">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-onbind" class="md-nav__link">
-    1) 在onBind中使用
+  <a href="#1-using-viewbinding-in-oncreateviewholder" class="md-nav__link">
+    1) Using ViewBinding in onCreateViewHolder
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-itembind" class="md-nav__link">
-    2) 在ItemBind中使用
+  <a href="#2-using-viewbinding-in-itembind" class="md-nav__link">
+    2) Using ViewBinding in ItemBind
   </a>
   
 </li>
@@ -729,8 +729,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    多类型
+  <a href="#multiple-types" class="md-nav__link">
+    Multiple Types
   </a>
   
 </li>
@@ -751,7 +751,7 @@
   
   
     <li class="md-nav__item">
-      <a href="https://github.com/liangjingkanji/BRV/blob/master/docs/issues.md" class="md-nav__link">
+      <a href="../issues/" class="md-nav__link">
         FAQ
       </a>
     </li>
@@ -828,30 +828,30 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    前言
+  <a href="#introduction" class="md-nav__link">
+    Introduction
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    使用
+  <a href="#usage" class="md-nav__link">
+    Usage
   </a>
   
-    <nav class="md-nav" aria-label="使用">
+    <nav class="md-nav" aria-label="Usage">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-onbind" class="md-nav__link">
-    1) 在onBind中使用
+  <a href="#1-using-viewbinding-in-oncreateviewholder" class="md-nav__link">
+    1) Using ViewBinding in onCreateViewHolder
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-itembind" class="md-nav__link">
-    2) 在ItemBind中使用
+  <a href="#2-using-viewbinding-in-itembind" class="md-nav__link">
+    2) Using ViewBinding in ItemBind
   </a>
   
 </li>
@@ -862,8 +862,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    多类型
+  <a href="#multiple-types" class="md-nav__link">
+    Multiple Types
   </a>
   
 </li>
@@ -888,68 +888,65 @@
 
   <h1>ViewBinding</h1>
 
-<p>假设不想使用DataBinding只想用ViewBinding可以阅读以下内容</p>
-<blockquote>
-<p>其实使用ViewBinding和DataBinding的查找视图对象用法一致, 都是调用<code>getBinding()</code></p>
-</blockquote>
-<h2 id="_1">前言<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>更推荐使用DataBinding而非ViewBinding, 理由如下</p>
+<p>Assuming you don't want to use DataBinding and prefer to use ViewBinding, you can refer to the following information.</p>
+<p>In fact, the usage of ViewBinding for finding view objects is similar to DataBinding, as both involve calling <code>getBinding()</code>.</p>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>It is highly recommended to use DataBinding instead of ViewBinding for the following reasons:</p>
 <ol>
-<li>首先MVVM双向数据绑定是目前最优秀的架构设计, 而DataBinding是实现MVVM的最优解</li>
-<li>ViewBinding只是DataBinding中的一个小功能, 且DataBinding不会默认为所有布局自动生成类故代码量更少</li>
+<li>MVVM with two-way data binding is currently one of the best architectural designs, and DataBinding is the optimal solution for implementing MVVM.</li>
+<li>ViewBinding is just a small feature within DataBinding and does not generate classes for all layouts by default, resulting in less code.</li>
 </ol>
-<h2 id="_2">使用<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>如果你依然想用ViewBinding可以参考以下代码</p>
-<h3 id="1-onbind">1) 在onBind中使用<a class="headerlink" href="#1-onbind" title="Permanent link">&para;</a></h3>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<p>If you still want to use ViewBinding, you can refer to the following code.</p>
+<h3 id="1-using-viewbinding-in-oncreateviewholder">1) Using ViewBinding in <code>onCreateViewHolder</code><a class="headerlink" href="#1-using-viewbinding-in-oncreateviewholder" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">SimpleModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_simple</span><span class="p">)</span>
 
-<span class="w">    </span><span class="c1">// 在onCreateViewHolder生命周期使用</span>
+<span class="w">    </span><span class="c1">// Use in the onCreateViewHolder lifecycle</span>
 <span class="w">    </span><span class="n">onCreate</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">getBinding</span><span class="o">&lt;</span><span class="n">ItemSimpleBinding</span><span class="o">&gt;</span><span class="p">().</span><span class="na">tvName</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;文本内容&quot;</span>
+<span class="w">        </span><span class="n">getBinding</span><span class="o">&lt;</span><span class="n">ItemSimpleBinding</span><span class="o">&gt;</span><span class="p">().</span><span class="na">tvName</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Text content&quot;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="c1">// 或者在onBindViewHolder生命周期中使用</span>
+<span class="w">    </span><span class="c1">// Or use in the onBindViewHolder lifecycle</span>
 <span class="w">    </span><span class="n">onBind</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">binding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getBinding</span><span class="o">&lt;</span><span class="n">ItemSimpleBinding</span><span class="o">&gt;</span><span class="p">()</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span><span class="p">()</span>
 </code></pre></div>
-<h3 id="2-itembind">2) 在ItemBind中使用<a class="headerlink" href="#2-itembind" title="Permanent link">&para;</a></h3>
-<p>如果使用实现接口<a href="/#2">ItemBind</a>的数据模型</p>
+<h3 id="2-using-viewbinding-in-itembind">2) Using ViewBinding in <code>ItemBind</code><a class="headerlink" href="#2-using-viewbinding-in-itembind" title="Permanent link">&para;</a></h3>
+<p>If you are using a data model that implements the <code>ItemBind</code> interface:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">SimpleModel</span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nv">name</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;BRV&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ItemBind</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onBind</span><span class="p">(</span><span class="n">holder</span><span class="p">:</span><span class="w"> </span><span class="n">BindingAdapter</span><span class="p">.</span><span class="na">BindingViewHolder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">binding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getBinding</span><span class="o">&lt;</span><span class="n">ItemSimpleBinding</span><span class="o">&gt;</span><span class="p">()</span>
-<span class="w">        </span><span class="n">binding</span><span class="p">.</span><span class="na">tvName</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;文本内容&quot;</span>
+<span class="w">        </span><span class="n">binding</span><span class="p">.</span><span class="na">tvName</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Text content&quot;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>都是调用方法<code>getBinding()</code></p>
-<h2 id="_3">多类型<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>如果是多类型注意先判断类型, 避免为绑定错误的ViewBinding</p>
+<p>In both cases, you can call the <code>getBinding()</code> method.</p>
+<h2 id="multiple-types">Multiple Types<a class="headerlink" href="#multiple-types" title="Permanent link">&para;</a></h2>
+<p>If you have multiple item types, make sure to check the type first to avoid binding the wrong ViewBinding.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">SimpleModel</span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nv">name</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;BRV&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ItemBind</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onBind</span><span class="p">(</span><span class="n">holder</span><span class="p">:</span><span class="w"> </span><span class="n">BindingAdapter</span><span class="p">.</span><span class="na">BindingViewHolder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="c1">// 方式1 判断itemViewType</span>
-<span class="w">        </span><span class="k">when</span><span class="p">(</span><span class="n">holder</span><span class="p">.</span><span class="na">itemViewType</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Approach 1: Check the itemViewType</span>
+<span class="w">        </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">holder</span><span class="p">.</span><span class="na">itemViewType</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_simple</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">getBinding</span><span class="o">&lt;</span><span class="n">ItemSimpleBinding</span><span class="o">&gt;</span><span class="p">().</span><span class="na">tvName</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;文本内容&quot;</span>
+<span class="w">                </span><span class="n">getBinding</span><span class="o">&lt;</span><span class="n">ItemSimpleBinding</span><span class="o">&gt;</span><span class="p">().</span><span class="na">tvName</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Text content&quot;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">            </span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_simple_2</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">getBinding</span><span class="o">&lt;</span><span class="n">ItemSimpleBinding2</span><span class="o">&gt;</span><span class="p">().</span><span class="na">tvName</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;类型2-文本内容&quot;</span>
+<span class="w">                </span><span class="n">getBinding</span><span class="o">&lt;</span><span class="n">ItemSimpleBinding2</span><span class="o">&gt;</span><span class="p">().</span><span class="na">tvName</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Type 2 - Text content&quot;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
 
-
-<span class="w">        </span><span class="c1">// 方式2 判断ViewBinding</span>
+<span class="w">        </span><span class="c1">// Approach 2: Check the ViewBinding</span>
 <span class="w">        </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">viewBinding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getBinding</span><span class="o">&lt;</span><span class="n">ViewBinding</span><span class="o">&gt;</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">is</span><span class="w"> </span><span class="n">ItemSimpleBinding</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">viewBinding</span><span class="p">.</span><span class="na">tvName</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;文本内容&quot;</span>
+<span class="w">                </span><span class="n">viewBinding</span><span class="p">.</span><span class="na">tvName</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Text content&quot;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">            </span><span class="k">is</span><span class="w"> </span><span class="n">ItemComplexBinding</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">viewBinding</span><span class="p">.</span><span class="na">tvName</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;类型2-文本内容&quot;</span>
+<span class="w">                </span><span class="n">viewBinding</span><span class="p">.</span><span class="na">tvName</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Type 2 - Text content&quot;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
@@ -1012,13 +1009,13 @@
 
         <!-- Link to next page -->
         
-        <a href="../component/" class="md-footer__link md-footer__link--next" rel="next">
+        <a href="../issues/" class="md-footer__link md-footer__link--next" rel="next">
             <div class="md-footer__title">
                 <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-                    Third-Party Components
+                    FAQ
                 </div>
             </div>
             <div class="md-footer__button md-icon">

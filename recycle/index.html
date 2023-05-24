@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#databinding" class="md-skip">
+        <a href="#using-databinding" class="md-skip">
           Skip to content
         </a>
       
@@ -650,16 +650,16 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#databinding" class="md-nav__link">
-    使用DataBinding
+  <a href="#using-databinding" class="md-nav__link">
+    Using DataBinding
   </a>
   
-    <nav class="md-nav" aria-label="使用DataBinding">
+    <nav class="md-nav" aria-label="Using DataBinding">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    数据模型差异
+  <a href="#handling-data-model-differences" class="md-nav__link">
+    Handling Data Model Differences
   </a>
   
 </li>
@@ -670,22 +670,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#itembind" class="md-nav__link">
-    实现ItemBind接口
+  <a href="#implementing-the-itembind-interface" class="md-nav__link">
+    Implementing the ItemBind Interface
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#onbind" class="md-nav__link">
-    使用onBind
+  <a href="#using-onbind" class="md-nav__link">
+    Using onBind
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    扩展函数
+  <a href="#extension-functions" class="md-nav__link">
+    Extension Functions
   </a>
   
 </li>
@@ -751,7 +751,7 @@
   
   
     <li class="md-nav__item">
-      <a href="https://github.com/liangjingkanji/BRV/blob/master/docs/issues.md" class="md-nav__link">
+      <a href="../issues/" class="md-nav__link">
         FAQ
       </a>
     </li>
@@ -828,16 +828,16 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#databinding" class="md-nav__link">
-    使用DataBinding
+  <a href="#using-databinding" class="md-nav__link">
+    Using DataBinding
   </a>
   
-    <nav class="md-nav" aria-label="使用DataBinding">
+    <nav class="md-nav" aria-label="Using DataBinding">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    数据模型差异
+  <a href="#handling-data-model-differences" class="md-nav__link">
+    Handling Data Model Differences
   </a>
   
 </li>
@@ -848,22 +848,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#itembind" class="md-nav__link">
-    实现ItemBind接口
+  <a href="#implementing-the-itembind-interface" class="md-nav__link">
+    Implementing the ItemBind Interface
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#onbind" class="md-nav__link">
-    使用onBind
+  <a href="#using-onbind" class="md-nav__link">
+    Using onBind
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    扩展函数
+  <a href="#extension-functions" class="md-nav__link">
+    Extension Functions
   </a>
   
 </li>
@@ -888,41 +888,39 @@
 
   <h1>Recycle List</h1>
 
-<p>因为BRV并不需要创建Adapter, 所以很多人可能不知道如何复用相似列表. 实际上更加简单</p>
-<p>首先根据请你了解BRV<a href="../">三种绑定数据的方式</a></p>
-<h2 id="databinding">使用DataBinding<a class="headerlink" href="#databinding" title="Permanent link">&para;</a></h2>
-<p>如果你使用DataBinding那么就更好实现了. DataBinding的业务逻辑都在Model中,  视图都在XML文件中. 如果UI或者业务相同你注册同样的类和XML文件即可</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// 列表 1</span>
+<p>BRV does not require creating an Adapter, so many people may not know how to reuse similar lists. In reality, it's even simpler.</p>
+<p>First, familiarize yourself with the <a href="../">three data binding methods</a> in BRV.</p>
+<h2 id="using-databinding">Using DataBinding<a class="headerlink" href="#using-databinding" title="Permanent link">&para;</a></h2>
+<p>If you're using DataBinding, it's even easier to achieve reuse. The business logic of DataBinding is contained in the Model, while the views are defined in XML files. If the UI or business logic is the same, you can register the same class and XML file.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// List 1</span>
 <span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">Model</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_simple</span><span class="p">)</span>
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span><span class="p">()</span>
 
-<span class="c1">// 列表2</span>
+<span class="c1">// List 2</span>
 <span class="n">rv2</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">Model</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_simple</span><span class="p">)</span>
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span><span class="p">()</span>
 </code></pre></div>
-<p><br></p>
-<h3 id="_1">数据模型差异<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
-<p>如果数据模型不一样, 但是XML一样. 你可以使用以下两种方式
-<br></p>
+<h3 id="handling-data-model-differences">Handling Data Model Differences<a class="headerlink" href="#handling-data-model-differences" title="Permanent link">&para;</a></h3>
+<p>If the data models are different but the XML is the same, you can use the following two approaches:</p>
 <ol>
-<li>将多个类包装到一个类对象中作为列表数据(万物皆对象)
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">ComposeModel</span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nv">model</span><span class="p">:</span><span class="w"> </span><span class="n">Model</span><span class="p">,</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">model2</span><span class="p">:</span><span class="w"> </span><span class="n">Model2</span><span class="p">)</span>
+<li>Wrap multiple classes into a single class object as the list data (everything is an object).
+   <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">ComposeModel</span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nv">model</span><span class="p">:</span><span class="w"> </span><span class="n">Model</span><span class="p">,</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">model2</span><span class="p">:</span><span class="w"> </span><span class="n">Model2</span><span class="p">)</span>
 
 <span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">ComposeModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_simple</span><span class="p">)</span>
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span><span class="p">()</span>
 </code></pre></div></li>
-<li>多个类实现指定接口: <a href="/multi-type/#_4">接口类型</a>
-    <div class="highlight"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nc">ModelImpl</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">text</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">defaultText</span><span class="w"> </span><span class="c1">// 暴露使用函数</span>
+<li>Have multiple classes implement a specified interface: <a href="/multi-type/#_4">Interface Types</a>
+   <div class="highlight"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nc">ModelImpl</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">text</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="c1">// Expose a getter function</span>
 <span class="p">}</span>
-<span class="kd">class</span><span class="w"> </span><span class="nc">Model</span><span class="p">():</span><span class="n">ModelImpl</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">text</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">otherText</span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">Model</span><span class="p">():</span><span class="w"> </span><span class="n">ModelImpl</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">text</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Other text&quot;</span>
 <span class="p">}</span>
-<span class="kd">class</span><span class="w"> </span><span class="nc">Model2</span><span class="p">():</span><span class="n">ModelImpl</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">text</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">otherText</span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">Model2</span><span class="p">():</span><span class="w"> </span><span class="n">ModelImpl</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">text</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Other text&quot;</span>
 <span class="p">}</span>
 
 <span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
@@ -930,8 +928,8 @@
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span><span class="p">()</span>
 </code></pre></div></li>
 </ol>
-<h2 id="itembind">实现ItemBind接口<a class="headerlink" href="#itembind" title="Permanent link">&para;</a></h2>
-<p>这种数据绑定形式业务和UI都在一个函数中实现, 所以你重复使用这个数据模型集合, 如果UI相同但是数据有差异参考上面包装数据模型</p>
+<h2 id="implementing-the-itembind-interface">Implementing the ItemBind Interface<a class="headerlink" href="#implementing-the-itembind-interface" title="Permanent link">&para;</a></h2>
+<p>With this data binding method, both the business logic and UI are implemented in a single function. You can reuse the same data model collection. If the UI is the same but the data is different, refer to the previous method of wrapping data models.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">SimpleModel</span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nv">name</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;BRV&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ItemBind</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onBind</span><span class="p">(</span><span class="n">holder</span><span class="p">:</span><span class="w"> </span><span class="n">BindingAdapter</span><span class="p">.</span><span class="na">BindingViewHolder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -940,18 +938,18 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="c1">// 列表 1</span>
+<div class="highlight"><pre><span></span><code><span class="c1">// List 1</span>
 <span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">SimpleModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_simple</span><span class="p">)</span>
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span><span class="p">()</span>
 
-<span class="c1">// 列表2</span>
+<span class="c1">// List 2</span>
 <span class="n">rv2</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">SimpleModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_simple2</span><span class="p">)</span>
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span><span class="p">()</span>
 </code></pre></div>
-<h2 id="onbind">使用onBind<a class="headerlink" href="#onbind" title="Permanent link">&para;</a></h2>
-<p>以下这种形式不太方便复用. 本身也只是图方便并不是很推荐大量逻辑场景下使用. 这个你要复制就使用复制粘贴吧....</p>
+<h2 id="using-onbind">Using onBind<a class="headerlink" href="#using-onbind" title="Permanent link">&para;</a></h2>
+<p>The following approach is not very convenient for reuse. It's primarily for quick and simple scenarios, and it's not recommended for complex logic. If you want to copy and paste, feel free to use it.</p>
 <div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">SimpleModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_simple</span><span class="p">)</span>
 <span class="w">    </span><span class="n">onBind</span><span class="w"> </span><span class="p">{</span>
@@ -959,18 +957,18 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span><span class="p">()</span>
 </code></pre></div>
-<h2 id="_2">扩展函数<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>完整复用构建列表代码可以直接封装为Kt扩展函数</p>
+<h2 id="extension-functions">Extension Functions<a class="headerlink" href="#extension-functions" title="Permanent link">&para;</a></h2>
+<p>You can encapsulate the complete code for building reusable lists as Kotlin extension functions.</p>
 <div class="highlight"><pre><span></span><code><span class="cm">/**</span>
-<span class="cm"> * 使用</span>
+<span class="cm"> * Usage</span>
 <span class="cm"> */</span>
-<span class="n">viewBinding</span><span class="p">.</span><span class="na">rv1</span><span class="p">.</span><span class="na">setupNews</span><span class="p">{</span><span class="w"> </span><span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">listOf</span><span class="o">&lt;</span><span class="n">News1Module</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="n">viewBinding</span><span class="p">.</span><span class="na">rv1</span><span class="p">.</span><span class="na">setupNews</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">listOf</span><span class="o">&lt;</span><span class="n">News1Module</span><span class="o">&gt;</span><span class="p">()</span>
 
-<span class="kd">val</span><span class="w"> </span><span class="nv">adapter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">viewBinding</span><span class="p">.</span><span class="na">rv2</span><span class="p">.</span><span class="na">setupNews</span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">adapter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">viewBinding</span><span class="p">.</span><span class="na">rv2</span><span class="p">.</span><span class="na">setupNews</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
 <span class="n">adapter</span><span class="p">.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">listOf</span><span class="o">&lt;</span><span class="n">News1Module</span><span class="o">&gt;</span><span class="p">()</span>
 
 <span class="cm">/**</span>
-<span class="cm"> * adapter ?</span>
+<span class="cm"> * Adapter</span>
 <span class="cm"> */</span>
 <span class="kd">fun</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">INews</span><span class="o">&gt;</span><span class="w"> </span><span class="n">RecyclerView</span><span class="p">.</span><span class="nf">setupNews</span><span class="p">(</span><span class="n">onItemContainerClick</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}):</span><span class="w"> </span><span class="n">BindingAdapter</span><span class="w"> </span><span class="o">=</span>
 <span class="w">    </span><span class="n">linear</span><span class="p">()</span>
@@ -984,7 +982,7 @@
 <span class="w">        </span><span class="p">}</span>
 
 <span class="cm">/**</span>
-<span class="cm"> * 定义接口</span>
+<span class="cm"> * Define Interface</span>
 <span class="cm"> */</span>
 <span class="kd">interface</span><span class="w"> </span><span class="nc">INews</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">title</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span>
@@ -996,7 +994,7 @@
 <span class="p">}</span>
 
 <span class="cm">/**</span>
-<span class="cm"> * 实体类 1</span>
+<span class="cm"> * Entity Class 1</span>
 <span class="cm"> */</span>
 <span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">News1Module</span><span class="p">(</span>
 <span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">news1Field</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span>
@@ -1009,7 +1007,7 @@
 <span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">INews</span>
 
 <span class="cm">/**</span>
-<span class="cm"> * 实体类 2</span>
+<span class="cm"> * Entity Class 2</span>
 <span class="cm"> */</span>
 <span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">News2Module</span><span class="p">(</span>
 <span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">news2Field</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span>

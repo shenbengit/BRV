@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#combining-spacing" class="md-skip">
           Skip to content
         </a>
       
@@ -450,22 +450,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    组合间距
+  <a href="#combining-spacing" class="md-nav__link">
+    Combining Spacing
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    方法
+  <a href="#methods" class="md-nav__link">
+    Methods
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    计算边缘
+  <a href="#computing-edges" class="md-nav__link">
+    Computing Edges
   </a>
   
 </li>
@@ -733,7 +733,7 @@
   
   
     <li class="md-nav__item">
-      <a href="https://github.com/liangjingkanji/BRV/blob/master/docs/issues.md" class="md-nav__link">
+      <a href="../issues/" class="md-nav__link">
         FAQ
       </a>
     </li>
@@ -810,22 +810,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    组合间距
+  <a href="#combining-spacing" class="md-nav__link">
+    Combining Spacing
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    方法
+  <a href="#methods" class="md-nav__link">
+    Methods
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    计算边缘
+  <a href="#computing-edges" class="md-nav__link">
+    Computing Edges
   </a>
   
 </li>
@@ -851,61 +851,61 @@
   <h1>Custom</h1>
 
 <ol>
-<li>BRV的分割线函数<code>divider</code>都是通过创建<code>DefaultDecoration</code>来实现的. 如果想访问更多功能请查看该类公开函数</li>
-<li>假设自带的分割线功能不满足你的要求你可以继承<code>RecyclerView.ItemDecoration</code>实现</li>
+<li>The <code>divider</code> functions in BRV are implemented by creating a <code>DefaultDecoration</code>. If you want to access more functionality, please refer to the public functions in that class.</li>
+<li>If the built-in divider functionality doesn't meet your requirements, you can inherit from <code>RecyclerView.ItemDecoration</code> to implement your own divider.</li>
 </ol>
-<h2 id="_1">组合间距<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>可以重复调用<code>.divider</code>来叠加设置分割线/间距</p>
-<div class="highlight"><pre><span></span><code><span class="n">binding</span><span class="p">.</span><span class="na">rv</span><span class="p">.</span><span class="na">grid</span><span class="p">(</span><span class="m">3</span><span class="p">).</span><span class="na">divider</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 水平间距</span>
+<h2 id="combining-spacing">Combining Spacing<a class="headerlink" href="#combining-spacing" title="Permanent link">&para;</a></h2>
+<p>You can repeatedly call <code>.divider</code> to stack multiple divider and spacing settings:</p>
+<div class="highlight"><pre><span></span><code><span class="n">binding</span><span class="p">.</span><span class="na">rv</span><span class="p">.</span><span class="na">grid</span><span class="p">(</span><span class="m">3</span><span class="p">).</span><span class="na">divider</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// Horizontal spacing</span>
 <span class="w">    </span><span class="n">orientation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DividerOrientation</span><span class="p">.</span><span class="na">HORIZONTAL</span>
 <span class="w">    </span><span class="n">setDivider</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
-<span class="p">}.</span><span class="na">divider</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 垂直间距</span>
+<span class="p">}.</span><span class="na">divider</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// Vertical spacing</span>
 <span class="w">    </span><span class="n">orientation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DividerOrientation</span><span class="p">.</span><span class="na">VERTICAL</span>
 <span class="w">    </span><span class="n">setDivider</span><span class="p">(</span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
-<span class="w">    </span><span class="n">onEnabled</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 是否为当前Item启用分割线</span>
+<span class="w">    </span><span class="n">onEnabled</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// Enable dividers only for specific item type</span>
 <span class="w">        </span><span class="n">itemViewType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_divider_vertical</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}.</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">DividerModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_divider_vertical</span><span class="p">)</span>
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span><span class="p">()</span>
 </code></pre></div>
-<h2 id="_2">方法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>函数</th>
-<th>描述</th>
+<th>Function</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>onEnabled</td>
-<td>是否为当前Item启用分割线</td>
+<td>Specifies whether the divider is enabled for the current item</td>
 </tr>
 <tr>
 <td>addType</td>
-<td>假设使用该函数则只有被添加的类型才会绘制分割线</td>
+<td>Specifies that dividers should only be drawn for the added item types</td>
 </tr>
 <tr>
 <td>setColor</td>
-<td>设置分割线颜色</td>
+<td>Sets the color of the divider</td>
 </tr>
 <tr>
 <td>setDrawable</td>
-<td>设置分割线图片</td>
+<td>Sets the drawable resource for the divider</td>
 </tr>
 <tr>
 <td>setBackground</td>
-<td>设置分割线背景颜色</td>
+<td>Sets the background color of the divider</td>
 </tr>
 <tr>
 <td>setMargin</td>
-<td>设置分割线间距</td>
+<td>Sets the spacing for the divider</td>
 </tr>
 </tbody>
 </table>
-<h2 id="_3">计算边缘<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>其中有一个工具类可以计算出Item位于列表的边缘位置, 可以用于来设置间距, 即<code>Edge.computeEdge()</code>返回结果为<code>Edge</code></p>
+<h2 id="computing-edges">Computing Edges<a class="headerlink" href="#computing-edges" title="Permanent link">&para;</a></h2>
+<p>There is a utility class available to calculate the edge position of an item within the list. This can be used to set spacing. The <code>Edge.computeEdge()</code> function returns an <code>Edge</code> object:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Edge</span><span class="p">(</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">left</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">top</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
@@ -913,7 +913,7 @@
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">bottom</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
 <span class="p">)</span>
 </code></pre></div>
-<p>left为true则表示指定position位于列表左侧, top为true则表示指定position位于列表顶部, 其他类推. 即可根据其结果来设置ItemView的间距</p>
+<p>If <code>left</code> is <code>true</code>, it indicates that the specified position is at the left edge of the list. Similarly, <code>top</code> being <code>true</code> indicates the item is at the top edge, and so on. You can use the results of this calculation to set the spacing for the itemView.</p>
 
 
 

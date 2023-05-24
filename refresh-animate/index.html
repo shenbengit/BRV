@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#disabling-pull-up-loading-animation" class="md-skip">
           Skip to content
         </a>
       
@@ -500,15 +500,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    关闭上拉加载动画
+  <a href="#disabling-pull-up-loading-animation" class="md-nav__link">
+    Disabling Pull-Up Loading Animation
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    自定义刷新动画
+  <a href="#custom-refresh-animations" class="md-nav__link">
+    Custom Refresh Animations
   </a>
   
 </li>
@@ -724,7 +724,7 @@
   
   
     <li class="md-nav__item">
-      <a href="https://github.com/liangjingkanji/BRV/blob/master/docs/issues.md" class="md-nav__link">
+      <a href="../issues/" class="md-nav__link">
         FAQ
       </a>
     </li>
@@ -801,15 +801,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    关闭上拉加载动画
+  <a href="#disabling-pull-up-loading-animation" class="md-nav__link">
+    Disabling Pull-Up Loading Animation
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    自定义刷新动画
+  <a href="#custom-refresh-animations" class="md-nav__link">
+    Custom Refresh Animations
   </a>
   
 </li>
@@ -834,10 +834,10 @@
 
   <h1>Refresh Animation</h1>
 
-<p>上一章介绍过BRV内嵌<a href="https://github.com/scwang90/SmartRefreshLayout">SmartRefreshLayout</a>来实现下拉刷新/上拉加载, 以下演示自定义刷新动画</p>
-<h2 id="_1">关闭上拉加载动画<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>关闭动画以后并不会影响原有的预加载功能</p>
-<p>全局配置</p>
+<p>In the previous chapter, we introduced the integration of <a href="https://github.com/scwang90/SmartRefreshLayout">SmartRefreshLayout</a> in BRV to achieve pull-down refresh and pull-up loading. The following demonstrates custom refresh animations.</p>
+<h2 id="disabling-pull-up-loading-animation">Disabling Pull-Up Loading Animation<a class="headerlink" href="#disabling-pull-up-loading-animation" title="Permanent link">&para;</a></h2>
+<p>Disabling the animation does not affect the original preloading functionality.</p>
+<p>Global Configuration:</p>
 <div class="highlight"><pre><span></span><code><span class="n">SmartRefreshLayout</span><span class="p">.</span><span class="na">setDefaultRefreshFooterCreator</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">layout</span><span class="w"> </span><span class="o">-&gt;</span>
 <span class="w">    </span><span class="n">layout</span><span class="p">.</span><span class="na">setFooterHeight</span><span class="p">(</span><span class="m">0F</span><span class="p">)</span>
 <span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">classicsFooter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ClassicsFooter</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
@@ -845,7 +845,7 @@
 <span class="w">    </span><span class="n">classicsFooter</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>单例配置, 修改xml布局, 当然你也可以代码修改</p>
+<p>Singleton Configuration, modify XML layout, or modify programmatically:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;com.drake.brv.PageRefreshLayout</span>
 <span class="w">    </span><span class="na">android:id=</span><span class="s">&quot;@+id/page&quot;</span>
 <span class="w">    </span><span class="na">android:layout_width=</span><span class="s">&quot;match_parent&quot;</span>
@@ -864,25 +864,25 @@
 
 <span class="nt">&lt;/com.drake.brv.PageRefreshLayout&gt;</span>
 </code></pre></div>
-<h2 id="_2">自定义刷新动画<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h2 id="custom-refresh-animations">Custom Refresh Animations<a class="headerlink" href="#custom-refresh-animations" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="https://github.com/scwang90/SmartRefreshLayout/blob/master/art/md_custom.md">SmartRefreshLayout自定义动画文档</a></li>
+<li><a href="https://github.com/scwang90/SmartRefreshLayout/blob/master/art/md_custom.md">SmartRefreshLayout Custom Animation Documentation</a></li>
 </ul>
-<p>SmartRefresh自带7个动画依赖库可以参考/修改源码或者直接使用</p>
-<div class="highlight"><pre><span></span><code><span class="n">implementation</span><span class="w">  </span><span class="s1">&#39;io.github.scwang90:refresh-header-classics:2.0.5&#39;</span><span class="w">    </span><span class="c1">//经典刷新头</span>
-<span class="n">implementation</span><span class="w">  </span><span class="s1">&#39;io.github.scwang90:refresh-header-radar:2.0.5&#39;</span><span class="w">       </span><span class="c1">//雷达刷新头</span>
-<span class="n">implementation</span><span class="w">  </span><span class="s1">&#39;io.github.scwang90:refresh-header-falsify:2.0.5&#39;</span><span class="w">     </span><span class="c1">//虚拟刷新头</span>
-<span class="n">implementation</span><span class="w">  </span><span class="s1">&#39;io.github.scwang90:refresh-header-material:2.0.5&#39;</span><span class="w">    </span><span class="c1">//谷歌刷新头</span>
-<span class="n">implementation</span><span class="w">  </span><span class="s1">&#39;io.github.scwang90:refresh-header-two-level:2.0.5&#39;</span><span class="w">   </span><span class="c1">//二级刷新头</span>
-<span class="n">implementation</span><span class="w">  </span><span class="s1">&#39;io.github.scwang90:refresh-footer-ball:2.0.5&#39;</span><span class="w">        </span><span class="c1">//球脉冲加载</span>
-<span class="n">implementation</span><span class="w">  </span><span class="s1">&#39;io.github.scwang90:refresh-footer-classics:2.0.5&#39;</span><span class="w">    </span><span class="c1">//经典加载</span>
+<p>SmartRefresh comes with 7 animation dependency libraries that can be referenced/modified in the source code or used directly:</p>
+<div class="highlight"><pre><span></span><code><span class="n">implementation</span><span class="w">  </span><span class="s1">&#39;io.github.scwang90:refresh-header-classics:2.0.5&#39;</span><span class="w">    </span><span class="c1">// Classic refresh header</span>
+<span class="n">implementation</span><span class="w">  </span><span class="s1">&#39;io.github.scwang90:refresh-header-radar:2.0.5&#39;</span><span class="w">       </span><span class="c1">// Radar refresh header</span>
+<span class="n">implementation</span><span class="w">  </span><span class="s1">&#39;io.github.scwang90:refresh-header-falsify:2.0.5&#39;</span><span class="w">     </span><span class="c1">// Falsify refresh header</span>
+<span class="n">implementation</span><span class="w">  </span><span class="s1">&#39;io.github.scwang90:refresh-header-material:2.0.5&#39;</span><span class="w">    </span><span class="c1">// Google refresh header</span>
+<span class="n">implementation</span><span class="w">  </span><span class="s1">&#39;io.github.scwang90:refresh-header-two-level:2.0.5&#39;</span><span class="w">   </span><span class="c1">// Two-level refresh header</span>
+<span class="n">implementation</span><span class="w">  </span><span class="s1">&#39;io.github.scwang90:refresh-footer-ball:2.0.5&#39;</span><span class="w">        </span><span class="c1">// Ball pulse loading</span>
+<span class="n">implementation</span><span class="w">  </span><span class="s1">&#39;io.github.scwang90:refresh-footer-classics:2.0.5&#39;</span><span class="w">    </span><span class="c1">// Classic loading</span>
 </code></pre></div>
-<p>想要了解更多请查看<a href="https://github.com/scwang90/SmartRefreshLayout">SmartRefreshLayout</a>主页</p>
+<p>For more information, please refer to the <a href="https://github.com/scwang90/SmartRefreshLayout">SmartRefreshLayout</a> homepage.</p>
 <table>
 <thead>
 <tr>
-<th align="center">个人首页</th>
-<th align="center">微博列表</th>
+<th align="center">Personal Homepage</th>
+<th align="center">Weibo List</th>
 </tr>
 </thead>
 <tbody>
@@ -895,8 +895,8 @@
 <table>
 <thead>
 <tr>
-<th align="center">餐饮美食</th>
-<th align="center">个人中心</th>
+<th align="center">Food and Dining</th>
+<th align="center">Personal Center</th>
 </tr>
 </thead>
 <tbody>
@@ -920,10 +920,11 @@
 </tr>
 <tr>
 <td align="center"><a href="https://dribbble.com/shots/2753803-Refresh-your-delivery">Refresh-your-delivery</a></td>
-<td align="center"><a href="https://dribbble.com/shots/3470499-DropBox-Refresh">Dropbox-Refresh</a></td>
+<td align="center">[Dropbox-</td>
 </tr>
 </tbody>
 </table>
+<p>Refresh](https://dribbble.com/shots/3470499-DropBox-Refresh)                       |</p>
 <table>
 <thead>
 <tr>

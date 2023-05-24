@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#usage" class="md-skip">
           Skip to content
         </a>
       
@@ -470,8 +470,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    使用
+  <a href="#usage" class="md-nav__link">
+    Usage
   </a>
   
 </li>
@@ -484,8 +484,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    骨骼动画
+  <a href="#skeleton-animation" class="md-nav__link">
+    Skeleton Animation
   </a>
   
 </li>
@@ -731,7 +731,7 @@
   
   
     <li class="md-nav__item">
-      <a href="https://github.com/liangjingkanji/BRV/blob/master/docs/issues.md" class="md-nav__link">
+      <a href="../issues/" class="md-nav__link">
         FAQ
       </a>
     </li>
@@ -808,8 +808,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    使用
+  <a href="#usage" class="md-nav__link">
+    Usage
   </a>
   
 </li>
@@ -822,8 +822,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    骨骼动画
+  <a href="#skeleton-animation" class="md-nav__link">
+    Skeleton Animation
   </a>
   
 </li>
@@ -848,85 +848,83 @@
 
   <h1>Empty State</h1>
 
-<p>缺省页对于一个用户体验良好的应用非常重要</p>
-<p>BRV采用集成一个非常优秀缺省页库 <a href="https://github.com/liangjingkanji/StateLayout">StateLayout</a>来实现列表缺省页</p>
+<p>The default page is very important for a user-friendly application.</p>
+<p>BRV integrates a highly efficient default page library called <a href="https://github.com/liangjingkanji/StateLayout">StateLayout</a> to implement default pages for lists.</p>
 <blockquote>
-<p>已经内嵌在BRV库中, 无需再次依赖StateLayout. 如果你的列表同时包含下拉刷新/上拉加载我建议使用<a href="../refresh/">PageRefreshLayout</a>替代StateLayout</p>
+<p>StateLayout is already embedded in the BRV library, so there is no need to depend on StateLayout separately. If your list includes both pull-to-refresh and load-more functionality, I recommend using <a href="../refresh/">PageRefreshLayout</a> instead of StateLayout.</p>
 </blockquote>
-<p><br></p>
-<p>主要特点</p>
+<p>Main Features:</p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> 优雅的函数设计</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> 局部缺省页</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> 布局或代码声明皆可</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> 全局/单例配置</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> 监听缺省页显示</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> 自定义动画</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> 多种状态缺省页</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> 网络请求回调</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> 传递任意对象作为标签</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> 快速配置点击重试</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> 异步线程</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> 无网络立即显示错误缺省页</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> 配合列表使用自动化显示列表缺省页</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> 配合网络请求自动化显示缺省页</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Elegant function design</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Partial default pages</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Layout or code declaration</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Global/singleton configuration</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Listening to default page display</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Custom animations</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Multiple state default pages</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Network request callbacks</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Passing any object as a tag</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Quick configuration for click-to-retry</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Asynchronous threads</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Immediate display of error default page when there is no network</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Automatic display of list default page when used with lists</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Automatic display of default page when used with network requests</li>
 </ul>
-<p><br></p>
-<p><img src="https://i.loli.net/2021/08/14/cliN9VtnAfjb1Z4.gif" width="250"/></p>
-<h2 id="_1">使用<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>第一步, 在Application中初始化缺省页</p>
+<p><img alt="StateLayout Demo" src="https://i.loli.net/2021/08/14/cliN9VtnAfjb1Z4.gif" /></p>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<p>Step 1: Initialize the default page in your Application class.</p>
 <div class="highlight"><pre><span></span><code><span class="n">StateConfig</span><span class="p">.</span><span class="na">apply</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">emptyLayout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">layout_empty</span>
 <span class="w">    </span><span class="n">errorLayout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">layout_error</span>
 <span class="w">    </span><span class="n">loadingLayout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">layout_loading</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>第二步, 创建缺省页</p>
-<div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">布局创建</label><div class="tabbed-content">
+<p>Step 2: Create the default page.</p>
+<div class="tabbed-set" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Layout Creation</label><div class="tabbed-content"></div>
+</div>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;com.drake.statelayout.StateLayout</span>
-<span class="w">    </span><span class="na">android:id=</span><span class="s">&quot;@+id/state&quot;</span>
-<span class="w">    </span><span class="na">android:layout_width=</span><span class="s">&quot;match_parent&quot;</span>
-<span class="w">    </span><span class="na">android:layout_height=</span><span class="s">&quot;match_parent&quot;</span><span class="nt">&gt;</span>
+<span class="na">android:id=</span><span class="s">&quot;@+id/state&quot;</span>
+<span class="na">android:layout_width=</span><span class="s">&quot;match_parent&quot;</span>
+<span class="na">android:layout_height=</span><span class="s">&quot;match_parent&quot;</span><span class="nt">&gt;</span>
 
-<span class="w">    </span><span class="nt">&lt;androidx.recyclerview.widget.RecyclerView</span>
-<span class="w">        </span><span class="na">android:id=</span><span class="s">&quot;@+id/rv&quot;</span>
-<span class="w">        </span><span class="na">android:layout_width=</span><span class="s">&quot;match_parent&quot;</span>
-<span class="w">        </span><span class="na">android:layout_height=</span><span class="s">&quot;match_parent&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
-<span class="nt">&lt;/com.drake.statelayout.StateLayout&gt;</span>
+<span class="w">        </span><span class="nt">&lt;androidx.recyclerview.widget.RecyclerView</span>
+<span class="w">            </span><span class="na">android:id=</span><span class="s">&quot;@+id/rv&quot;</span>
+<span class="w">            </span><span class="na">android:layout_width=</span><span class="s">&quot;match_parent&quot;</span>
+<span class="w">            </span><span class="na">android:layout_height=</span><span class="s">&quot;match_parent&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/com.drake.statelayout.StateLayout&gt;</span>
 </code></pre></div>
+<div class="tabbed-set" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Code Creation</label><div class="tabbed-content"></div>
 </div>
-<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">代码创建</label><div class="tabbed-content">
-<p>建议在XML布局中创建, 可保持代码可读性且避免不必要的问题发生, 性能也更优
-<div class="highlight"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stateCreate</span><span class="p">()</span><span class="w"> </span><span class="c1">// 在Activity/Fragment直接函数创建缺省页, `rv.stateCreate()`也可以, 但是非常不推荐使用</span>
+<p>It is recommended to create the StateLayout in XML layout to maintain code readability and avoid unnecessary issues for better performance.
+<div class="highlight"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stateCreate</span><span class="p">()</span><span class="w"> </span><span class="c1">// Create the default page function directly in the Activity/Fragment. `rv.stateCreate()` can also be used, but it is strongly discouraged.</span>
 </code></pre></div></p>
-</div>
-</div>
 <blockquote>
-<p>CoordinatorLayout+ViewPager<code>要求使用的状态缺省页的XML根布局为</code>NestedScrollView`, 否则显示缺省页后无法正常滑动</p>
+<p>For CoordinatorLayout+ViewPager, the root layout of the default page XML must be NestedScrollView in order to scroll correctly after displaying the default page.</p>
 </blockquote>
-<p>第三步, 创建列表</p>
+<p>Step 3: Create the list.</p>
 <div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">Model</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_simple</span><span class="p">)</span>
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">DoubleItemModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_full_span</span><span class="p">)</span>
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span><span class="p">()</span>
 </code></pre></div>
-<p>第四步, 显示缺省页
-<div class="highlight"><pre><span></span><code><span class="n">state</span><span class="p">.</span><span class="na">showLoading</span><span class="p">()</span><span class="w">  </span><span class="c1">// 加载中</span>
-<span class="n">state</span><span class="p">.</span><span class="na">showContent</span><span class="p">()</span><span class="w"> </span><span class="c1">// 加载成功</span>
-<span class="n">state</span><span class="p">.</span><span class="na">showError</span><span class="p">()</span><span class="w"> </span><span class="c1">// 加载错误</span>
-<span class="n">state</span><span class="p">.</span><span class="na">showEmpty</span><span class="p">()</span><span class="w"> </span><span class="c1">// 加载失败</span>
-</code></pre></div></p>
+<p>Step 4: Show the default page.</p>
+<div class="highlight"><pre><span></span><code><span class="n">state</span><span class="p">.</span><span class="na">showLoading</span><span class="p">()</span><span class="w">  </span><span class="c1">// Show loading state</span>
+<span class="n">state</span><span class="p">.</span><span class="na">showContent</span><span class="p">()</span><span class="w"> </span><span class="c1">// Show content</span>
+<span class="n">state</span><span class="p">.</span><span class="na">showError</span><span class="p">()</span><span class="w"> </span><span class="c1">// Show error state</span>
+<span class="n">state</span><span class="p">.</span><span class="na">showEmpty</span><span class="p">()</span><span class="w"> </span><span class="c1">// Show empty state</span>
+</code></pre></div>
 <h2 id="statelayout">StateLayout<a class="headerlink" href="#statelayout" title="Permanent link">&para;</a></h2>
-<p>StateLayout缺省页库非常推荐使用, BRV内部集成实现列表缺省页给开发者使用</p>
-<p>如果你想要自定义缺省页动画以及缺省页的生命周期监听建议你阅读以下文档</p>
+<p>StateLayout is a highly recommended default page library. BRV internally integrates it to provide default pages for lists to developers.</p>
+<p>If you want to customize the default page animations and listen to the lifecycle of the default page, I recommend reading the following documentation:</p>
 <ul>
 <li><a href="https://github.com/liangjingkanji/StateLayout/">GitHub</a></li>
-<li><a href="https://liangjingkanji.github.io/StateLayout">使用文档</a></li>
+<li><a href="https://liangjingkanji.github.io/StateLayout">Documentation</a></li>
 </ul>
-<h2 id="_2">骨骼动画<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>骨骼动画实际上就是对应布局的动画或者图片</p>
-<p>brv的骨骼动画同样由StateLayout实现: <a href="https://liangjingkanji.github.io/StateLayout/skeleton/">骨骼动画</a></p>
-<p>具体实现代码示例可以阅读<a href="https://github.com/liangjingkanji/BRV/blob/857e33e2bbc80bbdb9b5dec364012ff353b74d5a/sample/src/main/java/com/drake/brv/sample/ui/fragment/SkeletonFragment.kt">sample</a></p>
+<h2 id="skeleton-animation">Skeleton Animation<a class="headerlink" href="#skeleton-animation" title="Permanent link">&para;</a></h2>
+<p>Skeleton animation refers to the animation or image corresponding to the layout.</p>
+<p>BRV implements skeleton animation using StateLayout. You can refer to the [Skeleton Animation](https://liangjingkanji.github.io/</p>
+<p>StateLayout/skeleton/) documentation for specific implementation code examples.</p>
+<p>For code examples, you can refer to the <a href="https://github.com/liangjingkanji/BRV/blob/857e33e2bbc80bbdb9b5dec364012ff353b74d5a/sample/src/main/java/com/drake/brv/sample/ui/fragment/SkeletonFragment.kt">sample</a> in the BRV repository.</p>
 
 
 

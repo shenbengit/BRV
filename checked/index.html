@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#multi-select-list" class="md-skip">
           Skip to content
         </a>
       
@@ -560,29 +560,29 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    多选列表
+  <a href="#multi-select-list" class="md-nav__link">
+    Multi-select List
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    默认选择
+  <a href="#default-selection" class="md-nav__link">
+    Default Selection
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    数据变化
+  <a href="#data-changes" class="md-nav__link">
+    Data Changes
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    函数
+  <a href="#functions" class="md-nav__link">
+    Functions
   </a>
   
 </li>
@@ -738,7 +738,7 @@
   
   
     <li class="md-nav__item">
-      <a href="https://github.com/liangjingkanji/BRV/blob/master/docs/issues.md" class="md-nav__link">
+      <a href="../issues/" class="md-nav__link">
         FAQ
       </a>
     </li>
@@ -815,29 +815,29 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    多选列表
+  <a href="#multi-select-list" class="md-nav__link">
+    Multi-select List
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    默认选择
+  <a href="#default-selection" class="md-nav__link">
+    Default Selection
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    数据变化
+  <a href="#data-changes" class="md-nav__link">
+    Data Changes
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    函数
+  <a href="#functions" class="md-nav__link">
+    Functions
   </a>
   
 </li>
@@ -863,119 +863,119 @@
   <h1>Selection Mode</h1>
 
 <p><img src="https://i.loli.net/2021/08/14/MIe74pdKf5c1hTX.gif" width="250"/></p>
-<p>可编辑/多选列表在开发中很常见, BRV可以短短几行代码就可以实现一个选择模式: <a href="https://github.com/liangjingkanji/BRV/blob/master/sample/src/main/java/com/drake/brv/sample/ui/fragment/CheckModeFragment.kt">Demo</a></p>
-<h2 id="_1">多选列表<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>Editable/multi-select lists are common in development, and with just a few lines of code, BRV can implement a selection mode: <a href="https://github.com/liangjingkanji/BRV/blob/master/sample/src/main/java/com/drake/brv/sample/ui/fragment/CheckModeFragment.kt">Demo</a></p>
+<h2 id="multi-select-list">Multi-select List<a class="headerlink" href="#multi-select-list" title="Permanent link">&para;</a></h2>
 <ol>
 <li>
-<p>创建列表
+<p>Create the list:
     <div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">CheckModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_check_mode</span><span class="p">)</span>
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span>
 </code></pre></div></p>
 </li>
 <li>
-<p>为Model创建一个字段用于保存选择的状态
-    <div class="highlight"><pre><span></span><code><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">CheckModel</span><span class="p">(</span>
-<span class="hll"><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">checked</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-</span><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">visibility</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
-<span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">BaseObservable</span><span class="p">()</span><span class="w"> </span><span class="c1">// BaseObservable 这是DataBinding的数据绑定写法</span>
-</code></pre></div></p>
+<p>Add a field to the Model for storing the selection state:
+    ```kotlin hl_lines="2"
+    data class CheckModel(
+        var checked: Boolean = false,
+        var visibility: Boolean = false
+    ) : BaseObservable() // BaseObservable is used for DataBinding</p>
 </li>
 <li>
-<p>监听选择事件
+<p>Listen for selection events:
     <div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
 <span class="w">   </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">CheckModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_check_mode</span><span class="p">)</span>
 <span class="hll"><span class="w">   </span><span class="n">onChecked</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">position</span><span class="p">,</span><span class="w"> </span><span class="n">isChecked</span><span class="p">,</span><span class="w"> </span><span class="n">isAllChecked</span><span class="w"> </span><span class="o">-&gt;</span>
 </span><span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getModel</span><span class="o">&lt;</span><span class="n">CheckModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
 <span class="w">        </span><span class="n">model</span><span class="p">.</span><span class="na">checked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isChecked</span>
-<span class="w">        </span><span class="n">model</span><span class="p">.</span><span class="na">notifyChange</span><span class="p">()</span><span class="w"> </span><span class="c1">// 通知UI跟随数据变化</span>
+<span class="w">        </span><span class="n">model</span><span class="p">.</span><span class="na">notifyChange</span><span class="p">()</span><span class="w"> </span><span class="c1">// Notify UI of data changes</span>
 <span class="w">   </span><span class="p">}</span>
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span>
 </code></pre></div></p>
 </li>
 <li>
-<p>触发选择事件
+<p>Trigger the selection event:
     <div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
 <span class="w">   </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">CheckModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_check_mode</span><span class="p">)</span>
 <span class="w">   </span><span class="n">onChecked</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">position</span><span class="p">,</span><span class="w"> </span><span class="n">isChecked</span><span class="p">,</span><span class="w"> </span><span class="n">isAllChecked</span><span class="w"> </span><span class="o">-&gt;</span>
 <span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getModel</span><span class="o">&lt;</span><span class="n">CheckModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
 <span class="w">        </span><span class="n">model</span><span class="p">.</span><span class="na">checked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isChecked</span>
-<span class="w">        </span><span class="n">model</span><span class="p">.</span><span class="na">notifyChange</span><span class="p">()</span><span class="w"> </span><span class="c1">// 通知UI跟随数据变化</span>
+<span class="w">        </span><span class="n">model</span><span class="p">.</span><span class="na">notifyChange</span><span class="p">()</span><span class="w"> </span><span class="c1">// Notify UI of data changes</span>
 <span class="w">   </span><span class="p">}</span>
 
 <span class="w">   </span><span class="n">onClick</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">cb</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">item</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nv">checked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getModel</span><span class="o">&lt;</span><span class="n">CheckModel</span><span class="o">&gt;</span><span class="p">().</span><span class="na">checked</span>
-<span class="hll"><span class="w">        </span><span class="n">setChecked</span><span class="p">(</span><span class="n">adapterPosition</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="n">checked</span><span class="p">)</span><span class="w"> </span><span class="c1">// 在点击事件中触发选择事件, 即点击列表条目就选中</span>
+<span class="hll"><span class="w">        </span><span class="n">setChecked</span><span class="p">(</span><span class="n">adapterPosition</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="n">checked</span><span class="p">)</span><span class="w"> </span><span class="c1">// Trigger the selection event when clicking on a list item to select/deselect it</span>
 </span><span class="w">   </span><span class="p">}</span>
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span>
 </code></pre></div></p>
 </li>
 </ol>
 <p><br></p>
-<h2 id="_2">默认选择<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>如果你想默认选中某些Item, 应当使用<code>setChecked</code>函数去设置, 而不是直接在Model中设置<code>isChecked</code>属性为true(这是不会触发选中回调的)</p>
-<p>例如在Demo中就有这么一行代码默认选中第一个Item</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// 切换选择模式</span>
+<h2 id="default-selection">Default Selection<a class="headerlink" href="#default-selection" title="Permanent link">&para;</a></h2>
+<p>If you want to default select certain items, you should use the <code>setChecked</code> function instead of directly setting the <code>isChecked</code> property to true in the Model (this won't trigger the selection callback).</p>
+<p>For example, in the Demo, there is a line of code that defaults to selecting the first item:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Toggle selection mode</span>
 <span class="n">tv_manage</span><span class="p">.</span><span class="na">setOnClickListener</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">adapter</span><span class="p">.</span><span class="na">toggle</span><span class="p">()</span>
-<span class="w">    </span><span class="n">rv</span><span class="p">.</span><span class="na">bindingAdapter</span><span class="p">.</span><span class="na">setChecked</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="c1">// 一开始就选中第一个</span>
+<span class="w">    </span><span class="n">rv</span><span class="p">.</span><span class="na">bindingAdapter</span><span class="p">.</span><span class="na">setChecked</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="c1">// Select the first item initially</span>
 <span class="p">}</span>
 </code></pre></div>
-<h2 id="_3">数据变化<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>如果数据位置发生变化, 例如增删, 请使用<code>BindingAdapter.checkedPosition.clear()</code>清除选中位置集合(也不一定就是清除), 否则可能发生数据错误导致的无法单选</p>
-<h2 id="_4">函数<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p>支持选择模式的常用函数</p>
+<h2 id="data-changes">Data Changes<a class="headerlink" href="#data-changes" title="Permanent link">&para;</a></h2>
+<p>If the data positions change, such as with additions or deletions, use <code>BindingAdapter.checkedPosition.clear()</code> to clear the selected position collection (or perform necessary operations), otherwise data errors may occur, leading to the inability to single-select.</p>
+<h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">&para;</a></h2>
+<p>Common functions for selection mode support:</p>
 <table>
 <thead>
 <tr>
-<th>函数</th>
-<th>描述</th>
+<th>Function</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>allChecked</td>
-<td>全选或者全部取消全选</td>
+<td>Select or deselect all items</td>
 </tr>
 <tr>
 <td>singleMode</td>
-<td>是否为单选模式</td>
+<td>Check if it is in single-selection mode</td>
 </tr>
 <tr>
 <td>isCheckedAll</td>
-<td>是否被全选</td>
+<td>Check if all items are selected</td>
 </tr>
 <tr>
 <td>checkedReverse</td>
-<td>反选</td>
+<td>Reverse the selection</td>
 </tr>
 <tr>
 <td>setChecked</td>
-<td>指定位置的条目是否选中</td>
+<td>Set whether the item at the specified position is selected</td>
 </tr>
 <tr>
 <td>checkedSwitch</td>
-<td>切换选中状态</td>
+<td>Toggle the selection state</td>
 </tr>
 <tr>
 <td>setCheckableType</td>
-<td>指定的type才允许选中</td>
+<td>Specify the type(s) that can be selected</td>
 </tr>
 <tr>
 <td>getCheckedModels</td>
-<td>得到选择的数据模型集合</td>
+<td>Get the collection of selected data models</td>
 </tr>
 <tr>
 <td>checkedPosition</td>
-<td>被选择的item的position集合</td>
+<td>Collection of positions of selected items</td>
 </tr>
 <tr>
 <td>checkedCount</td>
-<td>已选择数量</td>
+<td>Number of items selected</td>
 </tr>
 <tr>
 <td>onChecked</td>
-<td>选择回调</td>
+<td>Selection callback</td>
 </tr>
 </tbody>
 </table>

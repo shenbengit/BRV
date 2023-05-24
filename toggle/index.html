@@ -66,11 +66,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#_1" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -522,45 +517,9 @@
       
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Mode Switching
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="./" class="md-nav__link md-nav__link--active">
         Mode Switching
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    示例
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    函数
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -724,7 +683,7 @@
   
   
     <li class="md-nav__item">
-      <a href="https://github.com/liangjingkanji/BRV/blob/master/docs/issues.md" class="md-nav__link">
+      <a href="../issues/" class="md-nav__link">
         FAQ
       </a>
     </li>
@@ -794,28 +753,6 @@
   
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    示例
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    函数
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -834,49 +771,46 @@
 
   <h1>Mode Switching</h1>
 
-<p>BRV提供一个切换事件的触发和监听, 相当于会提供一个回调函数遍历所有的列表条目, 你可以在这个回调里面依次更新数据或者视图.</p>
-<p><br>
-这个<code>切换</code>可以理解为<code>遍历</code>列表条目</p>
-<p><br>
-一般用于切换列表的编辑模式</p>
+<p>BRV provides a toggle event trigger and listener, which can be used to iterate through all the list items. You can update the data or views in the callback function.</p>
+<p>The "toggle" can be understood as "iterating" through the list items.</p>
+<p>This feature is commonly used to switch between different editing modes in a list.</p>
 <p><img src="https://i.loli.net/2021/08/14/BVjGH7CT9lZ8KXa.gif" width="250"/></p>
-<p><br></p>
-<h2 id="_1">示例<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>Here's an example:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onActivityCreated</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span><span class="w"> </span><span class="n">Bundle?)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">super</span><span class="p">.</span><span class="na">onActivityCreated</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
 
 <span class="w">    </span><span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">CheckModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_check_mode</span><span class="p">)</span>
 
-<span class="w">        </span><span class="c1">// 监听切换事件</span>
+<span class="w">        </span><span class="c1">// Listen to toggle events</span>
 <span class="w">        </span><span class="n">onToggle</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">position</span><span class="p">,</span><span class="w"> </span><span class="n">toggleMode</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">-&gt;</span>
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">end</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="c1">// 显示和隐藏编辑菜单</span>
+<span class="w">                </span><span class="c1">// Show or hide the edit menu</span>
 <span class="w">                </span><span class="n">ll_menu</span><span class="p">.</span><span class="na">visibility</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">toggleMode</span><span class="p">)</span><span class="w"> </span><span class="n">View</span><span class="p">.</span><span class="na">VISIBLE</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="n">View</span><span class="p">.</span><span class="na">GONE</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span><span class="p">()</span>
 <span class="p">}</span>
 
-<span class="kd">fun</span><span class="w"> </span><span class="nf">onClick</span><span class="p">(</span><span class="n">v</span><span class="p">:</span><span class="n">View</span><span class="p">){</span>
-<span class="w">    </span><span class="n">rv</span><span class="p">.</span><span class="na">bindingAdapter</span><span class="p">.</span><span class="na">toggle</span><span class="p">()</span><span class="w"> </span><span class="c1">// 点击事件触发切换事件</span>
+<span class="kd">fun</span><span class="w"> </span><span class="nf">onClick</span><span class="p">(</span><span class="n">v</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">rv</span><span class="p">.</span><span class="na">bindingAdapter</span><span class="p">.</span><span class="na">toggle</span><span class="p">()</span><span class="w"> </span><span class="c1">// Trigger the toggle event on click</span>
 <span class="p">}</span>
 </code></pre></div>
-<h2 id="_2">函数<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>Available functions:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">fun</span><span class="w"> </span><span class="nf">toggle</span><span class="p">()</span>
-<span class="c1">// 触发切换模式(根据当前状态取反)</span>
+<span class="c1">// Trigger the toggle mode (invert the current state)</span>
 
 <span class="kd">fun</span><span class="w"> </span><span class="nf">getToggleMode</span><span class="p">():</span><span class="w"> </span><span class="kt">Boolean</span>
-<span class="c1">// 范围当前出何种切换模式</span>
+<span class="c1">// Get the current toggle mode</span>
 
 <span class="kd">fun</span><span class="w"> </span><span class="nf">setToggleMode</span><span class="p">(</span><span class="n">toggleMode</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="p">)</span>
-<span class="c1">// 设置切换模式, 如果设置的是当前正处于的模式不会触发回调</span>
+<span class="c1">// Set the toggle mode. If the provided mode is the same as the current mode, the callback won&#39;t be triggered.</span>
 
 <span class="kd">fun</span><span class="w"> </span><span class="nf">onToggle</span><span class="p">(</span><span class="n">block</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">position</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">toggleMode</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">Unit</span><span class="p">)</span>
-<span class="c1">// 监听切换事件, 在事件中你可以处理任何视图的数据或者视图修改</span>
-<span class="c1">// position: 遍历过程中的列表条目索引</span>
-<span class="c1">// toggleMode: 切换模式(布尔值)</span>
-<span class="c1">// end: 是否全部遍历完成</span>
+<span class="c1">// Listen to toggle events. In this event, you can modify data or views as needed.</span>
+<span class="c1">// position: Index of the list item during the iteration</span>
+<span class="c1">// toggleMode: The toggle mode (Boolean)</span>
+<span class="c1">// end: Whether the iteration is completed for all items</span>
 </code></pre></div>
 
 

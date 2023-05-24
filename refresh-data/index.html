@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#adding-data" class="md-skip">
           Skip to content
         </a>
       
@@ -274,36 +274,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    添加数据
+  <a href="#adding-data" class="md-nav__link">
+    Adding Data
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    删除数据
+  <a href="#removing-data" class="md-nav__link">
+    Removing Data
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    对比数据刷新
+  <a href="#updating-data-with-comparison" class="md-nav__link">
+    Updating Data with Comparison
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    局部刷新
+  <a href="#partial-refresh" class="md-nav__link">
+    Partial Refresh
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    刷新方法
+  <a href="#refresh-methods" class="md-nav__link">
+    Refresh Methods
   </a>
   
 </li>
@@ -745,7 +745,7 @@
   
   
     <li class="md-nav__item">
-      <a href="https://github.com/liangjingkanji/BRV/blob/master/docs/issues.md" class="md-nav__link">
+      <a href="../issues/" class="md-nav__link">
         FAQ
       </a>
     </li>
@@ -822,36 +822,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    添加数据
+  <a href="#adding-data" class="md-nav__link">
+    Adding Data
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    删除数据
+  <a href="#removing-data" class="md-nav__link">
+    Removing Data
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    对比数据刷新
+  <a href="#updating-data-with-comparison" class="md-nav__link">
+    Updating Data with Comparison
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    局部刷新
+  <a href="#partial-refresh" class="md-nav__link">
+    Partial Refresh
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    刷新方法
+  <a href="#refresh-methods" class="md-nav__link">
+    Refresh Methods
   </a>
   
 </li>
@@ -876,24 +876,24 @@
 
   <h1>Data Refresh</h1>
 
-<p>BRV没有自定义RecyclerView, 所以RV如何操作数据BRV就如何操作数据. 对于RV基础不了解的可以阅读本章后网上搜索</p>
-<p>你要知道的是RV操作数据需要两个步骤</p>
+<p>BRV does not have a custom RecyclerView, so data manipulation in BRV is done in the same way as with RecyclerView. For those who are not familiar with the basics of RecyclerView, you can read this chapter and then search online for more information.</p>
+<p>The process of manipulating data in RecyclerView involves two steps:</p>
 <ol>
-<li>更新集合(删除或者添加元素)</li>
-<li>调用对应的notify**()方法更新列表</li>
+<li>Updating the collection (adding or removing elements).</li>
+<li>Calling the corresponding <code>notify**()</code> methods to update the list.</li>
 </ol>
-<p>但是BRV的<code>models/addData</code>赋值会自动notifyDataChanged(), 无需调用更新列表. 如果不想自动更新列表可以使用BindingAdapter的<code>_data</code>字段</p>
+<p>However, in BRV, assigning values to <code>models</code> or using <code>addData()</code> will automatically call <code>notifyDataChanged()</code>, so there is no need to manually update the list. If you don't want the list to be automatically updated, you can use the <code>_data</code> field in the BindingAdapter.</p>
 <blockquote>
-<p>BRV的数据集合无论是<code>models</code>或<code>addData()</code>都是添加的<code>List&lt;Any?&gt;(任意对象数据集合)</code>. 所以只要是一个集合即可映射出一个列表 <br>
-如果数据不满足一个集合条件(或任何数据上的问题), 请自己处理下数据</p>
+<p>The data collection in BRV, whether it's <code>models</code> or <code>addData()</code>, is of type <code>List&lt;Any?&gt;</code> (a collection of any objects). So as long as it's a collection, it can be mapped to a list. <br>
+If the data doesn't meet the requirements of a collection (or any issues with the data), please handle the data accordingly.</p>
 </blockquote>
-<h2 id="_1">添加数据<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>使用BRV自带的两个方法添加数据会自动刷新UI</p>
-<div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataList</span><span class="w"> </span><span class="c1">// 自动使用 notifyDataSetChanged</span>
-<span class="n">rv</span><span class="p">.</span><span class="na">addModels</span><span class="p">(</span><span class="n">newDataList</span><span class="p">)</span><span class="w"> </span><span class="c1">// 自动使用 notifyItemRangeInserted, 当然也可以禁止动画</span>
-<span class="n">binding</span><span class="p">.</span><span class="na">rv</span><span class="p">.</span><span class="na">addModels</span><span class="p">(</span><span class="n">newDataList</span><span class="p">,</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="c1">// 在索引3后面添加数据</span>
+<h2 id="adding-data">Adding Data<a class="headerlink" href="#adding-data" title="Permanent link">&para;</a></h2>
+<p>Using the built-in methods in BRV to add data will automatically refresh the UI.</p>
+<div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataList</span><span class="w"> </span><span class="c1">// Automatically calls notifyDataSetChanged</span>
+<span class="n">rv</span><span class="p">.</span><span class="na">addModels</span><span class="p">(</span><span class="n">newDataList</span><span class="p">)</span><span class="w"> </span><span class="c1">// Automatically calls notifyItemRangeInserted, animation can also be disabled</span>
+<span class="n">binding</span><span class="p">.</span><span class="na">rv</span><span class="p">.</span><span class="na">addModels</span><span class="p">(</span><span class="n">newDataList</span><span class="p">,</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="c1">// Add data after index 3</span>
 </code></pre></div>
-<p>代码示例
+<p>Code Example:
 <div class="highlight"><pre><span></span><code><span class="n">binding</span><span class="p">.</span><span class="na">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">SimpleModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_simple</span><span class="p">)</span>
 <span class="w">    </span><span class="n">onBind</span><span class="w"> </span><span class="p">{</span>
@@ -901,34 +901,36 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span><span class="p">()</span>
 
-<span class="n">binding</span><span class="p">.</span><span class="na">rv</span><span class="p">.</span><span class="na">addModels</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="c1">// 添加数据</span>
-<span class="n">binding</span><span class="p">.</span><span class="na">rv</span><span class="p">.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newDataList</span><span class="w"> </span><span class="c1">// 覆盖原来的列表</span>
+<span class="n">binding</span><span class="p">.</span><span class="na">rv</span><span class="p">.</span><span class="na">addModels</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="c1">// Add data</span>
+<span class="n">binding</span><span class="p">.</span><span class="na">rv</span><span class="p">.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newDataList</span><span class="w"> </span><span class="c1">// Replace the original list with new data</span>
 </code></pre></div></p>
 <blockquote>
-<p>切记Java/Kotlin的引用类型是传址, 如果这两个方法操作的数据集都是同一个会导致问题 - 自己添加自己.  这种属于基本的语法问题</p>
+<p>Remember that in Java/Kotlin, reference types are passed by reference. If both methods operate on the same data collection, it will cause issues with adding the same data to itself. This is a basic language syntax issue.</p>
 </blockquote>
-<h2 id="_2">删除数据<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>BRV操作数据和RV没有任何区别(毕竟只是自定义Adapter), 删除全部数据可以为models赋值null</p>
-<p>如果删除指定数据, 比如删除第二条</p>
-<div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">mutable</span><span class="p">.</span><span class="na">removeAt</span><span class="p">(</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="c1">// 先删除数据</span>
-<span class="n">rv</span><span class="p">.</span><span class="na">bindingAdapter</span><span class="p">.</span><span class="na">notifyItemRemoved</span><span class="p">(</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="c1">// 然后刷新列表</span>
+<h2 id="removing-data">Removing Data<a class="headerlink" href="#removing-data" title="Permanent link">&para;</a></h2>
+<p>Manipulating data in BRV is the same as in RecyclerView (after all, it's just a custom Adapter). To remove all data, you can assign <code>null</code> to <code>models</code>.</p>
+<p>If you want to remove specific data, such as removing the second item:</p>
+<div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">mutable</span><span class="p">.</span><span class="na">removeAt</span><span class="p">(</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="c1">// Remove the data first</span>
+<span class="n">rv</span><span class="p">.</span><span class="na">bindingAdapter</span><span class="p">.</span><span class="na">notifyItemRemoved</span><span class="p">(</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="c1">// Then refresh the list</span>
 </code></pre></div>
-<p>如果你删除N条或者添加/插入N条, 请调用对应的<code>notifyItem**()</code>方法, 具体方法你可以查看本章末尾或者网上搜索</p>
-<h2 id="_3">对比数据刷新<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>BRV可以根据新的数据集合和旧的数据集合对比判断来自动使用刷新动画</p>
+<p>If you are removing or adding/inserting multiple items, please use the corresponding <code>notifyItem**()</code> methods. You can find the specific methods at the end of this chapter or search online.</p>
+<h2 id="updating-data-with-comparison">Updating Data with Comparison<a class="headerlink" href="#updating-data-with-comparison" title="Permanent link">&para;</a></h2>
+<p>BRV can automatically use refresh animations based on the comparison of new and old data collections.</p>
 <div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">setDifferModels</span><span class="p">(</span><span class="n">getRandomData</span><span class="p">())</span>
 </code></pre></div>
-<p>该方法内部使用Android自带工具<code>DiffUtil</code>进行数据对比刷新, 但是支持异步/同步线程对比
+<p>This method internally uses the Android tool <code>DiffUtil</code> to compare and refresh the data. It supports synchronous and asynchronous thread comparison.
 <div class="highlight"><pre><span></span><code><span class="kd">fun</span><span class="w"> </span><span class="nf">setDifferModels</span><span class="p">(</span><span class="n">newModels</span><span class="p">:</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">Any?</span><span class="o">&gt;?</span><span class="p">,</span><span class="w"> </span><span class="n">detectMoves</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="n">commitCallback</span><span class="p">:</span><span class="w"> </span><span class="n">Runnable? </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span>
 </code></pre></div></p>
 <blockquote>
-<p>数据对比默认使用<code>equals</code>方法对比, 你可以为数据手动实现equals方法来修改对比逻辑. 推荐定义数据为 data class, 因其会根据构造参数自动生成equals</p>
+<p>By default, data comparison uses the <code>equals</code> method. You can manually implement the <code>equals</code> method for your data to modify the comparison logic. It is recommended to define data as <code>data class</code>, as it will automatically generate <code>equals</code> based on the constructor parameters.</p>
 </blockquote>
-<p>如果需要完全自定义对比数据的判断逻辑就实现<code>ItemDifferCallback</code>接口</p>
+<p>If you need to completely customize the comparison logic for data, you can implement the <code>ItemDifferCallback</code> interface.</p>
 <div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">SimpleModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_simple</span><span class="p">)</span>
-<span class="hll"><span class="w">    </span><span class="n">itemDifferCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">object</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">ItemDifferCallback</span><span class="w"> </span><span class="p">{</span>
-</span><span class="w">        </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">areContentsTheSame</span><span class="p">(</span><span class="n">oldItem</span><span class="p">:</span><span class="w"> </span><span class="kt">Any</span><span class="p">,</span><span class="w"> </span><span class="n">newItem</span><span class="p">:</span><span class="w"> </span><span class="kt">Any</span><span class="p">):</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">add</span>
+<span class="hll">
+</span><span class="n">Type</span><span class="o">&lt;</span><span class="n">SimpleModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_simple</span><span class="p">)</span>
+<span class="w">    </span><span class="n">itemDifferCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">object</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">ItemDifferCallback</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">areContentsTheSame</span><span class="p">(</span><span class="n">oldItem</span><span class="p">:</span><span class="w"> </span><span class="kt">Any</span><span class="p">,</span><span class="w"> </span><span class="n">newItem</span><span class="p">:</span><span class="w"> </span><span class="kt">Any</span><span class="p">):</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">oldItem</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">SimpleModel</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">newItem</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">SimpleModel</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="n">oldItem</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">newItem</span><span class="p">.</span><span class="na">name</span>
 <span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">super</span><span class="p">.</span><span class="na">areContentsTheSame</span><span class="p">(</span><span class="n">oldItem</span><span class="p">,</span><span class="w"> </span><span class="n">newItem</span><span class="p">)</span>
@@ -937,7 +939,7 @@
 <span class="w">    </span><span class="c1">// ...</span>
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getRandomData</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
 </code></pre></div>
-<p>使用<code>setDifferModels</code>对比刷新时, 相同item刷新有白屏动画这是因为<code>getChangePayload</code>返回null, 随便返回一个对象即可关闭</p>
+<p>When using <code>setDifferModels</code> for comparison and refresh, if the same item refreshes with a blank animation, it means that <code>getChangePayload</code> returns null. Just return any object to disable it.</p>
 <div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// ...</span>
 <span class="w">    </span><span class="n">itemDifferCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">object</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">ItemDifferCallback</span><span class="w"> </span><span class="p">{</span>
@@ -947,83 +949,83 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getRandomData</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="_4">局部刷新<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p>局部刷新某个或者批量Item的内容, 我们可以使用到两种方式</p>
+<h2 id="partial-refresh">Partial Refresh<a class="headerlink" href="#partial-refresh" title="Permanent link">&para;</a></h2>
+<p>To partially refresh a specific item or a batch of items, there are two approaches:</p>
 <ol>
-<li><code>notifyItemChanged</code>等方法, 这个上面提过</li>
-<li>DataBinding本身就支持这个特性 (推荐此方法), 性能最高/方便. Demo中的<a href="https://github.com/liangjingkanji/BRV/blob/master/sample/src/main/java/com/drake/brv/sample/ui/fragment/CheckModeFragment.kt">选择模式</a>就是如此实现</li>
+<li>Using methods like <code>notifyItemChanged</code>, as mentioned above.</li>
+<li>Utilizing the built-in feature of DataBinding (recommended), which provides the highest performance and convenience. The <a href="https://github.com/liangjingkanji/BRV/blob/master/sample/src/main/java/com/drake/brv/sample/ui/fragment/CheckModeFragment.kt">Check Mode</a> in the demo is implemented using this method.</li>
 </ol>
 <p><br>
-BRV支持DataBinding绑定数据, DataBinding的数据模型如果继承Observable就可以自动更新UI</p>
+BRV supports data binding, and if the data model used by DataBinding extends <code>Observable</code>, the UI will be automatically updated.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">CheckModel</span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nv">checked</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">visibility</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">BaseObservable</span><span class="p">()</span>
 </code></pre></div>
-<p>可以自动更新UI的字段类型, 这样可以不用整个数据模型继承BaseObservable</p>
+<p>Fields that can automatically update the UI can also be used without the data model itself extending <code>BaseObservable</code>.</p>
 <ul>
 <li>LiveData</li>
 <li>ObservableField</li>
 </ul>
-<p>自动更新LiveData字段要求先为DataBinding配置生命周期, 因为liveData观察者需要lifecycleOwner
+<p>To automatically update LiveData fields, you need to configure the lifecycle for DataBinding, as LiveData observers require a lifecycle owner.
 <div class="highlight"><pre><span></span><code><span class="n">binding</span><span class="p">.</span><span class="na">lifecycleOwner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span>
 </code></pre></div></p>
 <blockquote>
-<p>以上属于DataBinding使用基础, 更多DataBinding使用方法请阅读: <a href="https://juejin.cn/post/6844903549223059463">DataBinding最全使用说明 </a></p>
+<p>These are the basics of using DataBinding. For more information, please read: <a href="https://juejin.cn/post/6844903549223059463">Comprehensive DataBinding Guide</a></p>
 </blockquote>
-<h2 id="_5">刷新方法<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>这里介绍的属于RecyclerView官方方法, BRV的<code>BindingAdapter</code>继承<code>RecyclerView.Adapter</code>, 自然拥有父类的数据刷新方法.
-由于很多开发者常问此需求, 故统一介绍下</p>
+<h2 id="refresh-methods">Refresh Methods<a class="headerlink" href="#refresh-methods" title="Permanent link">&para;</a></h2>
+<p>Here, we introduce the RecyclerView's official methods. The <code>BindingAdapter</code> in BRV inherits from <code>RecyclerView.Adapter</code>, so it naturally has access to the parent class's data refresh methods.
+Since many developers often ask about this requirement, let's discuss it in detail.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">BindingAdapter</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">RecyclerView</span><span class="p">.</span><span class="na">Adapter</span><span class="o">&lt;</span><span class="n">BindingAdapter</span><span class="p">.</span><span class="na">BindingViewHolder</span><span class="o">&gt;</span><span class="p">()</span>
 </code></pre></div>
 <table>
 <thead>
 <tr>
-<th>刷新方法</th>
-<th>描述</th>
+<th>Refresh Method</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>notifyDataSetChanged</td>
-<td>全部数据刷新(不带动画)</td>
+<td>Refreshes all data (without animation)</td>
 </tr>
 <tr>
 <td>notifyItemChanged</td>
-<td>局部数据变更</td>
+<td>Partially updates data</td>
 </tr>
 <tr>
 <td>notifyItemInserted</td>
-<td>Item插入</td>
+<td>Inserts an item</td>
 </tr>
 <tr>
 <td>notifyItemMoved</td>
-<td>Item移动位置</td>
+<td>Moves an item</td>
 </tr>
 <tr>
 <td>notifyItemRemoved</td>
-<td>Item删除</td>
+<td>Removes an item</td>
 </tr>
 <tr>
 <td>notifyItemRangeChanged</td>
-<td>指定范围内Item数据变更</td>
+<td>Partially updates items within a specified range</td>
 </tr>
 <tr>
 <td>notifyItemRangeInserted</td>
-<td>指定范围内Item插入</td>
+<td>Inserts items within a specified range</td>
 </tr>
 <tr>
 <td>notifyItemRangeRemoved</td>
-<td>指定范围内删除</td>
+<td>Removes items within a specified range</td>
 </tr>
 </tbody>
 </table>
-<p>具体区别可以搜索: <code>RecycleView局部刷新</code><br>
-要注意的是这些方法都是刷新UI, 如果你列表数据并没有发生改变那么刷新是无效的</p>
+<p>You can search for "RecyclerView partial refresh" to learn more about the specific differences.
+Note that these methods refresh the UI, so if the list data hasn't changed, the refresh will have no effect.</p>
 <div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">SimpleModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_simple</span><span class="p">)</span>
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataList</span>
 
 <span class="n">dataList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">SimpleModel</span><span class="p">())</span>
 
-<span class="n">rv</span><span class="p">.</span><span class="na">bindingAdapter</span><span class="p">.</span><span class="na">notifyItemInserted</span><span class="p">(</span><span class="n">dataList</span><span class="p">.</span><span class="na">size</span><span class="p">)</span><span class="w"> </span><span class="c1">// 最后的位置有插入一个新的Item</span>
+<span class="n">rv</span><span class="p">.</span><span class="na">bindingAdapter</span><span class="p">.</span><span class="na">notifyItemInserted</span><span class="p">(</span><span class="n">dataList</span><span class="p">.</span><span class="na">size</span><span class="p">)</span><span class="w"> </span><span class="c1">// Inserts a new item at the end</span>
 </code></pre></div>
 
 

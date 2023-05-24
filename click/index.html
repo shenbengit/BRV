@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#functions" class="md-skip">
           Skip to content
         </a>
       
@@ -289,29 +289,29 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    函数
+  <a href="#functions" class="md-nav__link">
+    Functions
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    多对一点击事件
+  <a href="#one-to-many-click-events" class="md-nav__link">
+    One-to-Many Click Events
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    一对一点击事件
+  <a href="#one-to-one-click-events" class="md-nav__link">
+    One-to-One Click Events
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    点击防抖动
+  <a href="#click-debouncing" class="md-nav__link">
+    Click Debouncing
   </a>
   
 </li>
@@ -738,7 +738,7 @@
   
   
     <li class="md-nav__item">
-      <a href="https://github.com/liangjingkanji/BRV/blob/master/docs/issues.md" class="md-nav__link">
+      <a href="../issues/" class="md-nav__link">
         FAQ
       </a>
     </li>
@@ -815,29 +815,29 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    函数
+  <a href="#functions" class="md-nav__link">
+    Functions
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    多对一点击事件
+  <a href="#one-to-many-click-events" class="md-nav__link">
+    One-to-Many Click Events
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    一对一点击事件
+  <a href="#one-to-one-click-events" class="md-nav__link">
+    One-to-One Click Events
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    点击防抖动
+  <a href="#click-debouncing" class="md-nav__link">
+    Click Debouncing
   </a>
   
 </li>
@@ -862,43 +862,43 @@
 
   <h1>Click Event</h1>
 
-<h2 id="_1">函数<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>函数</th>
-<th>描述</th>
+<th>Function</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>onFastClick</td>
-<td>为指定的Id添加事件监听器</td>
+<td>Add an event listener for the specified Id</td>
 </tr>
 <tr>
 <td>onClick</td>
-<td>为指定的Id添加点击事件监听器, 但包含防抖动(默认500毫秒内不允许重复点击). 也可以<a href="#_4">设置间隔</a></td>
+<td>Add a click event listener for the specified Id with debounce (prevents repeated clicks within a default interval of 500 milliseconds). You can also <a href="#_4">set the interval</a></td>
 </tr>
 <tr>
 <td>onLongClick</td>
-<td>为指定的Id添加长按事件监听器</td>
+<td>Add a long click event listener for the specified Id</td>
 </tr>
 </tbody>
 </table>
 <blockquote>
-<p>通过使用Item的布局文件中的控件id可以为任何视图设置点击事件或者长按事件, Item的点击事件就是给Item的根布局添加Id.</p>
+<p>By using the control's ID in the item's layout file, you can set click or long click events for any view. The click event for an item is added to the root layout of the item by setting its ID.</p>
 </blockquote>
-<h2 id="_2">多对一点击事件<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>这种使用适用于多个id处理同一个点击业务逻辑</p>
+<h2 id="one-to-many-click-events">One-to-Many Click Events<a class="headerlink" href="#one-to-many-click-events" title="Permanent link">&para;</a></h2>
+<p>This approach is useful when multiple IDs need to handle the same click logic.</p>
 <div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">SimpleModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_simple</span><span class="p">)</span>
 
 <span class="w">    </span><span class="n">onClick</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">item</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// Item设置点击事件, 就要给Item的根布局设置一个id, 这里设置的是R.id.item</span>
+<span class="w">        </span><span class="c1">// Click event for the item, where the root layout of the item has the ID R.id.item</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span><span class="p">()</span>
 </code></pre></div>
-<p>onClick参数是可变长度. 可以指定多个Id, 并且存在覆盖行为.  onFastClick / onLongClick同理</p>
+<p>The <code>onClick</code> parameter is of variable length. You can specify multiple IDs, and there is an override behavior. The same applies to <code>onFastClick</code> and <code>onLongClick</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">SimpleModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_simple</span><span class="p">)</span>
 
@@ -906,49 +906,49 @@
 
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="n">onClick</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">btn_submit</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// it就是你设置的id</span>
+<span class="w">        </span><span class="c1">// `it` refers to the ID you set</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="n">onClick</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">btn_submit</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// 这会覆盖上面的回调逻辑, 因为两者设置的Id相同</span>
+<span class="w">        </span><span class="c1">// This will override the previous callback logic because the IDs are the same</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span><span class="p">()</span>
 </code></pre></div>
-<h2 id="_3">一对一点击事件<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>既一个Id对应一个点击事件回调. 那么可以使用以下更加简洁的用法</p>
+<h2 id="one-to-one-click-events">One-to-One Click Events<a class="headerlink" href="#one-to-one-click-events" title="Permanent link">&para;</a></h2>
+<p>When there is a one-to-one mapping between an ID and a click event callback, you can use the following simplified syntax:</p>
 <div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">SimpleModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_simple</span><span class="p">)</span>
 
 <span class="w">    </span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">tv_simple</span><span class="p">.</span><span class="na">onClick</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">toast</span><span class="p">(</span><span class="s">&quot;点击Text&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">toast</span><span class="p">(</span><span class="s">&quot;Click Text&quot;</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">item</span><span class="p">.</span><span class="na">onLongClick</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">toast</span><span class="p">(</span><span class="s">&quot;点击Item&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">toast</span><span class="p">(</span><span class="s">&quot;Click Item&quot;</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span><span class="p">()</span>
 </code></pre></div>
-<h2 id="_4">点击防抖动<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h2 id="click-debouncing">Click Debouncing<a class="headerlink" href="#click-debouncing" title="Permanent link">&para;</a></h2>
 <blockquote>
-<p><strong>防抖动</strong>: 一定间隔时间内只会响应第一次的点击. 避免用户快速点击导致重复响应点击事件</p>
+<p><strong>Debouncing</strong>: Responding only to the first click within a certain interval, preventing repeated response to click events caused by fast user clicks.</p>
 </blockquote>
-<p>BRV支持防抖动很简单, 使用<code>onClick</code>函数设置监听事件即可, <code>onFastClick</code>即不包含防抖动的点击事件.</p>
-<p>以下代码可以修改防抖动间隔时间(默认为500毫秒)</p>
-<div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">全局</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="n">BRV</span><span class="p">.</span><span class="na">clickThrottle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="c1">// 单位毫秒</span>
+<p>Enabling click debouncing in BRV is straightforward. Simply use the <code>onClick</code> function to set the event listener. <code>onFastClick</code> does not include click debouncing.</p>
+<p>The following code can modify the debounce interval (default is 500 milliseconds):</p>
+<div class="tabbed-set" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Global Setting</label><div class="tabbed-content"></div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="n">BRV</span><span class="p">.</span><span class="na">clickThrottle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="c1">// in milliseconds</span>
 </code></pre></div>
+<div class="tabbed-set" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Per-instance Setting</label><div class="tabbed-content"></div>
 </div>
-<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">单例</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="n">binding</span><span class="p">.</span><span class="na">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
-<span class="hll"><span class="w">    </span><span class="n">clickThrottle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="c1">// 覆盖全局设置</span>
-</span>
-<span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">SimpleModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_simple</span><span class="p">)</span>
-<span class="w">    </span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">item</span><span class="p">.</span><span class="na">onClick</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">toast</span><span class="p">(</span><span class="s">&quot;点击文本&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span><span class="p">()</span>
-</code></pre></div>
-</div>
-</div>
+<p>```kotlin hl_lines="2"
+binding.rv.linear().setup {
+clickThrottle = 1000 // override the global setting</p>
+<pre><code>    addType&lt;SimpleModel&gt;(R.layout.item_simple)
+    R.id.item.onClick {
+        toast("Click Text")
+    }
+}.models = getData()
+```
+</code></pre>
 
 
 

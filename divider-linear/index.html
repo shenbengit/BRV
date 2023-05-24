@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#horizontal-divider" class="md-skip">
           Skip to content
         </a>
       
@@ -408,36 +408,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    水平分割线
+  <a href="#horizontal-divider" class="md-nav__link">
+    Horizontal Divider
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    垂直分割线
+  <a href="#vertical-divider" class="md-nav__link">
+    Vertical Divider
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    边缘分割线
+  <a href="#edge-dividers" class="md-nav__link">
+    Edge Dividers
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    四周全包裹
+  <a href="#full-wrap-dividers" class="md-nav__link">
+    Full Wrap Dividers
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    分割线间隔
+  <a href="#divider-spacing" class="md-nav__link">
+    Divider Spacing
   </a>
   
 </li>
@@ -747,7 +747,7 @@
   
   
     <li class="md-nav__item">
-      <a href="https://github.com/liangjingkanji/BRV/blob/master/docs/issues.md" class="md-nav__link">
+      <a href="../issues/" class="md-nav__link">
         FAQ
       </a>
     </li>
@@ -824,36 +824,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    水平分割线
+  <a href="#horizontal-divider" class="md-nav__link">
+    Horizontal Divider
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    垂直分割线
+  <a href="#vertical-divider" class="md-nav__link">
+    Vertical Divider
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    边缘分割线
+  <a href="#edge-dividers" class="md-nav__link">
+    Edge Dividers
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    四周全包裹
+  <a href="#full-wrap-dividers" class="md-nav__link">
+    Full Wrap Dividers
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    分割线间隔
+  <a href="#divider-spacing" class="md-nav__link">
+    Divider Spacing
   </a>
   
 </li>
@@ -878,64 +878,64 @@
 
   <h1>Linear List</h1>
 
-<p>如果直接绘制item的xml可以实现分割线, 比如你在xml中使用简单的<code>layout_margin</code>(设置间距)也能完成你想要的分割线效果, 那么我更建议使用layout_margin</p>
-<h2 id="_1">水平分割线<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>If you prefer to directly create item layouts with XML to achieve the divider effect, using simple <code>layout_margin</code> for spacing, I recommend using <code>layout_margin</code>.</p>
+<h2 id="horizontal-divider">Horizontal Divider<a class="headerlink" href="#horizontal-divider" title="Permanent link">&para;</a></h2>
 <p><img src="https://i.loli.net/2021/08/14/IoBfnz6ERXVHlq3.png" width="250" /></p>
-<p>创建一个<code>drawable</code>文件来描述分隔线, 其具备复用的特点</p>
+<p>Create a <code>drawable</code> file to describe the divider, which can be reused:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;shape</span><span class="w"> </span><span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span><span class="nt">&gt;</span>
 <span class="w">    </span><span class="nt">&lt;solid</span><span class="w"> </span><span class="na">android:color=</span><span class="s">&quot;@color/dividerDecoration&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 <span class="w">    </span><span class="nt">&lt;size</span><span class="w"> </span><span class="na">android:height=</span><span class="s">&quot;5dp&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/shape&gt;</span>
 </code></pre></div>
-<p>创建列表</p>
+<p>Create the list:</p>
 <div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">divider</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">drawable</span><span class="p">.</span><span class="na">divider_horizontal</span><span class="p">).</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">DividerModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_divider</span><span class="p">)</span>
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span><span class="p">()</span>
 </code></pre></div>
 <p><br></p>
-<h2 id="_2">垂直分割线<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h2 id="vertical-divider">Vertical Divider<a class="headerlink" href="#vertical-divider" title="Permanent link">&para;</a></h2>
 <p><img src="https://i.loli.net/2021/08/14/rAeDXkfV6HxJUym.png" width="250"/></p>
-<p>创建Drawable作为分隔线
+<p>Create a drawable as the divider:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;shape</span><span class="w"> </span><span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span><span class="nt">&gt;</span>
 <span class="w">    </span><span class="nt">&lt;solid</span><span class="w"> </span><span class="na">android:color=</span><span class="s">&quot;@color/dividerDecoration&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 <span class="w">    </span><span class="nt">&lt;size</span><span class="w"> </span><span class="na">android:width=</span><span class="s">&quot;5dp&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/shape&gt;</span>
-</code></pre></div></p>
-<p>创建列表
+</code></pre></div>
+<p>Create the list:</p>
 <div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">(</span><span class="n">RecyclerView</span><span class="p">.</span><span class="na">HORIZONTAL</span><span class="p">).</span><span class="na">divider</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">drawable</span><span class="p">.</span><span class="na">divider_vertical</span><span class="p">).</span><span class="na">setup</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">DividerModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_divider_vertical</span><span class="p">)</span>
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span><span class="p">()</span>
-</code></pre></div></p>
+</code></pre></div>
 <ul>
-<li>这里使用<code>Drawable</code>资源来快速设置分割线, Drawable的宽高就是分割线的宽高</li>
-<li>如果水平分割线, 则Drawable的宽度值无效(实际宽度值为RecyclerView的宽)</li>
-<li>如果垂直分割线, 则Drawable的高度值无效(实际分割线高度为RecyclerView高度)</li>
+<li>Here, a <code>Drawable</code> resource is used to quickly set the divider. The width and height of the Drawable determine the width and height of the divider.</li>
+<li>For horizontal dividers, the width value of the Drawable is ignored (the actual width is determined by the RecyclerView's width).</li>
+<li>For vertical dividers, the height value of the Drawable is ignored (the actual height of the divider is determined by the RecyclerView's height).</li>
 </ul>
-<h2 id="_3">边缘分割线<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h2 id="edge-dividers">Edge Dividers<a class="headerlink" href="#edge-dividers" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>字段</th>
-<th>描述</th>
+<th>Field</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><a href="../api/-b-r-v/com.drake.brv/-default-decoration/#-2091559976%2FProperties%2F-900954490">startVisible</a></td>
-<td>是否显示首部分割线</td>
+<td>Indicates whether the start divider is visible</td>
 </tr>
 <tr>
 <td><a href="../api/-b-r-v/com.drake.brv/-default-decoration/#-377591023%2FProperties%2F-900954490">endVisible</a></td>
-<td>是否显示尾部分割线</td>
+<td>Indicates whether the end divider is visible</td>
 </tr>
 <tr>
 <td><a href="../api/-b-r-v/com.drake.brv/-default-decoration/#1716094302%2FProperties%2F-900954490">includeVisible</a></td>
-<td>是否显示首尾分割线</td>
+<td>Indicates whether both start and end dividers are visible</td>
 </tr>
 </tbody>
 </table>
 <p><img src="https://i.loli.net/2021/08/14/iL5epWdOQKnwZAc.png" width="250"/></p>
-<p>通过两个字段可以控制首尾是否显示分割线</p>
+<p>You can control the visibility of the start and end dividers using the two fields:</p>
 <div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">divider</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">setDrawable</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">drawable</span><span class="p">.</span><span class="na">divider_horizontal</span><span class="p">)</span>
 <span class="hll"><span class="w">    </span><span class="n">startVisible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
@@ -944,16 +944,17 @@
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">DividerModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_divider_horizontal</span><span class="p">)</span>
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span><span class="p">()</span>
 </code></pre></div>
-<h2 id="_4">四周全包裹<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h2 id="full-wrap-dividers">Full Wrap Dividers<a class="headerlink" href="#full-wrap-dividers" title="Permanent link">&para;</a></h2>
 <p><img src="https://i.loli.net/2021/08/14/lGSOPdg5A8WInoL.png" width="250"/></p>
-<p>这种分割线属于网格分割线, 要求使用<code>DividerOrientation.GRID</code>, 但LinearLayoutManager并不支持</p>
-<p>这里有两种解决办法</p>
+<p>This type of divider is called a grid divider and requires the use of <code>DividerOrientation.GRID</code>, which is not supported by LinearLayoutManager.</p>
+<p>There are two ways to achieve this:</p>
 <ol>
-<li>使用spanCount为1的GridLayoutManager等效</li>
-<li>在rv两侧单独使用<code>View</code>绘制两条分割线</li>
+<li>Use a GridLayoutManager with a spanCount of 1.</li>
+<li>Use separate <code>View</code>s on both sides of</li>
 </ol>
-<p>推荐第一种办法, 示例代码如下:</p>
-<div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">grid</span><span class="p">().</span><span class="na">divider</span><span class="p">{</span>
+<p>the RecyclerView to draw the dividers.</p>
+<p>The first method is recommended. Here's an example:</p>
+<div class="highlight"><pre><span></span><code><span class="n">rv</span><span class="p">.</span><span class="na">grid</span><span class="p">().</span><span class="na">divider</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">setDrawable</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">drawable</span><span class="p">.</span><span class="na">divider_horizontal</span><span class="p">)</span>
 <span class="w">    </span><span class="n">orientation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DividerOrientation</span><span class="p">.</span><span class="na">GRID</span>
 <span class="w">    </span><span class="n">includeVisible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
@@ -961,11 +962,11 @@
 <span class="w">    </span><span class="n">addType</span><span class="o">&lt;</span><span class="n">DividerModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">item_divider_vertical</span><span class="p">)</span>
 <span class="p">}.</span><span class="na">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getData</span><span class="p">()</span>
 </code></pre></div>
-<h2 id="_5">分割线间隔<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>有两种方式</p>
+<h2 id="divider-spacing">Divider Spacing<a class="headerlink" href="#divider-spacing" title="Permanent link">&para;</a></h2>
+<p>There are two ways to add spacing to the dividers:</p>
 <ol>
 <li>
-<p>直接配置一个具备间隔margin的drawable, 以下为间距16的水平分割线</p>
+<p>Directly configure a <code>drawable</code> with the desired margin. Here's an example of a horizontal divider with a 16dp margin:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;inset</span><span class="w"> </span><span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
 <span class="w">    </span><span class="na">android:insetLeft=</span><span class="s">&quot;16dp&quot;</span>
 <span class="w">    </span><span class="na">android:insetRight=</span><span class="s">&quot;16dp&quot;</span><span class="nt">&gt;</span>
@@ -977,7 +978,7 @@
 </code></pre></div>
 </li>
 <li>
-<p>使用setMargin()</p>
+<p>Use <code>setMargin()</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="n">binding</span><span class="p">.</span><span class="na">rv</span><span class="p">.</span><span class="na">linear</span><span class="p">().</span><span class="na">divider</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">setDivider</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
 <span class="w">    </span><span class="n">setMargin</span><span class="p">(</span><span class="m">16</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">dp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>

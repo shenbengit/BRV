@@ -683,7 +683,7 @@
   
   
     <li class="md-nav__item">
-      <a href="https://github.com/liangjingkanji/BRV/blob/master/docs/issues.md" class="md-nav__link">
+      <a href="../issues/" class="md-nav__link">
         FAQ
       </a>
     </li>
@@ -771,20 +771,20 @@
 
   <h1>Network Requests</h1>
 
-<p>Net是一个第三方的强大的网络请求/异步任务框架, 非常优秀的设计, BRV可以和Net联动扩展功能</p>
-<p>首先引用<a href="https://github.com/liangjingkanji/Net/">Net</a>依赖库</p>
-<p><a href="https://github.com/liangjingkanji/Net/"><img alt="" src="https://jitpack.io/v/liangjingkanji/Net.svg" /></a></p>
-<p><div class="highlight"><pre><span></span><code><span class="n">dependencies</span><span class="w"> </span><span class="o">{</span>
-<span class="w">    </span><span class="n">implementation</span><span class="w"> </span><span class="s1">&#39;com.github.liangjingkanji:Net:+&#39;</span>
+<p>BRV can be integrated with Net to enhance its functionality in terms of network requests and asynchronous tasks.</p>
+<p>To integrate Net into your project, you need to add the Net dependency to your project's build.gradle file:</p>
+<div class="highlight"><pre><span></span><code><span class="n">dependencies</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="n">implementation</span><span class="w"> </span><span class="s1">&#39;com.github.liangjingkanji:Net:&lt;version&gt;&#39;</span>
 <span class="o">}</span>
 </code></pre></div>
-推荐使用指定的版本号替换<code>+</code></p>
-<p>配合<a href="https://github.com/liangjingkanji/Net/">Net</a>框架可以实现以下功能</p>
+<p>Replace <code>&lt;version&gt;</code> with the specific version of Net you want to use. It's recommended to use a specific version instead of the <code>+</code> symbol to ensure stability.</p>
+<p>With Net integration, you can leverage the following features:</p>
 <ul>
-<li><a href="https://liangjingkanji.github.io/Net/auto-refresh/">自动下拉刷新</a></li>
-<li><a href="https://liangjingkanji.github.io/Net/auto-page/">自动分页加载</a></li>
-<li><a href="https://liangjingkanji.github.io/Net/auto-state/">自动缺省页</a></li>
+<li><a href="https://liangjingkanji.github.io/Net/auto-refresh/">Auto Refresh</a>: Automatically trigger pull-to-refresh functionality in the RecyclerView.</li>
+<li><a href="https://liangjingkanji.github.io/Net/auto-page/">Auto Paging</a>: Automatically load more data when scrolling reaches the end of the RecyclerView.</li>
+<li><a href="https://liangjingkanji.github.io/Net/auto-state/">Auto State</a>: Automatically handle empty, loading, and error states in the RecyclerView.</li>
 </ul>
+<p>By combining BRV with Net, you can create a powerful and efficient solution for handling network requests and providing a seamless user experience.</p>
 
 
 
