@@ -771,53 +771,53 @@
 
   <h1>数据接口</h1>
 
-<p>rv的数据是集合<code>List&lt;Any?&gt;?</code>, 其中的集合元素就是数据模型</p>
-<p>通过让数据模型实现不同的接口可以获取不同的功能或者回调</p>
+<p>The data for the RecyclerView is a collection of <code>List&lt;Any?&gt;?</code>, where the collection elements are data models.</p>
+<p>By having the data models implement different interfaces, you can obtain different functionalities or callbacks.</p>
 <table>
 <thead>
 <tr>
-<th>接口</th>
-<th>描述</th>
+<th>Interface</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>ItemBind</td>
-<td>在数据模型中回调onBindViewHolder生命周期, 用于<a href="../">绑定数据</a></td>
+<td>Callback in the data model's <code>onBindViewHolder</code> lifecycle, used for data binding.</td>
 </tr>
 <tr>
 <td>ItemAttached</td>
-<td>监听视图附着到窗口(Window)</td>
+<td>Listens to the view being attached to the window.</td>
 </tr>
 <tr>
 <td>ItemExpand</td>
-<td>Item可<a href="../group/">分组</a></td>
+<td>Indicates that the item can be grouped.</td>
 </tr>
 <tr>
 <td>ItemDrag</td>
-<td>Item可<a href="../drag/">拖拽</a></td>
+<td>Indicates that the item can be dragged.</td>
 </tr>
 <tr>
 <td>ItemSwipe</td>
-<td>Item可<a href="../swipe/">侧滑</a></td>
+<td>Indicates that the item can be swiped.</td>
 </tr>
 <tr>
 <td>ItemHover</td>
-<td>Item可<a href="../hover/">悬停</a></td>
+<td>Indicates that the item can be hovered.</td>
 </tr>
 <tr>
 <td>ItemPosition</td>
-<td>Item索引位置</td>
+<td>Represents the index position of the item.</td>
 </tr>
 </tbody>
 </table>
-<p>具体如何使用请查看对应功能章节或者注释</p>
+<p>Please refer to the corresponding feature sections or comments for specific usage.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">SimpleModel</span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nv">name</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;BRV&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ItemBind</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onBind</span><span class="p">(</span><span class="n">holder</span><span class="p">:</span><span class="w"> </span><span class="n">BindingAdapter</span><span class="p">.</span><span class="na">BindingViewHolder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// 使用不同的方法来获取视图控件</span>
-<span class="w">        </span><span class="c1">// holder.findView&lt;TextView&gt;(R.id.tv_simple).text = appName // 使用findById</span>
-<span class="w">        </span><span class="c1">// val binding = holder.getBinding&lt;ItemMultiTypeOneBinding&gt;() // 使用DataBinding或ViewBinding</span>
+<span class="w">        </span><span class="c1">// Use different methods to access the view components</span>
+<span class="w">        </span><span class="c1">// holder.findView&lt;TextView&gt;(R.id.tv_simple).text = appName // Using findById</span>
+<span class="w">        </span><span class="c1">// val binding = holder.getBinding&lt;ItemMultiTypeOneBinding&gt;() // Using DataBinding or ViewBinding</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
