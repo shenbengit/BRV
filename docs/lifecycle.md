@@ -1,23 +1,21 @@
-## 生命周期
+## Lifecycle
 
-首先要知道的RecyclerView(以下简称rv)的基础知识
+First, let's start with some basic knowledge about RecyclerView (referred to as "rv" for short).
 
-1. onCreateViewHolder (创建视图) 调用次数为屏幕同时可展示的Item数量, 对视图的频繁操作优先考虑此回调中进行!
-1. onBindViewHolder (绑定数据) 在每次Item被显示到屏幕上时回调, 故会在快速滑动列表的时候反复调用! 建议不要在里面进行耗时操作 <br>
-比如建议使用[Serialze](https://github.com/liangjingkanji/Serialize)取代SharePreference等耗时存储
+1. onCreateViewHolder (Create View): This callback is invoked to create the view. The number of times it is called is equal to the number of items that can be displayed on the screen simultaneously. If you need to frequently manipulate the view, it is recommended to do it in this callback.
+2. onBindViewHolder (Bind Data): This callback is invoked every time an item is displayed on the screen. Therefore, it will be called repeatedly during fast scrolling of the list. It is recommended not to perform time-consuming operations inside this callback. For example, it is suggested to use [Serialize](https://github.com/liangjingkanji/Serialize) for efficient storage instead of SharedPreferences.
 
-<br>
-而在BRV中简化了这两个函数
+In BRV, these two functions are simplified as follows:
 
-| 函数 | 描述 |
+| Function | Description |
 |-|-|
-| onCreate | 对应Adapter的`onCreateViewHolder`函数回调 |
-| onBind | 对应Adapter的`onBindViewHolder`函数回调 |
-| onBindViewHolders | 一个`onBindViewHolder`监听器的集合, 一般用于其他框架来监听扩展, 使用者一般不需要使用 |
+| onCreate | Corresponds to the `onCreateViewHolder` callback in the Adapter. |
+| onBind | Corresponds to the `onBindViewHolder` callback in the Adapter. |
+| onBindViewHolders | A collection of `onBindViewHolder` listeners, usually used by other frameworks for extension. Users generally do not need to use this directly. |
 
-## 注意
+## Note
 
-BindingAdapter是`open class` 可以被继承重写, 任何没有提供的函数回调可以通过继承或者匿名类实现 <br>
+BindingAdapter is an `open class` and can be inherited and overridden. Any missing callback functions can be implemented by inheritance or anonymous class.
 
 ```kotlin
 binding.rv.linear().adapter = object : BindingAdapter() {
@@ -31,7 +29,7 @@ binding.rv.linear().adapter = object : BindingAdapter() {
 }
 ```
 
-> onBind或onCreate只有最后设置的有效, 存在覆盖关系
+> Only the most recent `onBind` or `onCreate` callback is effective. There is a hierarchy of overrides.
 
 ```kotlin
 rv.linear().setup {
@@ -39,21 +37,21 @@ rv.linear().setup {
     onCreate {
         when(itemViewType){
             R.layout.item_simple -> {
-                // 特殊处理
+                // Special handling
             }
         }
     }
 }.models = getData()
 ```
 
-## 显示/隐藏
+## Show/Hide
 
-通过让数据模型实现`ItemAttached`可以感知item显示/隐藏, 比如item的动画就是监听item显示时触发的
+By implementing the `ItemAttached` interface in the data model, you can be notified when an item is displayed or hidden. For example, item animations can be triggered when an item is displayed.
 
 ```kotlin
 data class SimpleModel(var name: String = "BRV") : ItemAttached {
 
-    var visibility: Boolean = false // 显示隐藏
+    var visibility: Boolean = false // Show/hide
 
     override fun onViewAttachedToWindow(holder: BindingAdapter.BindingViewHolder) {
         visibility = true
@@ -62,9 +60,7 @@ data class SimpleModel(var name: String = "BRV") : ItemAttached {
     override fun onViewDetachedFromWindow(holder: BindingAdapter.BindingViewHolder) {
         visibility = false
     }
-
 }
 ```
 
-当然你直接继承BindingAdapter也可以实现
-
+Alternatively, you can directly inherit from `BindingAdapter` to achieve the same result.

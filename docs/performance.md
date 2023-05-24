@@ -1,19 +1,18 @@
-首先希望你已经阅读过rv基础的[生命周期](lifecycle.md), 正常情况下列表并不使用本章的优化方法也不会卡顿
+First of all, I assume you have already read the [lifecycle](lifecycle.md) documentation on the basics of RecyclerView. Under normal circumstances, the list should not experience lag even without implementing the optimization methods discussed in this chapter.
 
-> BRV并没有对RecyclerView存在卡顿影响, 这里介绍的都是RecyclerView的优化点, 未提及的请自行搜索或补充
+> BRV does not have any performance impact on RecyclerView. The optimization points mentioned here are specific to RecyclerView. For other optimizations, please refer to additional resources or suggestions.
 
-性能优化主要是避免滑动列表时频繁耗时操作, 而onBind就是滑动列表过程中频繁触发的回调
+Performance optimization is mainly about avoiding time-consuming operations during list scrolling, and `onBind` is a callback that gets triggered frequently during the scrolling process.
 
-## 主线程读写数据
+## Main Thread Data Read/Write
 
-SharePreference(简称sp)是Android自带的键值存储工具, 虽然允许方便地在主线程读写本地数据但是性能堪忧 <br>
-如果你在onBind里面读取体积较大的sp会导致列表卡顿甚至引起应用ANR
+SharePreferences (referred to as sp) is a built-in key-value storage tool in Android. Although it allows convenient data read/write on the main thread, its performance is not satisfactory. If you read large-sized sp data in `onBind`, it can lead to list lagging or even ANR (Application Not Responding) issues.
 
-网上可能大部分推荐使用MMKV来取代, 但我推荐基于MMKV封装的更高效/方便的[Serialze](https://github.com/liangjingkanji/Serialize)来取代
+While many suggestions online recommend using MMKV as an alternative, I recommend using [Serialze](https://github.com/liangjingkanji/Serialize), which is a more efficient and convenient wrapper based on MMKV.
 
-## 嵌套列表
+## Nested Lists
 
-在使用rv嵌套rv时应当在onCreate回调中为内嵌的rv设置视图(使用`rv.setup`), 这是为了避免同一类型反复创建rv导致内存消耗.  而嵌套的rv数据可以在onBind中绑定数据, 使用`rv.models`
+When using a RecyclerView within another RecyclerView, it is advisable to set the view for the nested RecyclerView in the `onCreate` callback (using `rv.setup`). This helps avoid excessive creation of RecyclerView instances of the same type, which can lead to increased memory consumption. The data for the nested RecyclerView can be bound in `onBind` using `rv.models`.
 
 ```kotlin
 rv.linear().setup {
@@ -21,33 +20,33 @@ rv.linear().setup {
 
     onCreate {
         val rv = findView<RecyclerView>(R.id.rv_check_mode)
-        rv.linear().setup { // 视图在onCreate可以避免列表滑动过程反复回调
+        rv.linear().setup { // Setting the view in onCreate avoids repeated callbacks during list scrolling
             addType<NestedModel>(R.layout.item_simple_nested)
         }
     }
 
     onBind {
-        val rv  = findView<RecyclerView>(R.id.rv_check_mode)
-        rv.models = getModel<Model>().listNested // 只有onBind才能获取到数据
+        val rv = findView<RecyclerView>(R.id.rv_check_mode)
+        rv.models = getModel<Model>().listNested // Only onBind can access the data
     }
 }
 ```
 
-由于被嵌套的rv是无法复用item, 所以建议使用recycledViewPool来复用, 具体请搜索关键词
+Since the nested RecyclerView cannot reuse items, it is recommended to use `recycledViewPool` for recycling. You can search for specific keywords for more details.
 
-如果被嵌套的列表非常简单其实也无需考虑其复用优化, 甚至你直接使用addView动态添加可能会比嵌套列表更简单
+If the nested list is very simple, you may not need to consider reuse optimization. In fact, dynamically adding views using `addView` might be simpler than using a nested list.
 
-## 视图添加/删除
+## View Addition/Removal
 
-要避免频繁操作主线程耗时的视图addView/removeView等操作
+To avoid frequent main thread operations such as `addView` and `removeView` on views, it is recommended to:
 
-1. 建议使用visibility控制视图显示或隐藏
-1. 判断数据避免反复addView, 视图已经addView情况下赋值而不是remove
-1. 如果只是添加图标建议使用[Spannable](https://github.com/liangjingkanji/spannable)构建图文混排直接赋值给TextView
+1. Use `visibility` to control view visibility.
+2. Check if the view has already been added before adding it again. If the view is already added, assign the value instead of removing it.
+3. If you are only adding icons, consider using [Spannable](https://github.com/liangjingkanji/spannable) to construct text with mixed graphics, and directly assign it to a TextView.
 
-## 高速滑动节流
+## Fast Scroll Throttling
 
-实现原理很像自动搜索节流, 延迟到一定时间后item依然显示在屏幕之上才加载数据, 因为高速滑动列表可能大部分item只会停留在屏幕很短时间并不需要加载数据
+The implementation principle is similar to automatic search throttling. Delay the data loading until a certain time has passed and the item is still visible on the screen. This is because during fast scrolling, most items are displayed on the screen for a very short time and do not require data loading.
 
 ```kotlin
 data class SimpleModel(var name: String = "BRV") : ItemBind, ItemAttached {
@@ -63,9 +62,11 @@ data class SimpleModel(var name: String = "BRV") : ItemBind, ItemAttached {
     }
 
     override fun onBind(holder: BindingAdapter.BindingViewHolder) {
-        holder.itemView.postDelayed({
+       
+
+ holder.itemView.postDelayed({
             if (itemVisible) {
-                  // 500ms 以后依然可见才会触发加载
+                // Trigger loading only if the item is still visible after 500ms
             }
         }, 500)
     }
@@ -73,31 +74,32 @@ data class SimpleModel(var name: String = "BRV") : ItemBind, ItemAttached {
 }
 ```
 
-如果你使用的Glide你还可以阅读[RecyclerView预加载图片](https://muyangmin.github.io/glide-docs-cn/int/recyclerview.html), 可以显著减少用户滑动图片列表时看到的加载中数量
+If you use Glide for image loading, you can also refer to [Glide Preloading in RecyclerView](https://muyangmin.github.io/glide-docs-cn/int/recyclerview.html), which can significantly reduce the number of "loading" images visible to users when scrolling through an image list.
 
-## 固定布局优化
+## Fixed Layout Optimization
 
-如果列表所有item的宽高不会因为适配器(Adapter)动态改变, 那么可以使用`setHasFixedSize(true)`来减少测绘次数提高性能
+If the width and height of all items in the list do not change dynamically due to adapter modifications, you can use `setHasFixedSize(true)` to reduce the number of layout calculations and improve performance.
 
+## Unique Item Identifiers
 
-## 列表唯一标识
-
-通过为item配置唯一ID提高列表使用`notifyDataSetChanged()`时的排序性能
+Improve the performance of using `notifyDataSetChanged()` by assigning unique IDs to items in the list.
 
 ```kotlin
 binding.rv.linear().setup {
-    setHasStableIds(true) // 启用唯一ID
+    setHasStableIds(true) // Enable unique IDs
     addType<UserModel>(R.layout.item_user)
 }.models = getData()
 ```
 
-数据模型实现`ItemStableId`
+The data model should implement `ItemStableId`.
 
 ```kotlin
 data class UserModel(var userId: Long) : ItemStableId {
 
     override fun getItemId(): Long {
-        return userId // 返回列表中唯一ID
+        return userId // Return the unique ID in the list
     }
 }
 ```
+
+I hope these optimizations help improve the performance of your RecyclerView. Let me know if you have any more questions!

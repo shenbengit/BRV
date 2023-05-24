@@ -1,65 +1,59 @@
-<img src="https://i.loli.net/2021/08/14/4ZgG9BmT8Qbv2jF.gif" width="250"/>
-
-
-为数据模型实现接口`ItemSwipe`即可开启拖拽功能
+To enable drag and swipe functionality, you can implement the `ItemSwipe` interface for your data model:
 
 ```kotlin
 data class SwipeModel(override var itemOrientationSwipe: Int = ItemOrientation.ALL) : ItemSwipe
 ```
 
-> 注意如果你的数据模型被Gson反序列化后, 会删除所有的字段初始化值
+> Note that if your data model is deserialized using Gson, it will remove all the field initialization values.
 
-这里我们可以重写访问函数来解决问题, 让该值固定返回
+To solve this, you can override the accessor function to always return the desired value:
 
-```kotlin hl_lines="3"
+```kotlin
 class SwipeModel() : ItemDrag {
     override var itemOrientationSwipe: Int = 0
-        get() = ItemOrientation.ALL // 只会返回该值
+        get() = ItemOrientation.ALL // Always return this value
 }
 ```
 
 ## ItemOrientation
 
-该类包含拖拽可配置的方向
+This class represents the configurable drag directions.
 
-|  字段  |    描述  |
-| ---- | ---- |
-|   `ALL`   |   全部方向   |
-|   `VERTICAL`   |   垂直方向   |
-|   `HORIZONTAL`   |   水平方向   |
-|   `LEFT`   |   向左   |
-|   `RIGHT`   |   向右   |
-|   `UP`   |   向上   |
-|   `DOWN`   |   向下   |
-|   `NONE`   |   禁用   |
+| Field        | Description          |
+|--------------|----------------------|
+| `ALL`        | All directions       |
+| `VERTICAL`   | Vertical direction   |
+| `HORIZONTAL` | Horizontal direction |
+| `LEFT`       | Left direction       |
+| `RIGHT`      | Right direction      |
+| `UP`         | Up direction         |
+| `DOWN`       | Down direction       |
+| `NONE`       | Disabled             |
 
+## Custom Swipe
 
-
-
-## 自定义侧滑
-
-如果想要扩展ItemTouchHelper可以给BindingAdapter的变量`itemTouchHelper`赋值
+If you want to extend ItemTouchHelper, you can assign a value to the `itemTouchHelper` variable in the BindingAdapter:
 
 ```kotlin
 rv.linear().setup {
   addType<SwipeModel>(R.layout.item)
 
   itemTouchHelper = ItemTouchHelper(object : DefaultItemTouchCallback(this) {
-	// 这里可以重写函数
+    // Override functions here
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         super.onSwiped(viewHolder, direction)
-        // 这是侧滑删除后回调, 这里可以同步服务器
+        // Callback after swiping, you can synchronize with the server here
 
-        Log.d("位置", "layoutPosition = ${viewHolder.layoutPosition}")
-        Log.d("数据", "SwipeModel = ${(viewHolder as BindingAdapter.BindingViewHolder).getModel<SwipeModel>()}")
+        Log.d("Position", "layoutPosition = ${viewHolder.layoutPosition}")
+        Log.d("Data", "SwipeModel = ${(viewHolder as BindingAdapter.BindingViewHolder).getModel<SwipeModel>()}")
     }
   })
 
 }.models = data
 ```
 
+You can customize the view that will move during the swipe by adding the `swipe` tag to the view. This will allow you to show the view behind the background:
 
-通过给view打上tag标签 `swipe` 可以自定义侧滑将会移动的视图. 这样就可以展示背景后的视图
 ```xml
 <RelativeLayout
         android:layout_width="wrap_content"
@@ -68,12 +62,12 @@ rv.linear().setup {
         android:tag="swipe"/>
 ```
 
-## 侧滑按钮
+## Swipe Buttons
 
-很多人会问如何实现类似QQ那样的侧滑展示按钮. 这种推荐使用自定义Item的视图对象, 而不是让列表去实现.0
+If you want to implement swipe buttons similar to the ones in the QQ app, it is recommended to use a custom item view instead of implementing it within the list.
 
-这里推荐第三方库: [SwipeToActionLayout](https://github.com/st235/SwipeToActionLayout)
+In this case, you can use a third-party library called [SwipeToActionLayout](https://github.com/st235/SwipeToActionLayout).
 
 <img src="https://github.com/st235/SwipeToActionLayout/raw/master/images/showcase.gif" width="50%"/>
 
-> 这种交互效果属于iOS的官方效果, 不推荐Android抄袭
+> Note that this interaction effect belongs to the official iOS effect, and it is not recommended to replicate it on Android.

@@ -1,11 +1,10 @@
-如果直接绘制item的xml可以实现分割线, 比如你在xml中使用简单的`layout_margin`(设置间距)也能完成你想要的分割线效果, 那么我更建议使用layout_margin
+If you prefer to directly create item layouts with XML to achieve the divider effect, using simple `layout_margin` for spacing, I recommend using `layout_margin`.
 
-
-## 水平分割线
+## Horizontal Divider
 
 <img src="https://i.loli.net/2021/08/14/IoBfnz6ERXVHlq3.png" width="250" />
 
-创建一个`drawable`文件来描述分隔线, 其具备复用的特点
+Create a `drawable` file to describe the divider, which can be reused:
 
 ```xml
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
@@ -14,7 +13,7 @@
 </shape>
 ```
 
-创建列表
+Create the list:
 
 ```kotlin
 rv.linear().divider(R.drawable.divider_horizontal).setup {
@@ -24,11 +23,12 @@ rv.linear().divider(R.drawable.divider_horizontal).setup {
 
 <br>
 
-## 垂直分割线
+## Vertical Divider
 
 <img src="https://i.loli.net/2021/08/14/rAeDXkfV6HxJUym.png" width="250"/>
 
-创建Drawable作为分隔线
+Create a drawable as the divider:
+
 ```xml
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid android:color="@color/dividerDecoration" />
@@ -36,30 +36,29 @@ rv.linear().divider(R.drawable.divider_horizontal).setup {
 </shape>
 ```
 
-创建列表
+Create the list:
+
 ```kotlin
 rv.linear(RecyclerView.HORIZONTAL).divider(R.drawable.divider_vertical).setup {
     addType<DividerModel>(R.layout.item_divider_vertical)
 }.models = getData()
 ```
 
+- Here, a `Drawable` resource is used to quickly set the divider. The width and height of the Drawable determine the width and height of the divider.
+- For horizontal dividers, the width value of the Drawable is ignored (the actual width is determined by the RecyclerView's width).
+- For vertical dividers, the height value of the Drawable is ignored (the actual height of the divider is determined by the RecyclerView's height).
 
-- 这里使用`Drawable`资源来快速设置分割线, Drawable的宽高就是分割线的宽高
-- 如果水平分割线, 则Drawable的宽度值无效(实际宽度值为RecyclerView的宽)
-- 如果垂直分割线, 则Drawable的高度值无效(实际分割线高度为RecyclerView高度)
+## Edge Dividers
 
-
-## 边缘分割线
-
-| 字段 | 描述 |
+| Field | Description |
 |-|-|
-| [startVisible](api/-b-r-v/com.drake.brv/-default-decoration/index.html#-2091559976%2FProperties%2F-900954490) | 是否显示首部分割线 |
-| [endVisible](api/-b-r-v/com.drake.brv/-default-decoration/index.html#-377591023%2FProperties%2F-900954490) | 是否显示尾部分割线 |
-| [includeVisible](api/-b-r-v/com.drake.brv/-default-decoration/index.html#1716094302%2FProperties%2F-900954490) | 是否显示首尾分割线 |
+| [startVisible](api/-b-r-v/com.drake.brv/-default-decoration/index.html#-2091559976%2FProperties%2F-900954490) | Indicates whether the start divider is visible |
+| [endVisible](api/-b-r-v/com.drake.brv/-default-decoration/index.html#-377591023%2FProperties%2F-900954490) | Indicates whether the end divider is visible |
+| [includeVisible](api/-b-r-v/com.drake.brv/-default-decoration/index.html#1716094302%2FProperties%2F-900954490) | Indicates whether both start and end dividers are visible |
 
 <img src="https://i.loli.net/2021/08/14/iL5epWdOQKnwZAc.png" width="250"/>
 
-通过两个字段可以控制首尾是否显示分割线
+You can control the visibility of the start and end dividers using the two fields:
 
 ```kotlin hl_lines="3 4"
 rv.linear().divider {
@@ -71,21 +70,23 @@ rv.linear().divider {
 }.models = getData()
 ```
 
-## 四周全包裹
+## Full Wrap Dividers
 
 <img src="https://i.loli.net/2021/08/14/lGSOPdg5A8WInoL.png" width="250"/>
 
-这种分割线属于网格分割线, 要求使用`DividerOrientation.GRID`, 但LinearLayoutManager并不支持
+This type of divider is called a grid divider and requires the use of `DividerOrientation.GRID`, which is not supported by LinearLayoutManager.
 
-这里有两种解决办法
+There are two ways to achieve this:
 
-1. 使用spanCount为1的GridLayoutManager等效
-1. 在rv两侧单独使用`View`绘制两条分割线
+1. Use a GridLayoutManager with a spanCount of 1.
+2. Use separate `View`s on both sides of
 
-推荐第一种办法, 示例代码如下:
+the RecyclerView to draw the dividers.
+
+The first method is recommended. Here's an example:
 
 ```kotlin
-rv.grid().divider{
+rv.grid().divider {
     setDrawable(R.drawable.divider_horizontal)
     orientation = DividerOrientation.GRID
     includeVisible = true
@@ -94,11 +95,11 @@ rv.grid().divider{
 }.models = getData()
 ```
 
-## 分割线间隔
+## Divider Spacing
 
-有两种方式
+There are two ways to add spacing to the dividers:
 
-1. 直接配置一个具备间隔margin的drawable, 以下为间距16的水平分割线
+1. Directly configure a `drawable` with the desired margin. Here's an example of a horizontal divider with a 16dp margin:
 
     ```xml
     <inset xmlns:android="http://schemas.android.com/apk/res/android"
@@ -111,7 +112,7 @@ rv.grid().divider{
     </inset>
     ```
 
-2. 使用setMargin()
+2. Use `setMargin()`:
 
     ```kotlin
     binding.rv.linear().divider {
@@ -122,4 +123,3 @@ rv.grid().divider{
         addType<DividerModel>(R.layout.item_divider_vertical)
     }
     ```
-

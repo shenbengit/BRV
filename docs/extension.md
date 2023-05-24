@@ -1,18 +1,18 @@
 ## RecyclerView
 
-提供一些`BindingAdapter`常用的调用
+Here are some commonly used calls for `BindingAdapter`:
 
-| 函数 | 描述 |
-|-|-|
-| bindingAdapter | 如果Adapter是[BindingAdapter]则返回对象, 否则抛出异常 |
-| models | 数据模型集合, 无需执行`notify*`函数, 自动使用`notifyDataChanged`刷新 |
-| _data | 和models的唯一区别是不会自动使用`notifyDataChanged`刷新 |
-| mutable | 可增删的非空[models]只读数据模型集合, 需要执行`notify*`函数手动刷新列表,如果实际没有赋值数据该函数会抛出异常  |
-| addModels | 添加数据, 自动刷新列表 |
+| Function         | Description                                                                                                                                                                                                   |
+|------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `bindingAdapter` | Returns the object if the adapter is a `BindingAdapter`, otherwise throws an exception.                                                                                                                       |
+| `models`         | Data model collection. No need to execute `notify*` functions, it automatically refreshes using `notifyDataChanged`.                                                                                          |
+| `_data`          | Similar to `models`, but it doesn't automatically refresh using `notifyDataChanged`.                                                                                                                          |
+| `mutable`        | Read-only data model collection that allows addition and removal. You need to manually refresh the list using `notify*` functions. If the actual data is not assigned, this function will throw an exception. |
+| `addModels`      | Adds data and automatically refreshes the list.                                                                                                                                                               |
 
-## 布局管理器
+## Layout Managers
 
-框架还提供快速创建布局管理器的扩展函数, 上面使用示例
+The framework also provides extension functions for quickly creating layout managers. Here are the examples shown above:
 
 === "LinearLayoutManager"
     ```kotlin hl_lines="1"
@@ -33,38 +33,35 @@
     }.models = getData()
     ```
 
-相关函数
+Related Functions:
 
-| 函数 | 描述 |
-|-|-|
-| [linear](api/-b-r-v/com.drake.brv.utils/grid.html) | 使用`LinearLayoutManager`创建线性列表 |
-| [grid](api/-b-r-v/com.drake.brv.utils/grid.html) | 使用`GridLayoutManager`创建网格列表 |
-| [staggered](api/-b-r-v/com.drake.brv.utils/staggered.html) | 使用`StaggeredLayoutManager`创建瀑布流列表 |
+| Function    | Description                                                   |
+|-------------|---------------------------------------------------------------|
+| `linear`    | Creates a linear list using `LinearLayoutManager`.            |
+| `grid`      | Creates a grid list using `GridLayoutManager`.                |
+| `staggered` | Creates a staggered grid list using `StaggeredLayoutManager`. |
 
+## Dividers
 
-
-## 分割线
-
-框架提供快速设置分隔物扩展函数
+The framework provides an extension function for quickly setting dividers:
 
 ```kotlin hl_lines="1"
 rv.linear().divider(R.drawable.divider_horizontal).setup {
     addType<DividerModel>(R.layout.item_divider_horizontal)
 }.models = getData()
 ```
-扩展函数实际上就是使用的[DefaultDecoration](api/-b-r-v/com.drake.brv/-default-decoration/index.html)来创建对象
 
+The extension function actually uses the `DefaultDecoration` to create the object.
 
-## 对话框
+## Dialogs
 
-通过扩展函数快速给对话框创建列表
+Quickly create a list in a dialog using the extension function:
 
 ```
 Dialog(activity).setAdapter(bindingAdapter).show()
 ```
 
-函数
+Function:
 ```kotlin
 fun Dialog.brv(block: BindingAdapter.(RecyclerView) -> Unit): Dialog
 ```
-

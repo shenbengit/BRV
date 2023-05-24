@@ -1,260 +1,275 @@
 ## 1.4.1
-- feat: 新增copyType方法让集合保留泛型, 避免addType无法判断List泛型区别
+- feat: Added `copyType` method to preserve generics in collections, avoiding ambiguity in `addType` for distinguishing List generics.
 
 ## 1.4.0
-- refactor: 如果models为null则mutable返回空集合
-- refactor: 删除isNetworkingRetry
-- refactor: 删除废弃方法
-- upgrade: StateLayout 1.4.1
-- fix: #200 拖拽第一个Item会快速滑动跳过列表
-- feat: 列表动画支持重复显示
+- refactor: If `models` is null, `mutable` returns an empty collection.
+- refactor: Removed `isNetworkingRetry`.
+- refactor: Removed deprecated methods.
+- upgrade: Upgraded StateLayout to version 1.4.1.
+- fix: #200 Dragging the first item would quickly skip the list.
+- feat: Added support for repeating animations in the list.
 
 ## 1.3.90
-- feat: #324 网格分割线间距支持以item为基准
-- refactor: 删除分割线 DefaultDecoration.kt setBackground()(可以使用rv背景色替代)
-- fix: 网格分割线间距设置错误
+- feat: #324 Grid divider spacing now supports item-based spacing.
+- refactor: Removed the `setBackground()` method from `DefaultDecoration.kt` (can be replaced with the background color of the `rv`).
+- fix: Fixed grid divider spacing issue.
 
 ## 1.3.89
-- upgrade: stateLayout 1.3.13
-- sample: use mock data
-- sample: 示例-嵌套列表
-- sample: 示例-首页布局
-- sample: 避免重复显示对话框
+- upgrade: Upgraded StateLayout to version 1.3.13.
+- sample: Used mock data.
+- sample: Added nested list example.
+- sample: Added home layout example.
+- sample: Avoided duplicate dialog display.
 
 ## 1.3.88
-- fix: #317 无法拖拽到item(禁用拖拽状态)的相邻位置
-- fix: #305 列表重新赋值数据可以恢复列表展开状态
-- pref: expand/collapse 判断逻辑
-- sample: #313 嵌套分组删除崩溃
-- sample: fix something
+- fix: #317 Unable to drag to adjacent positions of an item (when drag state is disabled).
+- fix: #305 Assigning new data to the list can restore the expanded state.
+- pref: Improved expand/collapse logic.
+- sample: #313 Fixed crash when deleting nested groups.
+- sample: Fixed something.
 
 ## 1.3.87
-- fix: #311 notifyItemChanged触发onRefresh
-- pref: 优化dataBinding开启时使用非layout布局存在inflate两次布局问题
-- feat: 新增page_upFetchEnabled属性
-- upgrade: StateLayout 1.3.12
+- fix: #311 `notifyItemChanged` triggering `onRefresh`.
+- pref: Optimized `dataBinding` to inflate layout only once when using non-layout bindings.
+- feat: Added `page_upFetchEnabled` property.
+- upgrade: Upgraded StateLayout to version 1.3.12.
 
 ## 1.3.86
-- fix: PageRefreshLayout.isNetworkingRetry noop
-- feat: #292 新增refreshEnableWhenEmpty/refreshEnableWhenError控制缺省页下拉刷新启用
-- pref: #298 onCreate现在支持itemViewType值
-
+- fix: `PageRefreshLayout.isNetworkingRetry` noop.
+- feat: #292 Added `refreshEnableWhenEmpty` and `refreshEnableWhenError` properties to control pull-to-refresh when the default page is empty.
+- pref: #298 `onCreate` now supports `itemViewType` values.
 
 ## 1.3.85
-- feat: #286 使用getBinding()获取ViewBinding实例
+- feat: #286 Added `getBinding()` to retrieve the ViewBinding instance.
 
 ## 1.3.84
-- fix: setDifferModel不支持继承自ItemExpand分组集合数据的问题
-- fix: #281 onPayload没有传递负载数据集合
+- fix: `setDifferModel` doesn't support inheritance from `ItemExpand` group collection data.
+- fix: #281 `onPayload` didn't pass payload data collection.
 
 ## 1.3.83
-- fix: 刷新数据导致单选失效
-- upgrade: StateLayout 1.3.11 FadeStateChangedHandler 内存泄漏
-
+- fix: Refreshing data caused single selection to fail.
+- upgrade: Upgraded StateLayout to version 1.3.11 to fix memory leaks in `FadeStateChangedHandler`.
 
 ## 1.3.82
-fix: [#263](https://github.com/liangjingkanji/BRV/issues/263) 自定义侧滑移动的视图android:tag="swipe"复用问题
+- fix: [#263](https://github.com/liangjingkanji/BRV/issues/263) Fixed custom swipe view reuse issue with `android:tag="swipe"`.
 
 ## 1.3.81
-修复侧滑删除遇到有 header 的时候移除 models 中 item 下标越界的问题
+Fixed issue where removing items with headers during swipe deletion caused index out of bounds error.
 
 ## 1.3.80
-pref: setRetryIds设置点击重试会使用最近showLoading的tag
+pref: `setRetryIds` now uses the most recent `showLoading` tag when clicking on retry.
 
 ## 1.3.79
-- fix: 网格分割线动态spanSize间距丢失
-- feat: findView支持可空类型
-- feat: 新增`dividerSpace`函数
-- feat: StateLayout 1.3.8 新增`isNetworkingRetry`来禁止无网络显示加载缺省
-- pref: DataBinding绑定数据失败日志输出
-- refactor: page函数废弃, 新增`pageCreate`
+- fix: Fixed grid divider dynamic `spanSize` spacing loss.
+- feat: `findView` now supports nullable types.
+- feat: Added `dividerSpace` function.
+- feat: Upgraded StateLayout to version 1.3.8, introducing `isNetworkingRetry` to disable loading default page when there is no network.
+- pref: Added logging for data binding failures.
+- refactor: Deprecated `page` function and added
+
+## 1.3.79
+- fix: Fixed grid divider dynamic `spanSize` spacing loss.
+- feat: Added `findView` method that supports nullable types.
+- feat: Added `dividerSpace` function.
+- feat: Upgraded StateLayout to version 1.3.8, introducing `isNetworkingRetry` to disable displaying the default loading page when there is no network.
+- pref: Added logging for data binding failures.
+- refactor: Deprecated the `page` function and added `pageCreate` function.
 
 ## 1.3.78
-- feat: PageRefreshLayout新增page_rv属性来指定列表
-- feat: PageRefreshLayout新增page_state布局属性指定缺省页
+- feat: Added `page_rv` attribute to `PageRefreshLayout` to specify the list.
+- feat: Added `page_state` layout attribute to `PageRefreshLayout` to specify the default page.
 
 ## 1.3.77
-- feat: StateLayout 1.3.6
-- feat: `ACCESS_NETWORK_STATE`(避免无网络显示加载中缺省页)权限可以被安全删除, 可以零权限运行本库
+- feat: Upgraded StateLayout to version 1.3.6.
+- feat: The `ACCESS_NETWORK_STATE` permission (to avoid displaying the loading default page without a network) can be safely removed, allowing the library to run with zero permissions.
 
 ## 1.3.76
-- fix: 网格和间距方向一致情况下导致item(铺满)大小不一致
+- fix: Fixed inconsistency in item size when grid and spacing directions are the same.
 
 ## 1.3.75
-- fix: showEmpty改为没有更多加载
-- fix: PageRefreshLayout使用addData新增索引判断, 避免状态判断无效
+- fix: Replaced `showEmpty` with "No more loading" message.
+- fix: Improved index checking when using `addData` in `PageRefreshLayout` to avoid invalid state checking.
 
 ## 1.3.74
-- fix: 修复分组深度计算错误
+- fix: Fixed calculation error for group depth.
 
 ## 1.3.73
-- fix: StateLayout 1.3.5
+- fix: Upgraded StateLayout to version 1.3.5.
 
 ## 1.3.72
-- refactor: StateLayout 1.3.4
-- feat: refreshing新增requireNetworking参数
+- refactor: Upgraded StateLayout to version 1.3.4.
+- feat: Added `refreshing` parameter to `refresh` function.
 
 ## 1.3.71
-修复addModels使用index局部更新错误
+Fixed issue with `addModels` using index for partial updates.
 
 ## 1.3.70
-- 新增`ItemStableId`来固定列表ID
-- feature #186 addModels索引插入
-- 修改ItemDepth位置
+- feat: Added `ItemStableId` to fix list IDs.
+- feature #186: Added index insertion for `addModels`.
+- Moved `ItemDepth` to a new position.
 
 ## 1.3.69
-Fixed #184 修复setCheckableType
+Fixed #184: Fixed `setCheckableType`.
 
 ## 1.3.68
-- Fixed #182
-- 新增单例BindingAdapter.modelId
-- 提升Api废弃等级
+- Fixed #182.
+- feat: Added singleton `BindingAdapter.modelId`.
+- Increased deprecation level for APIs.
 
 ## 1.3.67
-新增ItemAttached
+- feat: Added `ItemAttached`.
 
 ## 1.3.66
-- 更新StateLayout至1.3.3
-- 有网络情况下`showLoading`才显示LOADING, 不影响`onRefresh`
+- upgrade: Upgraded StateLayout to version 1.3.3.
+- feat: `showLoading` is only displayed as LOADING when there is network connectivity, without affecting `onRefresh`.
 
 ## 1.3.64
-- 更新StateLayout至1.3.1
-- 新增`StateChangedHandler`自定义缺省页切换处理
-- 新增`FadeStateChangedHandler`渐变透明切换缺省页
-- 新增`getBindingOrNull`方法
+- upgrade: Upgraded StateLayout to version 1.3.1.
+- feat: Added `StateChangedHandler` for custom default page switching.
+- feat: Added `FadeStateChangedHandler` for fade-in/fade-out default page transitions.
+- feat: Added `getBindingOrNull` method.
 
 ## 1.3.63
-Fixed [#164](https://github.com/liangjingkanji/BRV/issues/164)
+Fixed [#164](https://github.com/liangjingkanji/BRV/issues/164).
 
 ## 1.3.61
-Fixed [#157](https://github.com/liangjingkanji/BRV/issues/157)
+Fixed [#157](https://github.com/liangjingkanji/BRV/issues/157).
 
 ## 1.3.60
-现在可选依赖DataBinding
-
+Optional DataBinding dependency.
 
 ## 1.3.58
-fixed [#141](https://github.com/liangjingkanji/BRV/issues/141)
+Fixed [#141](https://github.com/liangjingkanji/BRV/issues/141).
 
 ## 1.3.57
-`PageRefreshLayout.showContent`参数`hasMore`默认值改为true, 避免超出开发者预期关闭加载更多行为
+The `hasMore` parameter of `PageRefreshLayout.showContent` now defaults to `true`, to avoid unexpected disabling of the load more behavior.
 
 ## 1.3.56
-修复刷新崩溃
+Fixed crash
+
+during refresh.
 
 ## 1.3.55
-解决不调用`PageRefreshLayout.finish`方法而是去调用`SmartRefreshLayout.finishRefresh`导致的上拉加载失效问题
-
+Resolved issue with incorrect loading more behavior when calling `PageRefreshLayout.finishRefresh` instead of `SmartRefreshLayout.finishRefresh`.
 
 ## 1.3.54
-- Fixed [#119](https://github.com/liangjingkanji/BRV/issues/119)
-- 分组避免重复展开/折叠
-- 修复单一展开模式
+- Fixed [#119](https://github.com/liangjingkanji/BRV/issues/119).
+- Prevented duplicate expansion/collapse of groups.
+- Fixed single expansion mode.
 
 ## 1.3.53
-- Fixed [#107](https://github.com/liangjingkanji/BRV/issues/107)
-- Fixed [#108](https://github.com/liangjingkanji/BRV/issues/108)
+- Fixed [#107](https://github.com/liangjingkanji/BRV/issues/107).
+- Fixed [#108](https://github.com/liangjingkanji/BRV/issues/108).
 
 ## 1.3.52
-避免多次显示加载页面导致缺省页showError无效
+Fixed issue with multiple loading pages being displayed, causing `showError` to be ineffective.
 
 ## 1.3.51
-fix: 修复拖拽功能导致列表显示与数据源不对应的问题
+- fix: Fixed incorrect item display when dragging and dropping.
+- feat: Added support for specifying `onClick/onFastClick/onLongClick` using ID directly.
+```kotlin
+rv.linear().setup {
+    addType<SimpleModel>(R.layout.item_simple)
+    R.id.tv_simple.onClick {
+        toast("Clicked Text")
+    }
+}.models = getData()
+```
 
 ## 1.3.50
-升级内置依赖SmartRefreshLayout至最新版本`2.0.5`
+Updated internal dependency on SmartRefreshLayout to the latest version `2.0.5`.
 ```groovy
 api 'io.github.scwang90:refresh-layout-kernel:2.0.5'
 api 'io.github.scwang90:refresh-header-material:2.0.5'
 api 'io.github.scwang90:refresh-footer-classics:2.0.5'
 ```
-注意如果你有添加附属的SmartRefreshLayout刷新头, 需要一并更新至最新的`mavenCentral()`版本
+Note that if you have added any additional SmartRefreshLayout refresh headers, you also need to update them to the latest `mavenCentral()` version.
 
-详情查看 [#85](https://github.com/liangjingkanji/BRV/issues/85)
+For more details, refer to [#85](https://github.com/liangjingkanji/BRV/issues/85).
 
 ## 1.3.40
-- 修复下拉刷新失效
-- 添加网格分组/拖拽分组示例
-- 优化列表负载更新
-- 修改addModels与addData的添加数据逻辑，使得models维持同一个对象
-- 更新示例代码
+- fix: Fixed issue with pull-to-refresh not working.
+- feat: Added examples for grid grouping and drag grouping.
+- feat: Optimized list load updates.
+- Modified `addModels` and `addData` to maintain the same object in `models`.
+- Updated example code.
 
 ## 1.3.39
-暴露对比数据变化的回调接口
+Exposed callback interface for comparing data changes.
 
 ## 1.3.38
-- 新增对比数据刷新函数`setDifferModels`, 本身BRV就支持官方对比刷新方案, 这次只是优化方案
-- 新增`PageRefreshLayout.refreshing`仅在第一次加载数据时时候加载缺省页后续使用静默加载
+- feat: Added `setDifferModels` function for data comparison and refresh. BRV already supports the official comparison refresh solution, but this enhancement optimizes the process.
+- feat: Added `PageRefreshLayout.refreshing` to load the default page only on the first data load and use silent loading for subsequent loads.
 
 ## 1.3.37
-- 修复UpFetch模式下缺省页颠倒问题
-- 修复reverseLayout下分割线问题
-- 新增ItemDepthUtils来简化获取分组层级深度
+- fix: Fixed reversed default page issue in UpFetch mode.
+- fix: Fixed divider display issue in `reverseLayout`.
+- feat: Added `ItemDepthUtils` to simplify getting the depth of grouped items.
 
 ## 1.3.36
-- 修复UpFetch模式下分割线显示错误问题
+- fix: Fixed divider display issue in UpFetch mode.
 
 ## 1.3.35
-- 添加多类型列表函数`addType`支持接口多态
-- 修复UpFetch拉取加载更多在Activity上内容颠倒问题
+- feat: Added support for polymorphic interfaces in the `addType` function for multi-type lists.
+- fix: Fixed content reversal issue on Activity with UpFetch loading.
 
 ## 1.3.34
-修复分组嵌套展开时产生重复数据问题(子列表为可变集合时引发此问题)
+Fixed issue with duplicate data when expanding nested groups (caused by mutable child lists).
 
 ## 1.3.33
-- 修复无法仅启用上拉加载问题
+- fix: Fixed issue with enabling only load more.
+- fix: Improved performance of parent item lookup with `findParentPosition`.
 
 ## 1.3.32
-- 允许BindingAdapter被重写
-- 修复加载更多时发生错误判断为没有更多页问题
+- feat: Allow overriding of `BindingAdapter`.
+- fix: Fixed incorrect determination of no more pages when loading more.
 
 ## 1.3.31
-修复PageRefreshLayout缺省页崩溃问题
+Fixed crash issue with default page in `PageRefreshLayout`.
 
 ## 1.3.30
-1. 更新依赖SmartRefreshLayout至2.0.3
-1. 更新依赖StateLayout至1.2.0
-2. 添加缺省页onContent监听
+1. Upgraded dependency on SmartRefreshLayout to version `2.0.3`.
+2. Upgraded dependency on StateLayout to version `1.2.0`.
+3. Added `onContent` listener for default page.
 
 ## 1.3.29
-隐藏内部函数 throttleClick
+Hidden internal function `throttleClick`.
 
 ## 1.3.28
-修复onClick点击防抖动失效问题
+Fixed issue with `onFastClick` not working.
 
 ## 1.3.27
-全局配置[点击防抖动](click.md#_4)间隔时间
+Configurable global interval for [click debouncing](click.md#_4).
 
 ## 1.3.26
-fixed #20 修复shoLoading缺省页参数错误
-
-## 1.3.25
-1. 新增函数isSampleGroup来判断两个位置的item是否处于同一分组下
-1.  组查询父项findParentPosition的性能
+- fix: Fixed incorrect parameter in `showLoading` default page.
+- feat: Added `isSampleGroup` function to determine if two items are in the same group.
+- feat: Improved performance of parent item lookup.
 
 ## 1.3.24
-修复局部刷新添加数据时动态分割线可能发生错误
+Fixed issue with dynamic dividers when adding data for partial refresh.
 
 ## 1.3.22
-为减少添加点击事件Id后还得判断Id. 点击事件现在和Id对应配置, 不做统一处理. 废弃部分函数
+Deprecated some functions to reduce the need for checking IDs after adding click events.
 
-| 废弃函数 | 替换 |
+| Deprecated Function | Replacement |
 |-|-|
-| addFastClickable| 替换为onFastClick |
-| addClickable | 替换为onClick |
-| addLongClickable | 替换为onLongClick |
+| `addFastClickable` | Replaced with `onFastClick` |
+| `addClickable` | Replaced with `onClick` |
+| `addLongClickable` | Replaced with `onLongClick` |
 
 ## 1.3.21
-新增可以使用Id直接调用onClick/onFastClick/onLongClick
+Added support for directly calling `onClick/onFastClick/onLongClick` using ID.
 ```kotlin
 rv.linear().setup {
     addType<SimpleModel>(R.layout.item_simple)
     R.id.tv_simple.onClick {
-        toast("点击Text")
+        toast("Clicked Text")
     }
 }.models = getData()
 ```
 
 ## 1.3.20
-修复单例缺省页无法覆盖全局缺省页问题
+Fixed issue where singleton default page was not overriding global default page.
+
 

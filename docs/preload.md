@@ -1,20 +1,19 @@
-`预加载`就是还没显示到列表末尾就会开始加载下一页, 执行上拉加载的逻辑, 前提是当前列表有下一页
+"Preloading" means starting to load the next page before it is displayed at the end of the list, usually triggered by the logic of "pull up to load more." The prerequisite is that there is actually a next page available for the current list.
 
-`预拉取`就是提前拉取. 和上面预加载差不多理解. 不知道拉取是什么请阅读[拉取更多](upfetch.md)
+"Prefetching" refers to preloading in advance. It is similar to preloading as mentioned above. If you're not familiar with the term "pulling," please refer to the [Upfetch](upfetch.md) documentation.
 
+## Preload Index for Current List
 
-## 当前列表预加载索引
+BRV enables preloading/prefetching by default. You can control when the preloading/prefetching starts by specifying the member property `preloadIndex`.
 
-BRV默认开启预加载/预拉取. 通过函数可以指定成员属性`preloadIndex`可以控制显示到倒数第几个条目时就开始预加载
+> The same property is used for both preloading and prefetching. When `preloadIndex` is set, both preloading and prefetching will take effect.
 
-> 预拉取和预加载条件都是使用的同一个字段. 设置preloadIndex后两者都会生效
-
-默认值是: 3
+The default value is 3.
 
 ```kotlin
 var preloadIndex = 3
 ```
 
-## 全局预加载索引
+## Global Preload Index
 
-通过`PageRefreshLayout.preloadIndex`可以设置全局默认值. 这样所有列表都默认就是你指定的索引开始预加载
+You can set the default value for the preload index using `PageRefreshLayout.preloadIndex`. This way, all lists will start preloading/prefetching from the specified index by default.

@@ -1,80 +1,78 @@
-假设不想使用DataBinding只想用ViewBinding可以阅读以下内容
+Assuming you don't want to use DataBinding and prefer to use ViewBinding, you can refer to the following information.
 
-> 其实使用ViewBinding和DataBinding的查找视图对象用法一致, 都是调用`getBinding()`
+In fact, the usage of ViewBinding for finding view objects is similar to DataBinding, as both involve calling `getBinding()`.
 
-## 前言
+## Introduction
 
-更推荐使用DataBinding而非ViewBinding, 理由如下
+It is highly recommended to use DataBinding instead of ViewBinding for the following reasons:
 
-1. 首先MVVM双向数据绑定是目前最优秀的架构设计, 而DataBinding是实现MVVM的最优解
-2. ViewBinding只是DataBinding中的一个小功能, 且DataBinding不会默认为所有布局自动生成类故代码量更少
+1. MVVM with two-way data binding is currently one of the best architectural designs, and DataBinding is the optimal solution for implementing MVVM.
+2. ViewBinding is just a small feature within DataBinding and does not generate classes for all layouts by default, resulting in less code.
 
+## Usage
 
-## 使用
+If you still want to use ViewBinding, you can refer to the following code.
 
-如果你依然想用ViewBinding可以参考以下代码
-
-### 1) 在onBind中使用
+### 1) Using ViewBinding in `onCreateViewHolder`
 
 ```kotlin
 rv.linear().setup {
     addType<SimpleModel>(R.layout.item_simple)
 
-    // 在onCreateViewHolder生命周期使用
+    // Use in the onCreateViewHolder lifecycle
     onCreate {
-        getBinding<ItemSimpleBinding>().tvName.text = "文本内容"
+        getBinding<ItemSimpleBinding>().tvName.text = "Text content"
     }
 
-    // 或者在onBindViewHolder生命周期中使用
+    // Or use in the onBindViewHolder lifecycle
     onBind {
         val binding = getBinding<ItemSimpleBinding>()
     }
 }.models = getData()
 ```
 
-### 2) 在ItemBind中使用
+### 2) Using ViewBinding in `ItemBind`
 
-如果使用实现接口[ItemBind](/#2)的数据模型
+If you are using a data model that implements the `ItemBind` interface:
 
 ```kotlin
 class SimpleModel(var name: String = "BRV") : ItemBind {
 
     override fun onBind(holder: BindingAdapter.BindingViewHolder) {
         val binding = getBinding<ItemSimpleBinding>()
-        binding.tvName.text = "文本内容"
+        binding.tvName.text = "Text content"
     }
 }
 ```
 
-都是调用方法`getBinding()`
+In both cases, you can call the `getBinding()` method.
 
-## 多类型
+## Multiple Types
 
-如果是多类型注意先判断类型, 避免为绑定错误的ViewBinding
+If you have multiple item types, make sure to check the type first to avoid binding the wrong ViewBinding.
 
 ```kotlin
 class SimpleModel(var name: String = "BRV") : ItemBind {
 
     override fun onBind(holder: BindingAdapter.BindingViewHolder) {
 
-        // 方式1 判断itemViewType
-        when(holder.itemViewType) {
+        // Approach 1: Check the itemViewType
+        when (holder.itemViewType) {
             R.layout.item_simple -> {
-                getBinding<ItemSimpleBinding>().tvName.text = "文本内容"
+                getBinding<ItemSimpleBinding>().tvName.text = "Text content"
             }
             R.layout.item_simple_2 -> {
-                getBinding<ItemSimpleBinding2>().tvName.text = "类型2-文本内容"
+                getBinding<ItemSimpleBinding2>().tvName.text = "Type 2 - Text content"
             }
         }
 
-
-        // 方式2 判断ViewBinding
+        // Approach 2: Check the ViewBinding
         when (val viewBinding = getBinding<ViewBinding>()) {
             is ItemSimpleBinding -> {
-                viewBinding.tvName.text = "文本内容"
+                viewBinding.tvName.text = "Text content"
             }
             is ItemComplexBinding -> {
-                viewBinding.tvName.text = "类型2-文本内容"
+                viewBinding.tvName.text = "Type 2 - Text content"
             }
         }
     }

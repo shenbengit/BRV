@@ -1,90 +1,92 @@
-本章内容看似多实则代码很简练, 只是为避免介绍不够详细
+The content of this chapter may seem extensive, but the code is actually concise. The detailed explanations are omitted to avoid redundancy.
 
 <img src="https://i.loli.net/2021/08/14/lV4ktFRAweYorsC.gif" width="250"/>
 
-[SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout) 应该是目前Android上扩展性最强的刷新框架,
-而BRV的下拉刷新和上拉加载正是扩展的SmartRefreshLayout , 支持其所有特性并且还增加了新的功能.
+[SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout) is currently the most powerful refresh framework for Android in terms of extensibility. BRV's pull-to-refresh and load-more functionalities are built on top of SmartRefreshLayout, supporting all its features and adding new ones.
 <br>
 
-> 如果需要更多的下拉刷新或者上拉加载的自定义需求请查看[SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout)的使用文档 <br>
-  本框架中的`PageRefreshLayout`继承自`SmartRefreshLayout`, 故拥有其所有特性
+> If you need more customization options for pull-to-refresh or load-more, please refer to the documentation of [SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout). <br>
+The `PageRefreshLayout` in this library inherits from `SmartRefreshLayout`, so it has all its features.
 
 <br>
-本库内置SmartRefreshLayout以下基础依赖, 无需再次引入
+This library includes the following basic dependencies of SmartRefreshLayout, so there's no need to include them again:
+
 ```groovy
 api 'io.github.scwang90:refresh-layout-kernel:2.0.5'
 api 'io.github.scwang90:refresh-header-material:2.0.5'
 api 'io.github.scwang90:refresh-footer-classics:2.0.5'
 ```
 
+To specify custom refresh headers and footers for SmartRefreshLayout, you need to include the respective libraries (that's how SmartRefreshLayout is designed):
 
-SmartRefreshLayout的指定的刷新头和刷新脚布局请分别依赖(其库如此设计)
-
-可选配置的刷新头布局和脚布局
+Optional configurations for refresh headers and footers:
 
 ```groovy
-implementation  'io.github.scwang90:refresh-layout-kernel:2.0.5'      //核心必须依赖
-implementation  'io.github.scwang90:refresh-header-classics:2.0.5'    //经典刷新头
-implementation  'io.github.scwang90:refresh-header-radar:2.0.5'       //雷达刷新头
-implementation  'io.github.scwang90:refresh-header-falsify:2.0.5'     //虚拟刷新头
-implementation  'io.github.scwang90:refresh-header-material:2.0.5'    //谷歌刷新头
-implementation  'io.github.scwang90:refresh-header-two-level:2.0.5'   //二级刷新头
-implementation  'io.github.scwang90:refresh-footer-ball:2.0.5'        //球脉冲加载
-implementation  'io.github.scwang90:refresh-footer-classics:2.0.5'    //经典加载
+implementation  'io.github.scwang90:refresh-layout-kernel:2.0.5'      // Core dependency (must include)
+implementation  'io.github.scwang90:refresh-header-classics:2.0.5'    // Classic refresh header
+implementation  'io.github.scwang90:refresh-header-radar:2.0.5'       // Radar refresh header
+implementation  'io.github.scwang90:refresh-header-falsify:2.0.5'     // Falsify refresh header
+implementation  'io.github.scwang90:refresh-header-material:2.0.5'    // Material refresh header
+implementation  'io.github.scwang90:refresh-header-two-level:2.0.5'   // Two-level refresh header
+implementation  'io.github.scwang90:refresh-footer-ball:2.0.5'        // Ball pulse load-more
+implementation  'io.github.scwang90:refresh-footer-classics:2.0.5'    // Classic load-more
 ```
 
-## 初始化
-刷新布局要求必须先初始化, 推荐在Application中
+## Initialization
+The refresh layout requires initialization first, and it's recommended to do it in the `Application` class.
 
-```
+```java
 SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout -> MaterialHeader(this) }
 SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout -> ClassicsFooter(this) }
 ```
 
-
 ## PageRefreshLayout
 
-该控件继承自`SmartRefreshLayout`, 增加以下特性
+This control extends from `SmartRefreshLayout` and adds the following features:
 
-1.  简化函数
-2.  细节优化
-3.  缺省页
-4.  分页加载
-5.  拉取加载更多
-6.  预加载 / 预拉取
+1. Simplified functions
+2. Fine-tuned details
+3. Empty state
+4. Pagination loading
+5. Pull-to-load-more
+6. Pre-loading / Pre-pulling
 
-### 声明
+### Declaration
 
-支持两种方式创建, 推荐布局包裹,
+There are two ways to create a `PageRefreshLayout`, but it's recommended to wrap it in a layout.
 
-=== "布局包裹"
+=== "Wrap in layout"
 
-    ```xml
-    <com.drake.brv.PageRefreshLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:id="@+id/page"
-        app:stateEnabled="true"
-        android:layout_height="match_parent"
-        tools:context="com.drake.brv.sample.fragment.RefreshFragment">
+```xml
+<com.drake.brv.PageRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:id="@+id/page"
+    app:stateEnabled="true"
+    android:layout_height="match_parent"
+    tools:context="com.drake.brv.sample.fragment.Refresh
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+Fragment">
 
-    </com.drake.brv.PageRefreshLayout>
-    ```
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/rv"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
 
-=== "代码包裹"
-    只推荐使用布局创建, 可保持项目代码可读性并且避免不必要的问题发生
-    ```xml
-    val page = rv.pageCreate()
-    ```
+</com.drake.brv.PageRefreshLayout>
+```
 
-### 创建列表
+=== "Wrapped in code"
+    It is only recommended to use layout creation, which can keep the project code readable and avoid unnecessary problems
+
+```kotlin
+val page = rv.pageCreate()
+```
+
+### Create the List
+
 ```kotlin
 rv.linear().setup {
     addType<Model>(R.layout.item_simple)
@@ -92,69 +94,67 @@ rv.linear().setup {
 }
 
 page.onRefresh {
-    postDelayed({ // 模拟网络请求2秒后成功, 创建假的数据集
+    postDelayed({
         val data = getData()
         addData(data) {
-            index < total // 判断是否有更多页
+            index < total
         }
     }, 2000)
 }.autoRefresh()
 ```
 
-1. `onRefresh`即每次刷新/上拉加载都会执行的函数
+1. `onRefresh` is the function that will be executed every time the list is refreshed or loaded more.
 
-### 监听状态
+### Listen for State Changes
 
 ```kotlin
-// 下拉刷新
+// Pull-to-refresh
 page.onRefresh {
-	// 这里可以进行网络请求等异步操作
+	// You can perform network requests or other asynchronous operations here
 }
 
-// 上拉加载
+// Load more
 page.onLoadMore {
-	// 这里可以进行网络请求等异步操作
+	// You can perform network requests or other asynchronous operations here
 }
 ```
 
-1.  如果不调用`onLoadMore`则上拉加载同样也会执行`onRefresh`函数, 因为下拉刷新和上拉加载在项目中一般是同一个接口只是分页字段值不同而已
+1. If you don't call `onLoadMore`, the pull-to-load-more functionality will also execute the `onRefresh` function. In most cases, pull-to-refresh and load more use the same API but with different page values.
 
+### Trigger Refresh
 
-### 触发刷新
+There are three functions to trigger the refresh state (all of them will invoke the `onRefresh` function):
 
-拥有三个函数可以触发刷新状态(都会回调函数onRefresh)
+| Function    | Description                                                                                              |
+|-------------|----------------------------------------------------------------------------------------------------------|
+| autoRefresh | Show the pull-to-refresh animation                                                                       |
+| showLoading | Show the loading state with a custom layout                                                              |
+| refresh     | Refresh silently without animation                                                                       |
+| refreshing  | Equivalent to `showLoading` for the first time. After loading is complete, it's equivalent to `refresh`. |
 
-| 函数 | 描述 |
-|-|-|
-| autoRefresh | 显示下拉刷新动画 |
-| showLoading | 显示加载中缺省页, 当然得先设置`loadingLayout`(或者读取`StateConfig`全局缺省页配置) |
-| refresh | 静默刷新(无动画) |
-| refreshing | 初次调用等效于`showLoading`. 当加载完毕以后, 再次调用等效`refresh` |
+> All three trigger methods will reset the index to `startIndex`. The index is the default field for page increment. You will see how to use this field later.
 
-> 这3种触发刷新方式都会导致重置索引 `index=startIndex`, index就是默认根据分页默认递增的字段, 后面会演示如何使用该字段
+### Empty State
 
-### 缺省页
+The `PageRefreshLayout` contains a `StateLayout` to handle the empty state.
 
-PageRefreshLayout内嵌`StateLayout`同时具备显示缺省页的能力
+Control the state of the empty state layout (usually handled automatically by the framework):
 
-缺省页状态控制(一般情况下都是框架内部自动控制)
+| Function    | Description                  |
+|-------------|------------------------------|
+| showLoading | Show the loading empty state |
+| showEmpty   | Show the empty empty state   |
+| showError   | Show the error empty state   |
+| showContent | Show the content view        |
 
-| 函数 | 描述 |
-|-|-|
-| showLoading | 显示加载中缺省页 |
-| showEmpty | 显示空缺省页 |
-| showError | 显示错误缺省页 |
-| showContent | 显示内容页 |
+#### Global Empty State Configuration
 
-
-#### 全局缺省页配置
-
-全局缺省页配置和StateLayout共享, 因为PageRefreshLayout就是内嵌StateLayout
+Global empty state configuration is shared with `StateLayout` because `PageRefreshLayout` embeds `StateLayout`.
 
 ```kotlin
 /**
- *  推荐在Application中进行全局配置缺省页, 当然同样每个页面可以单独指定缺省页.
- *  具体查看 https://github.com/liangjingkanji/StateLayout
+ * Recommended to configure the global empty state in the Application class.
+ * For more details, refer to https://github.com/liangjingkanji/StateLayout.
  */
 StateConfig.apply {
   emptyLayout = R.layout.layout_empty
@@ -162,96 +162,86 @@ StateConfig.apply {
   loadingLayout = R.layout.layout_loading
 
   onLoading {
-    // 此生命周期可以拿到LoadingLayout创建的视图对象, 可以进行动画设置或点击事件.
+    // This callback is triggered when the loading layout is created. You can customize animations or click events here.
   }
 }
 ```
 
+#### Singleton Empty State Configuration
 
+Singleton empty state means that for a specific layout, you want to use a different empty state layout instead of the global configuration. You don't need to specify all of them; you can choose to specify only the loading or error layout.
 
-#### 单例缺省页配置
+=== "XML Declaration"
 
-单例就是某个布局某个缺省状态页面不想使用全局配置的缺省页. 那么就为这个布局单独指定特殊的缺省页
+```xml
+<com.drake.brv.PageRefreshLayout
+    .....
+    app:error_layout="@layout/layout_error"
+    app:empty_layout="@layout/layout_empty"
+    app:loading_layout="@layout/layout_loading">
 
-无需全部单独指定, 可只指定加载中单例或者错误页面单例
+    <!--RecyclerView code-->
 
-=== "布局声明"
+</com.drake.brv.PageRefreshLayout>
+```
 
-    ```xml hl_lines="3 4 5"
-    <com.drake.brv.PageRefreshLayout
-        .....
-        app:error_layout="@layout/layout_error"
-        app:empty_layout="@layout/layout_empty"
-        app:loading_layout="@layout/layout_loading">
+=== "Code Declaration"
 
-        <!--RecyclerView代码-->
+```kotlin
+page.apply {
+    loadingLayout = R.layout.layout_loading
+    emptyLayout = R.layout.layout_empty
+    // errorLayout = R.layout.layout_error
+}
+```
 
-    </com.drake.brv.PageRefreshLayout>
-    ```
+By default, the empty state will be used. If you
 
-=== "代码声明"
+have set the global empty state and don't want to use it at this moment, you can use the `stateEnabled` property or function.
 
-    ```kotlin
-    page.apply {
-        loadingLayout = R.layout.layout_loading
-        emptyLayout = R.layout.layout_empty
-        // errorLayout = R.layout.layout_error
-    }
-    ```
+As the header layout is part of the list and the empty state covers the entire list, if you want to use the empty state without affecting the header layout, you can use `CoordinatorLayout`.
 
+> Note: Using `NestedScrollView` to nest the RecyclerView will load all items at once, which consumes more memory. However, nesting the RecyclerView inside a `CoordinatorLayout` won't have this issue.
 
+### Refreshing Data
 
-默认会使用缺省页, 如果你已经设置了全局缺省页但是此刻不想使用. 可以使用属性|函数: `stateEnabled`
+As mentioned earlier, `PageRefreshLayout` supports automatic pagination. You don't need to use the `rv.models` function to set the data; instead, you can use `addData`.
 
-
-
-因为头布局属于列表的一部分, 而缺省页会覆盖整个列表. 那么想要使用缺省页又不想影响列表的头布局, 那头布局请使用`CoordinatorLayout`实现.
-
-> 注意如果使用`NestedScrollView`嵌套Rv实现会导致RV一次性加载完item内存消耗大. 而CoordinatorLayout嵌套RV不会
-
-
-
-### 刷新数据
-
-前面提到 PageRefreshLayout 支持自动分页加载, 自动分页不需要你调用`rv.models`函数去设置数据, 使用`addData`即可
-
-```kotlin hl_lines="8"
-// 下拉刷新和上拉加载都会执行onRefresh, 除非另外设置onLoadMore
+```kotlin
 pageLayout.onRefresh {
     scope {
         val data = Get<String>("/path").await()
-        addData(data.list){
-            // 该回调函数参数返回一个布尔类型用于判断是否存在下一页, 决定上拉加载是否关闭
-            adapter.itemCount < data.count // 这里是判断是否由更多页, 具体逻辑根据接口定义
+        addData(data.list) {
+            adapter.itemCount < data.count
         }
     }
 }
 ```
 
-大部分情况后端定义分页字段第一页为1, 但是可能存在部分后端定义为0, 这里我们可以在Application中设置`index`的初始值即第一页的字段
+In most cases, the backend defines the first page as 1, but sometimes it can be 0. You can set the initial value of the `index` field (the field representing the page) in the `onCreate` method of your `Application` class.
 
 ```kotlin
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-
-        PageRefreshLayout.startIndex = 1 // startIndex即index变量的初始值
+        PageRefreshLayout.startIndex = 1
     }
+}
 ```
 
-这里的网络请求使用的是我开源的另一个项目[Net]((https://github.com/liangjingkanji/Net)), 和BRV可以联动配置
-<br>
-> 假设`PageRefreshLayout`没有直接包裹RecyclerView, 这个时候需要[addData](api/-b-r-v/com.drake.brv/-page-refresh-layout/index.html#-704450894%2FFunctions%2F-900954490)函数指定参数adapter来使用自动分页, 否则将抛出异常
+In the code snippet above, I used another open-source project of mine, [Net](https://github.com/liangjingkanji/Net), for network requests. It can be configured together with BRV.
 
-## 缺省页禁止下拉刷新
+> If `PageRefreshLayout` is not directly wrapping the RecyclerView, you need to pass the `adapter` parameter to the `addData` function in order to use automatic pagination. Otherwise, an exception will be thrown.
 
-控制PageRefreshLayout当显示缺省页状态时禁止下拉刷新交互手势
+## Disable Pull-to-Refresh in Empty State
 
-| 函数 | 描述 |
-|-|-|
-| refreshEnableWhenEmpty | 是否显示空缺省页时启用下拉刷新 |
-| refreshEnableWhenError | 是否显示错误缺省页时启用下拉刷新 |
+Control the PageRefreshLayout's ability to handle pull-to-refresh gestures when the empty state is displayed.
 
-> 同名的伴生对象属性为全局配置, PageRefreshLayout对象属性属于单例配置
+| Function               | Description                                              |
+|------------------------|----------------------------------------------------------|
+| refreshEnableWhenEmpty | Enable pull-to-refresh when the empty state is displayed |
+| refreshEnableWhenError | Enable pull-to-refresh when the error state is displayed |
 
-如果需要更复杂的逻辑建议自己在缺省页回调中通过`PageRefreshLayout.setEnableRefresh()`自由控制
+> The corresponding companion object properties are used for global configuration, while the object properties of PageRefreshLayout are used for singleton configuration.
+
+If you need more complex logic, it is recommended to use `PageRefreshLayout.setEnableRefresh()` in the empty state callback to have more control.

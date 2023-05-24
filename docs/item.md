@@ -1,26 +1,26 @@
-rv的数据是集合`List<Any?>?`, 其中的集合元素就是数据模型
+The data for the RecyclerView is a collection of `List<Any?>?`, where the collection elements are data models.
 
-通过让数据模型实现不同的接口可以获取不同的功能或者回调
+By having the data models implement different interfaces, you can obtain different functionalities or callbacks.
 
-| 接口 | 描述 |
+| Interface | Description |
 |-|-|
-| ItemBind | 在数据模型中回调onBindViewHolder生命周期, 用于[绑定数据](index.md) |
-| ItemAttached | 监听视图附着到窗口(Window) |
-| ItemExpand | Item可[分组](group.md) |
-| ItemDrag | Item可[拖拽](drag.md) |
-| ItemSwipe | Item可[侧滑](swipe.md) |
-| ItemHover | Item可[悬停](hover.md) |
-| ItemPosition | Item索引位置 |
+| ItemBind | Callback in the data model's `onBindViewHolder` lifecycle, used for data binding. |
+| ItemAttached | Listens to the view being attached to the window. |
+| ItemExpand | Indicates that the item can be grouped. |
+| ItemDrag | Indicates that the item can be dragged. |
+| ItemSwipe | Indicates that the item can be swiped. |
+| ItemHover | Indicates that the item can be hovered. |
+| ItemPosition | Represents the index position of the item. |
 
-具体如何使用请查看对应功能章节或者注释
+Please refer to the corresponding feature sections or comments for specific usage.
 
 ```kotlin
 data class SimpleModel(var name: String = "BRV") : ItemBind {
 
     override fun onBind(holder: BindingAdapter.BindingViewHolder) {
-        // 使用不同的方法来获取视图控件
-        // holder.findView<TextView>(R.id.tv_simple).text = appName // 使用findById
-        // val binding = holder.getBinding<ItemMultiTypeOneBinding>() // 使用DataBinding或ViewBinding
+        // Use different methods to access the view components
+        // holder.findView<TextView>(R.id.tv_simple).text = appName // Using findById
+        // val binding = holder.getBinding<ItemMultiTypeOneBinding>() // Using DataBinding or ViewBinding
     }
 }
 ```

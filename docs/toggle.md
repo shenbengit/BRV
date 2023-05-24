@@ -1,16 +1,13 @@
-BRV提供一个切换事件的触发和监听, 相当于会提供一个回调函数遍历所有的列表条目, 你可以在这个回调里面依次更新数据或者视图.
+BRV provides a toggle event trigger and listener, which can be used to iterate through all the list items. You can update the data or views in the callback function.
 
-<br>
-这个`切换`可以理解为`遍历`列表条目
+The "toggle" can be understood as "iterating" through the list items.
 
-<br>
-一般用于切换列表的编辑模式
+This feature is commonly used to switch between different editing modes in a list.
 
 <img src="https://i.loli.net/2021/08/14/BVjGH7CT9lZ8KXa.gif" width="250"/>
 
-<br>
+Here's an example:
 
-## 示例
 ```kotlin
 override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)
@@ -18,38 +15,36 @@ override fun onActivityCreated(savedInstanceState: Bundle?) {
     rv.linear().setup {
         addType<CheckModel>(R.layout.item_check_mode)
 
-        // 监听切换事件
+        // Listen to toggle events
         onToggle { position, toggleMode, end ->
             if (end) {
-                // 显示和隐藏编辑菜单
+                // Show or hide the edit menu
                 ll_menu.visibility = if (toggleMode) View.VISIBLE else View.GONE
             }
         }
     }.models = getData()
 }
 
-fun onClick(v:View){
-    rv.bindingAdapter.toggle() // 点击事件触发切换事件
+fun onClick(v: View) {
+    rv.bindingAdapter.toggle() // Trigger the toggle event on click
 }
-
 ```
 
-## 函数
+Available functions:
 
 ```kotlin
 fun toggle()
-// 触发切换模式(根据当前状态取反)
+// Trigger the toggle mode (invert the current state)
 
 fun getToggleMode(): Boolean
-// 范围当前出何种切换模式
+// Get the current toggle mode
 
 fun setToggleMode(toggleMode: Boolean)
-// 设置切换模式, 如果设置的是当前正处于的模式不会触发回调
+// Set the toggle mode. If the provided mode is the same as the current mode, the callback won't be triggered.
 
 fun onToggle(block: (position: Int, toggleMode: Boolean, end: Boolean) -> Unit)
-// 监听切换事件, 在事件中你可以处理任何视图的数据或者视图修改
-// position: 遍历过程中的列表条目索引
-// toggleMode: 切换模式(布尔值)
-// end: 是否全部遍历完成
+// Listen to toggle events. In this event, you can modify data or views as needed.
+// position: Index of the list item during the iteration
+// toggleMode: The toggle mode (Boolean)
+// end: Whether the iteration is completed for all items
 ```
-

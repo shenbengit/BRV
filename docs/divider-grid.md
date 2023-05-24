@@ -1,7 +1,6 @@
-支持`GridLayoutManager`的网格布局的分割线
+Support for GridLayoutManager with grid layout dividers.
 
-
-## 水平分割线
+## Horizontal Dividers
 
 <img src="https://i.loli.net/2021/08/14/oyjdg42zDUbkFtu.png" width="250"/>
 
@@ -11,8 +10,7 @@ rv.grid(3).divider(R.drawable.divider_horizontal).setup {
 }.models = getData()
 ```
 
-
-## 垂直分割线
+## Vertical Dividers
 
 <img src="https://i.loli.net/2021/08/14/ChG9ZnNiJyasWFr.png" width="250"/>
 
@@ -24,7 +22,7 @@ rv.grid(3, RecyclerView.HORIZONTAL)
 }.models = getData()
 ```
 
-## 网格分割线
+## Grid Dividers
 
 <img src="https://i.loli.net/2021/08/14/NLAPphzIU6yvVnt.png" width="250"/>
 
@@ -37,17 +35,17 @@ rv.grid(3).divider {
 }.models = getData()
 ```
 
-## 边缘分割线
+## Edge Dividers
 
-通过两个字段可以控制边缘分割线是否显示
+You can control whether edge dividers are visible using two fields:
 
-| 字段 | 描述 |
+| Field | Description |
 |-|-|
-| [startVisible](api/-b-r-v/com.drake.brv/-default-decoration/index.html#-2091559976%2FProperties%2F-900954490) | 是否显示上下边缘分割线 |
-| [endVisible](api/-b-r-v/com.drake.brv/-default-decoration/index.html#-377591023%2FProperties%2F-900954490) | 是否显示左右边缘分割线 |
-| [includeVisible](api/-b-r-v/com.drake.brv/-default-decoration/index.html#1716094302%2FProperties%2F-900954490) | 是否显示周围分割线 |
+| [startVisible](api/-b-r-v/com.drake.brv/-default-decoration/index.html#-2091559976%2FProperties%2F-900954490) | Whether to show top and bottom edge dividers |
+| [endVisible](api/-b-r-v/com.drake.brv/-default-decoration/index.html#-377591023%2FProperties%2F-900954490) | Whether to show left and right edge dividers |
+| [includeVisible](api/-b-r-v/com.drake.brv/-default-decoration/index.html#1716094302%2FProperties%2F-900954490) | Whether to show surrounding dividers |
 
-### 1) 上下
+### 1) Top and Bottom
 
 <img src="https://i.loli.net/2021/08/14/JBjETuMoaORFWHK.png" width="250"/>
 
@@ -61,8 +59,7 @@ rv.grid(3).divider {
 }.models = getData()
 ```
 
-
-### 2) 左右
+### 2) Left and Right
 
 <img src="https://i.loli.net/2021/08/14/IcxHsWafFQXh4Eg.png" width="250"/>
 
@@ -76,7 +73,7 @@ rv.grid(3).divider {
 }.models = getData()
 ```
 
-### 3) 四周
+### 3) All Edges
 
 <img src="https://i.loli.net/2021/08/14/UmhH5BgFA3a1W2Q.png" width="250"/>
 
@@ -91,11 +88,13 @@ rv.grid(3).divider {
 }.models = getData()
 ```
 
-## 分割线间隔
+## Divider Spacing
 
-分割线默认情况下是基于rv设置间隔
+By default, dividers are based on the spacing
 
-<img src="https://cdn.jsdelivr.net/gh/JBFiveHub/picture-storage@master/uPic/Clipboard - 2023-01-17 16.16.01.jpg" width="250"/>
+set for the RecyclerView.
+
+<img src="https://i.loli.net/2021/08/14/MSFzurOVYbK7EwU.png" width="250"/>
 
 ```kotlin
 binding.rv.grid(3, orientation = RecyclerView.VERTICAL).divider {
@@ -109,11 +108,7 @@ binding.rv.grid(3, orientation = RecyclerView.VERTICAL).divider {
 ```
 
 <br>
-使用`baseItemStart/baseItemEnd`参数以item为基准设置间隔
-
-<img src="https://cdn.jsdelivr.net/gh/JBFiveHub/picture-storage@master/uPic/Clipboard - 2023-01-17 16.30.04.jpg" width="250"/>
-
-<img src="https://cdn.jsdelivr.net/gh/JBFiveHub/picture-storage@master/uPic/Clipboard - 2023-01-17 16.33.04.jpg" width="250"/>
+You can set spacing based on the item using the `baseItemStart/baseItemEnd` parameters.
 
 ```kotlin
 binding.rv.grid(3, orientation = RecyclerView.VERTICAL).divider {
@@ -126,18 +121,15 @@ binding.rv.grid(3, orientation = RecyclerView.VERTICAL).divider {
 }.models = getData()
 ```
 
+## Grid Sticky Equally Spaced Dividers
 
-## 网格悬停均布间隔
-
-这里建议使用嵌套列表完成, 避免分割线出现问题. 这种需求比较常见所以演示实现思路
-
-<img src="https://i.loli.net/2021/08/14/kCS4Kr9qpIfsveQ.gif" width="250"/>
+For this requirement, it is recommended to use a nested list to avoid issues with dividers. This approach is commonly used to achieve this effect.
 
 ```kotlin
 binding.rv.linear().setup {
     onCreate {
-        if (itemViewType == R.layout.item_simple_list) { // 构建嵌套网格列表
-            findView<RecyclerView>(R.id.rv).divider { // 构建间距
+        if (itemViewType == R.layout.item_simple_list) { // Build nested grid list
+            findView<RecyclerView>(R.id.rv).divider { // Build spacing
                 setDivider(20)
                 includeVisible = true
                 orientation = DividerOrientation.GRID
@@ -147,7 +139,7 @@ binding.rv.linear().setup {
         }
     }
     onBind {
-        if (itemViewType == R.layout.item_simple_list) { // 为嵌套的网格列表赋值数据
+        if (itemViewType == R.layout.item_simple_list) { // Set data for nested grid list
             findView<RecyclerView>(R.id.rv).models =
                 getModel<NestedGroupModel>().itemSublist
         }
@@ -156,4 +148,3 @@ binding.rv.linear().setup {
     addType<HoverHeaderModel>(R.layout.item_hover_header)
 }.models = getData()
 ```
-

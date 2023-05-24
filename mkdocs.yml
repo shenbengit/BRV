@@ -21,7 +21,7 @@ theme:
 
   font: false
 
-  language: zh
+  language: en
 
 markdown_extensions:
   - toc:
@@ -35,37 +35,38 @@ markdown_extensions:
   - pymdownx.tabbed
 
 nav:
-  - 使用: index.md
-  - 多类型: multi-type.md
-  - 更新数据: refresh-data.md
-  - 点击事件: click.md
-  - 生命周期: lifecycle.md
-  - 滑动卡顿: performance.md
-  - 头脚布局: header_footer.md
-  - 分组: group.md
-  - 悬停: hover.md
-  - 分割线:
-      - 线性列表: divider-linear.md
-      - 网格列表: divider-grid.md
-      - 瀑布流列表: divider-staggerd.md
-      - 自定义: divider-other.md
-  - 缺省页: state.md
-  - 下拉刷新/上拉加载: refresh.md
-  - 刷新动画: refresh-animate.md
-  - 拉取更多: upfetch.md
-  - 预加载/预拉取: preload.md
-  - 切换模式: toggle.md
-  - 选择模式: checked.md
-  - 伸缩布局: flexbox.md
-  - 拖拽: drag.md
-  - 侧滑: swipe.md
-  - 列表动画: animation.md
-  - 数据接口: item.md
-  - 复用列表: recycle.md
-  - 扩展函数: extension.md
-  - 网络请求: net.md
+  - Usage: index.md
+  - Multi-type: multi-type.md
+  - Data Refresh: refresh-data.md
+  - Click Event: click.md
+  - Lifecycle: lifecycle.md
+  - Smooth Scrolling: performance.md
+  - Header/Footer Layout: header_footer.md
+  - Grouping: group.md
+  - Hover: hover.md
+  - Dividers:
+      - Linear List: divider-linear.md
+      - Grid List: divider-grid.md
+      - Staggered Grid List: divider-staggerd.md
+      - Custom: divider-other.md
+  - Empty State: state.md
+  - Pull-to-Refresh/Load-more: refresh.md
+  - Refresh Animation: refresh-animate.md
+  - Upfetch: upfetch.md
+  - Preload: preload.md
+  - Mode Switching: toggle.md
+  - Selection Mode: checked.md
+  - Flexbox Layout: flexbox.md
+  - Drag and Drop: drag.md
+  - Swipe: swipe.md
+  - List Animation: animation.md
+  - Data Interfaces: item.md
+  - Recycle List: recycle.md
+  - Extension Functions: extension.md
+  - Network Requests: net.md
   - ViewBinding: view-binding.md
-  - 常见问题: https://github.com/liangjingkanji/BRV/blob/master/docs/issues.md
-  - 第三方组件: component.md
-  - 更新日志: updates.md
-  - 1.x文档: api/index.html
+  - FAQ: issues.md
+  - Third-Party Components: component.md
+  - Changelog: updates.md
+  - 1.x Documentation: api/index.html
+

@@ -1,10 +1,10 @@
-上一章介绍过BRV内嵌[SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout)来实现下拉刷新/上拉加载, 以下演示自定义刷新动画
+In the previous chapter, we introduced the integration of [SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout) in BRV to achieve pull-down refresh and pull-up loading. The following demonstrates custom refresh animations.
 
-## 关闭上拉加载动画
+## Disabling Pull-Up Loading Animation
 
-关闭动画以后并不会影响原有的预加载功能
+Disabling the animation does not affect the original preloading functionality.
 
-全局配置
+Global Configuration:
 
 ```kotlin
 SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout ->
@@ -15,7 +15,7 @@ SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout ->
 }
 ```
 
-单例配置, 修改xml布局, 当然你也可以代码修改
+Singleton Configuration, modify XML layout, or modify programmatically:
 
 ```xml
 <com.drake.brv.PageRefreshLayout
@@ -37,64 +37,65 @@ SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout ->
 </com.drake.brv.PageRefreshLayout>
 ```
 
+## Custom Refresh Animations
 
-## 自定义刷新动画
+- [SmartRefreshLayout Custom Animation Documentation](https://github.com/scwang90/SmartRefreshLayout/blob/master/art/md_custom.md)
 
-- [SmartRefreshLayout自定义动画文档](https://github.com/scwang90/SmartRefreshLayout/blob/master/art/md_custom.md)
-
-SmartRefresh自带7个动画依赖库可以参考/修改源码或者直接使用
+SmartRefresh comes with 7 animation dependency libraries that can be referenced/modified in the source code or used directly:
 
 ```groovy
-implementation  'io.github.scwang90:refresh-header-classics:2.0.5'    //经典刷新头
-implementation  'io.github.scwang90:refresh-header-radar:2.0.5'       //雷达刷新头
-implementation  'io.github.scwang90:refresh-header-falsify:2.0.5'     //虚拟刷新头
-implementation  'io.github.scwang90:refresh-header-material:2.0.5'    //谷歌刷新头
-implementation  'io.github.scwang90:refresh-header-two-level:2.0.5'   //二级刷新头
-implementation  'io.github.scwang90:refresh-footer-ball:2.0.5'        //球脉冲加载
-implementation  'io.github.scwang90:refresh-footer-classics:2.0.5'    //经典加载
+implementation  'io.github.scwang90:refresh-header-classics:2.0.5'    // Classic refresh header
+implementation  'io.github.scwang90:refresh-header-radar:2.0.5'       // Radar refresh header
+implementation  'io.github.scwang90:refresh-header-falsify:2.0.5'     // Falsify refresh header
+implementation  'io.github.scwang90:refresh-header-material:2.0.5'    // Google refresh header
+implementation  'io.github.scwang90:refresh-header-two-level:2.0.5'   // Two-level refresh header
+implementation  'io.github.scwang90:refresh-footer-ball:2.0.5'        // Ball pulse loading
+implementation  'io.github.scwang90:refresh-footer-classics:2.0.5'    // Classic loading
 ```
 
-想要了解更多请查看[SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout)主页
+For more information, please refer to the [SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout) homepage.
 
-|个人首页|微博列表|
-|:---:|:---:|
-|![](https://scwang90.github.io/assets/refresh-layout/gif_practive_weibo_new.gif)|![](https://scwang90.github.io/assets/refresh-layout/gif_practive_feedlist_new.gif)|
+|                                Personal Homepage                                 |                                     Weibo List                                      |
+|:--------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------:|
+| ![](https://scwang90.github.io/assets/refresh-layout/gif_practive_weibo_new.gif) | ![](https://scwang90.github.io/assets/refresh-layout/gif_practive_feedlist_new.gif) |
 
-|餐饮美食|个人中心|
-|:---:|:---:|
-|![](https://scwang90.github.io/assets/refresh-layout/gif_practive_repast_new.gif)|![](https://scwang90.github.io/assets/refresh-layout/gif_practive_profile.gif)|
+|                                  Food and Dining                                  |                                Personal Center                                 |
+|:---------------------------------------------------------------------------------:|:------------------------------------------------------------------------------:|
+| ![](https://scwang90.github.io/assets/refresh-layout/gif_practive_repast_new.gif) | ![](https://scwang90.github.io/assets/refresh-layout/gif_practive_profile.gif) |
 
-|Delivery|DropBox|
-|:---:|:---:|
-|![](https://scwang90.github.io/assets/refresh-layout/gif_Delivery.gif)|![](https://scwang90.github.io/assets/refresh-layout/gif_Dropbox.gif)|
-|[Refresh-your-delivery](https://dribbble.com/shots/2753803-Refresh-your-delivery)|[Dropbox-Refresh](https://dribbble.com/shots/3470499-DropBox-Refresh)|
+|                                     Delivery                                      |                                DropBox                                |
+|:---------------------------------------------------------------------------------:|:---------------------------------------------------------------------:|
+|      ![](https://scwang90.github.io/assets/refresh-layout/gif_Delivery.gif)       | ![](https://scwang90.github.io/assets/refresh-layout/gif_Dropbox.gif) |
+| [Refresh-your-delivery](https://dribbble.com/shots/2753803-Refresh-your-delivery) |                               [Dropbox-                               |
 
-|BezierRadar|BezierCircle|
-|:---:|:---:|
-|![](https://scwang90.github.io/assets/refresh-layout/gif_BezierRadar.gif)|![](https://scwang90.github.io/assets/refresh-layout/gif_BezierCircle.gif)|
-|[Pull To Refresh](https://dribbble.com/shots/1936194-Pull-To-Refresh)|[Pull Down To Refresh](https://dribbble.com/shots/1797373-Pull-Down-To-Refresh)|
+Refresh](https://dribbble.com/shots/3470499-DropBox-Refresh)                       |
 
-|FlyRefresh|Classics|
-|:---:|:---:|
-|![](https://scwang90.github.io/assets/refresh-layout/gif_FlyRefresh.gif)|![](https://scwang90.github.io/assets/refresh-layout/gif_Classics.gif)|
-|[FlyRefresh](https://github.com/race604/FlyRefresh)|[ClassicsHeader](#1)|
+|                                BezierRadar                                |                                  BezierCircle                                   |
+|:-------------------------------------------------------------------------:|:-------------------------------------------------------------------------------:|
+| ![](https://scwang90.github.io/assets/refresh-layout/gif_BezierRadar.gif) |   ![](https://scwang90.github.io/assets/refresh-layout/gif_BezierCircle.gif)    |
+|   [Pull To Refresh](https://dribbble.com/shots/1936194-Pull-To-Refresh)   | [Pull Down To Refresh](https://dribbble.com/shots/1797373-Pull-Down-To-Refresh) |
 
-|Phoenix|Taurus|
-|:---:|:---:|
-|![](https://scwang90.github.io/assets/refresh-layout/gif_Phoenix.gif)|![](https://scwang90.github.io/assets/refresh-layout/gif_Taurus.gif)|
-|[Yalantis/Phoenix](https://github.com/Yalantis/Phoenix)|[Yalantis/Taurus](https://github.com/Yalantis/Taurus)
+|                                FlyRefresh                                |                                Classics                                |
+|:------------------------------------------------------------------------:|:----------------------------------------------------------------------:|
+| ![](https://scwang90.github.io/assets/refresh-layout/gif_FlyRefresh.gif) | ![](https://scwang90.github.io/assets/refresh-layout/gif_Classics.gif) |
+|           [FlyRefresh](https://github.com/race604/FlyRefresh)            |                          [ClassicsHeader](#1)                          |
 
-|BattleCity|HitBlock|
-|:---:|:---:|
-|![](https://scwang90.github.io/assets/refresh-layout/gif_BattleCity.gif)|![](https://scwang90.github.io/assets/refresh-layout/gif_HitBlock.gif)|
-|[FunGame/BattleCity](https://github.com/Hitomis/FunGameRefresh)|[FunGame/HitBlock](https://github.com/Hitomis/FunGameRefresh)
+|                                Phoenix                                |                                Taurus                                |
+|:---------------------------------------------------------------------:|:--------------------------------------------------------------------:|
+| ![](https://scwang90.github.io/assets/refresh-layout/gif_Phoenix.gif) | ![](https://scwang90.github.io/assets/refresh-layout/gif_Taurus.gif) |
+|        [Yalantis/Phoenix](https://github.com/Yalantis/Phoenix)        |        [Yalantis/Taurus](https://github.com/Yalantis/Taurus)         |
 
-|WaveSwipe|Material|
-|:---:|:---:|
-|![](https://scwang90.github.io/assets/refresh-layout/gif_WaveSwipe.gif)|![](https://scwang90.github.io/assets/refresh-layout/gif_Material.gif)|
-|[WaveSwipeRefreshLayout](https://github.com/recruit-lifestyle/WaveSwipeRefreshLayout)|[MaterialHeader](https://developer.android.com/reference/android/support/v4/widget/SwipeRefreshLayout.html)
+|                                BattleCity                                |                                HitBlock                                |
+|:------------------------------------------------------------------------:|:----------------------------------------------------------------------:|
+| ![](https://scwang90.github.io/assets/refresh-layout/gif_BattleCity.gif) | ![](https://scwang90.github.io/assets/refresh-layout/gif_HitBlock.gif) |
+|     [FunGame/BattleCity](https://github.com/Hitomis/FunGameRefresh)      |     [FunGame/HitBlock](https://github.com/Hitomis/FunGameRefresh)      |
 
-|StoreHouse|WaterDrop|
-|:---:|:---:|
-|![](https://scwang90.github.io/assets/refresh-layout/gif_StoreHouse.gif)|![](https://scwang90.github.io/assets/refresh-layout/gif_WaterDrop.gif)|
-|[CRefreshLayout](https://github.com/cloay/CRefreshLayout)|[WaterDrop](https://github.com/THEONE10211024/WaterDropListView)
+|                                       WaveSwipe                                       |                                                  Material                                                   |
+|:-------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------:|
+|        ![](https://scwang90.github.io/assets/refresh-layout/gif_WaveSwipe.gif)        |                   ![](https://scwang90.github.io/assets/refresh-layout/gif_Material.gif)                    |
+| [WaveSwipeRefreshLayout](https://github.com/recruit-lifestyle/WaveSwipeRefreshLayout) | [MaterialHeader](https://developer.android.com/reference/android/support/v4/widget/SwipeRefreshLayout.html) |
+
+|                                StoreHouse                                |                                WaterDrop                                |
+|:------------------------------------------------------------------------:|:-----------------------------------------------------------------------:|
+| ![](https://scwang90.github.io/assets/refresh-layout/gif_StoreHouse.gif) | ![](https://scwang90.github.io/assets/refresh-layout/gif_WaterDrop.gif) |
+|        [CRefreshLayout](https://github.com/cloay/CRefreshLayout)         |    [WaterDrop](https://github.com/THEONE10211024/WaterDropListView)     |

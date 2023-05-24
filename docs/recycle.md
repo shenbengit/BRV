@@ -1,60 +1,55 @@
-因为BRV并不需要创建Adapter, 所以很多人可能不知道如何复用相似列表. 实际上更加简单
+BRV does not require creating an Adapter, so many people may not know how to reuse similar lists. In reality, it's even simpler.
 
-首先根据请你了解BRV[三种绑定数据的方式](index.md)
+First, familiarize yourself with the [three data binding methods](index.md) in BRV.
 
-## 使用DataBinding
+## Using DataBinding
 
-如果你使用DataBinding那么就更好实现了. DataBinding的业务逻辑都在Model中,  视图都在XML文件中. 如果UI或者业务相同你注册同样的类和XML文件即可
+If you're using DataBinding, it's even easier to achieve reuse. The business logic of DataBinding is contained in the Model, while the views are defined in XML files. If the UI or business logic is the same, you can register the same class and XML file.
 
 ```kotlin
-// 列表 1
+// List 1
 rv.linear().setup {
     addType<Model>(R.layout.item_simple)
 }.models = getData()
 
-// 列表2
+// List 2
 rv2.linear().setup {
     addType<Model>(R.layout.item_simple)
 }.models = getData()
 ```
 
+### Handling Data Model Differences
 
-<br>
+If the data models are different but the XML is the same, you can use the following two approaches:
 
-### 数据模型差异
+1. Wrap multiple classes into a single class object as the list data (everything is an object).
+   ```kotlin
+   class ComposeModel(var model: Model, var model2: Model2)
 
-如果数据模型不一样, 但是XML一样. 你可以使用以下两种方式
-<br>
+   rv.linear().setup {
+       addType<ComposeModel>(R.layout.item_simple)
+   }.models = getData()
+   ```
+2. Have multiple classes implement a specified interface: [Interface Types](/multi-type/#_4)
+   ```kotlin
+   interface ModelImpl {
+       var text: String // Expose a getter function
+   }
+   class Model(): ModelImpl {
+       override var text: String = "Other text"
+   }
+   class Model2(): ModelImpl {
+       override var text: String = "Other text"
+   }
 
-1. 将多个类包装到一个类对象中作为列表数据(万物皆对象)
-    ```kotlin
-    class ComposeModel(var model: Model, var model2: Model2)
+   rv.linear().setup {
+       addType<ModelImpl>(R.layout.item_simple)
+   }.models = getData()
+   ```
 
-    rv.linear().setup {
-        addType<ComposeModel>(R.layout.item_simple)
-    }.models = getData()
-    ```
-2. 多个类实现指定接口: [接口类型](/multi-type/#_4)
-    ```kotlin
-    interface ModelImpl {
-        var text: String = defaultText // 暴露使用函数
-    }
-    class Model():ModelImpl {
-        override var text: String = otherText
-    }
-    class Model2():ModelImpl {
-        override var text: String = otherText
-    }
+## Implementing the ItemBind Interface
 
-    rv.linear().setup {
-        addType<ModelImpl>(R.layout.item_simple)
-    }.models = getData()
-    ```
-
-
-## 实现ItemBind接口
-
-这种数据绑定形式业务和UI都在一个函数中实现, 所以你重复使用这个数据模型集合, 如果UI相同但是数据有差异参考上面包装数据模型
+With this data binding method, both the business logic and UI are implemented in a single function. You can reuse the same data model collection. If the UI is the same but the data is different, refer to the previous method of wrapping data models.
 
 ```kotlin
 class SimpleModel(var name: String = "BRV") : ItemBind {
@@ -67,20 +62,20 @@ class SimpleModel(var name: String = "BRV") : ItemBind {
 ```
 
 ```kotlin
-// 列表 1
+// List 1
 rv.linear().setup {
     addType<SimpleModel>(R.layout.item_simple)
 }.models = getData()
 
-// 列表2
+// List 2
 rv2.linear().setup {
     addType<SimpleModel>(R.layout.item_simple2)
 }.models = getData()
 ```
 
-## 使用onBind
+## Using onBind
 
-以下这种形式不太方便复用. 本身也只是图方便并不是很推荐大量逻辑场景下使用. 这个你要复制就使用复制粘贴吧....
+The following approach is not very convenient for reuse. It's primarily for quick and simple scenarios, and it's not recommended for complex logic. If you want to copy and paste, feel free to use it.
 
 ```kotlin
 rv.linear().setup {
@@ -91,22 +86,21 @@ rv.linear().setup {
 }.models = getData()
 ```
 
+## Extension Functions
 
-## 扩展函数
-
-完整复用构建列表代码可以直接封装为Kt扩展函数
+You can encapsulate the complete code for building reusable lists as Kotlin extension functions.
 
 ```kotlin
 /**
- * 使用
+ * Usage
  */
-viewBinding.rv1.setupNews{ }.models = listOf<News1Module>()
+viewBinding.rv1.setupNews { }.models = listOf<News1Module>()
 
-val adapter = viewBinding.rv2.setupNews{ }
+val adapter = viewBinding.rv2.setupNews { }
 adapter.models = listOf<News1Module>()
 
 /**
- * adapter ?
+ * Adapter
  */
 fun <T : INews> RecyclerView.setupNews(onItemContainerClick: (T) -> Unit = {}): BindingAdapter =
     linear()
@@ -120,7 +114,7 @@ fun <T : INews> RecyclerView.setupNews(onItemContainerClick: (T) -> Unit = {}): 
         }
 
 /**
- * 定义接口
+ * Define Interface
  */
 interface INews {
     val title: String
@@ -132,7 +126,7 @@ interface INews {
 }
 
 /**
- * 实体类 1
+ * Entity Class 1
  */
 data class News1Module(
     val news1Field: String,
@@ -145,7 +139,7 @@ data class News1Module(
 ) : INews
 
 /**
- * 实体类 2
+ * Entity Class 2
  */
 data class News2Module(
     val news2Field: String,
@@ -169,5 +163,3 @@ data class News2Module(
         get() = news2Field5
 }
 ```
-
-

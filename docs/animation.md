@@ -1,43 +1,42 @@
-列表动画只是实现列表Item出现的动画
+List Animation is used to add animations to the appearance of list items.
 
-## 动画类型
-通过函数快速设置BRV自带的几种动画类型
+## Animation Types
+You can quickly set several built-in animation types provided by BRV using the following function:
 
 ```kotlin
 fun setAnimation(animationType: AnimationType)
 ```
 
-使用`AnimationType`枚举
+The available animation types are specified using the `AnimationType` enum:
 
-| 枚举 | 动画描述 |
+| Enum | Animation Description |
 |-|-|
-| ALPHA | 渐变 |
-| SCALE | 缩放动 |
-| SLIDE_BOTTOM | 底部滑入 |
-| SLIDE_LEFT | 左侧滑入 |
-| SLIDE_RIGHT | 右侧滑入 |
+| ALPHA | Fade-in animation |
+| SCALE | Scale animation |
+| SLIDE_BOTTOM | Slide-in from the bottom |
+| SLIDE_LEFT | Slide-in from the left |
+| SLIDE_RIGHT | Slide-in from the right |
 
+## Custom List Animation
 
-## 自定义列表动画
-
-如果默认的动画无法满足你, 你可以参考自带的`ItemAnimation`子类动画来自定义你要的动画效果
+If the default animations are not sufficient for your needs, you can customize the desired animation effect by referring to the built-in subclasses of `ItemAnimation`.
 
 ```kotlin
 fun setAnimation(itemAnimation: ItemAnimation)
 ```
 
-这里以`AlphaItemAnimation`源码示例
+Here is an example using the source code of `AlphaItemAnimation`:
 
 ```kotlin
 class AlphaItemAnimation @JvmOverloads constructor(private val mFrom: Float = DEFAULT_ALPHA_FROM) : ItemAnimation {
 
     override fun onItemEnterAnimation(view: View) {
-        ObjectAnimator.ofFloat(view, "alpha", mFrom, 1f).setDuration(300).start() // 渐变动画
+        ObjectAnimator.ofFloat(view, "alpha", mFrom, 1f).setDuration(300).start() // Fade-in animation
     }
 
     companion object {
 
-        private val DEFAULT_ALPHA_FROM = 0f // 初始透明度
+        private val DEFAULT_ALPHA_FROM = 0f // Initial opacity
     }
 }
 ```

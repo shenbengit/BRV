@@ -1,28 +1,28 @@
-## 函数
+## Functions
 
-| 函数 | 描述 |
+| Function | Description |
 |-|-|
-| onFastClick | 为指定的Id添加事件监听器 |
-| onClick | 为指定的Id添加点击事件监听器, 但包含防抖动(默认500毫秒内不允许重复点击). 也可以[设置间隔](#_4) |
-| onLongClick | 为指定的Id添加长按事件监听器 |
+| onFastClick | Add an event listener for the specified Id |
+| onClick | Add a click event listener for the specified Id with debounce (prevents repeated clicks within a default interval of 500 milliseconds). You can also [set the interval](#_4) |
+| onLongClick | Add a long click event listener for the specified Id |
 
-> 通过使用Item的布局文件中的控件id可以为任何视图设置点击事件或者长按事件, Item的点击事件就是给Item的根布局添加Id.
+> By using the control's ID in the item's layout file, you can set click or long click events for any view. The click event for an item is added to the root layout of the item by setting its ID.
 
-## 多对一点击事件
+## One-to-Many Click Events
 
-这种使用适用于多个id处理同一个点击业务逻辑
+This approach is useful when multiple IDs need to handle the same click logic.
 
 ```kotlin
 rv.linear().setup {
     addType<SimpleModel>(R.layout.item_simple)
 
     onClick(R.id.item) {
-        // Item设置点击事件, 就要给Item的根布局设置一个id, 这里设置的是R.id.item
+        // Click event for the item, where the root layout of the item has the ID R.id.item
     }
 }.models = getData()
 ```
 
-onClick参数是可变长度. 可以指定多个Id, 并且存在覆盖行为.  onFastClick / onLongClick同理
+The `onClick` parameter is of variable length. You can specify multiple IDs, and there is an override behavior. The same applies to `onFastClick` and `onLongClick`.
 
 ```kotlin
 rv.linear().setup {
@@ -32,53 +32,53 @@ rv.linear().setup {
 
     }
     onClick(R.id.btn_submit) {
-        // it就是你设置的id
+        // `it` refers to the ID you set
     }
 
     onClick(R.id.btn_submit) {
-        // 这会覆盖上面的回调逻辑, 因为两者设置的Id相同
+        // This will override the previous callback logic because the IDs are the same
     }
 }.models = getData()
 ```
 
-## 一对一点击事件
+## One-to-One Click Events
 
-既一个Id对应一个点击事件回调. 那么可以使用以下更加简洁的用法
+When there is a one-to-one mapping between an ID and a click event callback, you can use the following simplified syntax:
 
 ```kotlin
 rv.linear().setup {
     addType<SimpleModel>(R.layout.item_simple)
 
     R.id.tv_simple.onClick {
-        toast("点击Text")
+        toast("Click Text")
     }
     R.id.item.onLongClick {
-        toast("点击Item")
+        toast("Click Item")
     }
 }.models = getData()
 ```
 
-## 点击防抖动
+## Click Debouncing
 
-> **防抖动**: 一定间隔时间内只会响应第一次的点击. 避免用户快速点击导致重复响应点击事件
+> **Debouncing**: Responding only to the first click within a certain interval, preventing repeated response to click events caused by fast user clicks.
 
-BRV支持防抖动很简单, 使用`onClick`函数设置监听事件即可, `onFastClick`即不包含防抖动的点击事件.
+Enabling click debouncing in BRV is straightforward. Simply use the `onClick` function to set the event listener. `onFastClick` does not include click debouncing.
 
-以下代码可以修改防抖动间隔时间(默认为500毫秒)
+The following code can modify the debounce interval (default is 500 milliseconds):
 
-=== "全局"
-    ```kotlin
-    BRV.clickThrottle = 1000 // 单位毫秒
-    ```
+=== "Global Setting"
+```kotlin
+BRV.clickThrottle = 1000 // in milliseconds
+```
 
-=== "单例"
-    ```kotlin hl_lines="2"
-    binding.rv.linear().setup {
-        clickThrottle = 1000 // 覆盖全局设置
+=== "Per-instance Setting"
+```kotlin hl_lines="2"
+binding.rv.linear().setup {
+clickThrottle = 1000 // override the global setting
 
         addType<SimpleModel>(R.layout.item_simple)
         R.id.item.onClick {
-            toast("点击文本")
+            toast("Click Text")
         }
     }.models = getData()
     ```

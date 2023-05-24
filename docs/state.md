@@ -1,36 +1,31 @@
-缺省页对于一个用户体验良好的应用非常重要
+The default page is very important for a user-friendly application.
 
-BRV采用集成一个非常优秀缺省页库 [StateLayout](https://github.com/liangjingkanji/StateLayout)来实现列表缺省页
+BRV integrates a highly efficient default page library called [StateLayout](https://github.com/liangjingkanji/StateLayout) to implement default pages for lists.
 
-> 已经内嵌在BRV库中, 无需再次依赖StateLayout. 如果你的列表同时包含下拉刷新/上拉加载我建议使用[PageRefreshLayout](refresh.md)替代StateLayout
+> StateLayout is already embedded in the BRV library, so there is no need to depend on StateLayout separately. If your list includes both pull-to-refresh and load-more functionality, I recommend using [PageRefreshLayout](refresh.md) instead of StateLayout.
 
-<br>
+Main Features:
 
-主要特点
+- [x] Elegant function design
+- [x] Partial default pages
+- [x] Layout or code declaration
+- [x] Global/singleton configuration
+- [x] Listening to default page display
+- [x] Custom animations
+- [x] Multiple state default pages
+- [x] Network request callbacks
+- [x] Passing any object as a tag
+- [x] Quick configuration for click-to-retry
+- [x] Asynchronous threads
+- [x] Immediate display of error default page when there is no network
+- [x] Automatic display of list default page when used with lists
+- [x] Automatic display of default page when used with network requests
 
-- [x] 优雅的函数设计
-- [x] 局部缺省页
-- [x] 布局或代码声明皆可
-- [x] 全局/单例配置
-- [x] 监听缺省页显示
-- [x] 自定义动画
-- [x] 多种状态缺省页
-- [x] 网络请求回调
-- [x] 传递任意对象作为标签
-- [x] 快速配置点击重试
-- [x] 异步线程
-- [x] 无网络立即显示错误缺省页
-- [x] 配合列表使用自动化显示列表缺省页
-- [x] 配合网络请求自动化显示缺省页
+![StateLayout Demo](https://i.loli.net/2021/08/14/cliN9VtnAfjb1Z4.gif)
 
-<br>
+## Usage
 
-<img src="https://i.loli.net/2021/08/14/cliN9VtnAfjb1Z4.gif" width="250"/>
-
-
-## 使用
-
-第一步, 在Application中初始化缺省页
+Step 1: Initialize the default page in your Application class.
 
 ```kotlin
 StateConfig.apply {
@@ -40,30 +35,30 @@ StateConfig.apply {
 }
 ```
 
-第二步, 创建缺省页
+Step 2: Create the default page.
 
-=== "布局创建"
-    ```xml
-    <com.drake.statelayout.StateLayout
-        android:id="@+id/state"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+=== "Layout Creation"
+```xml
+<com.drake.statelayout.StateLayout
+android:id="@+id/state"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </com.drake.statelayout.StateLayout>
-    ```
-=== "代码创建"
-    建议在XML布局中创建, 可保持代码可读性且避免不必要的问题发生, 性能也更优
-    ```kotlin
-    val state = stateCreate() // 在Activity/Fragment直接函数创建缺省页, `rv.stateCreate()`也可以, 但是非常不推荐使用
-    ```
+```
+=== "Code Creation"
+It is recommended to create the StateLayout in XML layout to maintain code readability and avoid unnecessary issues for better performance.
+```kotlin
+val state = stateCreate() // Create the default page function directly in the Activity/Fragment. `rv.stateCreate()` can also be used, but it is strongly discouraged.
+```
 
-> CoordinatorLayout+ViewPager`要求使用的状态缺省页的XML根布局为`NestedScrollView`, 否则显示缺省页后无法正常滑动
+> For CoordinatorLayout+ViewPager, the root layout of the default page XML must be NestedScrollView in order to scroll correctly after displaying the default page.
 
-第三步, 创建列表
+Step 3: Create the list.
 
 ```kotlin
 rv.linear().setup {
@@ -72,27 +67,30 @@ rv.linear().setup {
 }.models = getData()
 ```
 
-第四步, 显示缺省页
+Step 4: Show the default page.
+
 ```kotlin
-state.showLoading()  // 加载中
-state.showContent() // 加载成功
-state.showError() // 加载错误
-state.showEmpty() // 加载失败
+state.showLoading()  // Show loading state
+state.showContent() // Show content
+state.showError() // Show error state
+state.showEmpty() // Show empty state
 ```
 
 ## StateLayout
 
-StateLayout缺省页库非常推荐使用, BRV内部集成实现列表缺省页给开发者使用
+StateLayout is a highly recommended default page library. BRV internally integrates it to provide default pages for lists to developers.
 
-如果你想要自定义缺省页动画以及缺省页的生命周期监听建议你阅读以下文档
+If you want to customize the default page animations and listen to the lifecycle of the default page, I recommend reading the following documentation:
 
 - [GitHub](https://github.com/liangjingkanji/StateLayout/)
-- [使用文档](https://liangjingkanji.github.io/StateLayout)
+- [Documentation](https://liangjingkanji.github.io/StateLayout)
 
-## 骨骼动画
+## Skeleton Animation
 
-骨骼动画实际上就是对应布局的动画或者图片
+Skeleton animation refers to the animation or image corresponding to the layout.
 
-brv的骨骼动画同样由StateLayout实现: [骨骼动画](https://liangjingkanji.github.io/StateLayout/skeleton/)
+BRV implements skeleton animation using StateLayout. You can refer to the [Skeleton Animation](https://liangjingkanji.github.io/
 
-具体实现代码示例可以阅读[sample](https://github.com/liangjingkanji/BRV/blob/857e33e2bbc80bbdb9b5dec364012ff353b74d5a/sample/src/main/java/com/drake/brv/sample/ui/fragment/SkeletonFragment.kt)
+StateLayout/skeleton/) documentation for specific implementation code examples.
+
+For code examples, you can refer to the [sample](https://github.com/liangjingkanji/BRV/blob/857e33e2bbc80bbdb9b5dec364012ff353b74d5a/sample/src/main/java/com/drake/brv/sample/ui/fragment/SkeletonFragment.kt) in the BRV repository.

@@ -1,16 +1,18 @@
-<img src="https://s2.loli.net/2022/04/24/JgSrqjWAP26b8x5.gif" width="250"/>
+The provided code demonstrates how to add header and footer layouts to a RecyclerView using the BRV library:
 
-1.  头布局和脚布局在rv中算作一个item, 所以计算`position`的时候应当考虑其中
-2.  头布局和脚布局也需要使用`addType`函数添加类型
+1. Both the header and footer layouts are considered as items within the RecyclerView, so when calculating the position, you need to take them into account.
+2. You need to use the `addType` function to add types for the header and footer layouts.
 
+Here's an example of how to add header and footer layouts using BRV:
 
 ```kotlin
 binding.rv.linear().setup {
     addType<Model>(R.layout.item_simple)
 
     /**
-     * BRV的数据集 = Header + Footer + Models
-     * 所以本质上他们都是一组多类型而已, 分出来只是为了方便替换Models而不影响Header和Footer
+     * The BRV data set = Header + Footer + Models
+     * So essentially, the header and footer layouts are just another group of multiple types.
+     * Separating them out is to facilitate the replacement of Models without affecting the Header and Footer.
      */
 
     addType<Header>(R.layout.item_header)
@@ -21,45 +23,35 @@ binding.rv.bindingAdapter.addHeader(Header(), animation = true)
 binding.rv.bindingAdapter.addFooter(Footer(), animation = true)
 ```
 
-不使用上面介绍的方法实现联动列表的Header还有以下解决方案
+If you don't want the default page to overlap with the header, you can use the following solutions:
 
-1. 如果你不想缺省页覆盖Header请使用CoordinatorLayout来实现Header效果, 因为`PageRefreshLayout`的缺省页功能会导致整个列表可能都会被缺省页遮挡
-1. 如果只是不想Header或者Footer干扰BRV可以使用[ConcatAdapter](https://developer.android.com/reference/androidx/recyclerview/widget/ConcatAdapter)实现
-1. 使用`ScrollView/NestedScrollView`嵌套rv也可以实现Header但会导致其失去复用item效果, 列表存在大量数据可能会造成卡顿(如果数据量小可以忽略)
+1. If you don't want the default page to cover the header, you can use the `CoordinatorLayout` to implement the header effect. The default page functionality of `PageRefreshLayout` can cause the entire list to be covered by the default page.
+2. If you only want to prevent the header or footer from interfering with BRV, you can use [ConcatAdapter](https://developer.android.com/reference/androidx/recyclerview/widget/ConcatAdapter) to achieve it.
+3. You can use a `ScrollView/NestedScrollView` to nest the RecyclerView to implement the header, but it will cause the RecyclerView to lose the item reuse effect. If there is a large amount of data in the list, it may cause lag (if the data volume is small, this can be ignored).
 
-<br>
+## Partial Empty State for the List
 
+If you are using the `CoordinatorLayout` solution to address the issue of the empty state overlapping the header, but you want the pull-to-refresh to start from the top of the page, you can refer to the implementation code in the demo's `PageNestedHeaderFragment`. Manually specify the empty state to avoid overlapping the header.
 
-## 列表局部缺省页
-
-如果你使用`CoordinatorLayout`方案来解决缺省页覆盖头部问题, 但是希望页面顶部开始下拉刷新
-
-请参考demo中的`PageNestedHeaderFragment`实现代码. 手动指定缺省页避免覆盖头部
-
-```kotlin
+```xml
 <com.drake.brv.PageRefreshLayout
     android:id="@+id/page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:page_rv="@id/rv"
-    app:page_state="@id/state">
+    app:page_state="@id/state"/>
 ```
 
-1. `app:page_rv` 指定嵌套的rv
-1. `app:page_state` 指定嵌套的缺省页
+1. Use the `app:page_rv` attribute to specify the nested RecyclerView.
+2. Use the `app:page_state` attribute to specify the nested empty state.
 
-## 函数
+## Functions
 
-| 函数 | 描述 |
+| Function | Description |
 |-|-|
-| addHeader / addFooter | 添加头布局/脚布局 |
-| removeHeader / removeFooter | 删除头布局/脚布局 |
-| removeHeaderAt / removeFooterAt | 删除指定索引的头布局/脚布局 |
-| clearHeader / clearFooter | 清除全部头布局/脚布局 |
-| isHeader / isFooter | 指定索引是否是头布局/脚布局 |
-| headerCount / footerCount | 头布局/脚布局数量 |
-
-
-
-
-
+| addHeader / addFooter | Add a header layout or a footer layout. |
+| removeHeader / removeFooter | Remove the header layout or the footer layout. |
+| removeHeaderAt / removeFooterAt | Remove the header layout or the footer layout at the specified index. |
+| clearHeader / clearFooter | Clear all header layouts or footer layouts. |
+| isHeader / isFooter | Check if the specified index is a header layout or a footer layout. |
+| headerCount / footerCount | Get the count of header layouts or footer layouts. |

@@ -1,13 +1,10 @@
-本章节说的拉取更多不是上拉加载更多, 而是下拉加载更多. 常见的应用场景就是聊天界面下拉取加载历史记录
+The section discusses the concept of loading more by pulling down, not by pulling up. A common use case is loading previous chat history in a chat interface.
 
-<br>
-例如聊天记录界面, 最新的消息在底部, 下拉列表会触发加载下一页. 这种需求在BRV中只需要一行代码(扩展自[SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout))
-
-<br>
+For example, in a chat history screen, the latest messages are at the bottom, and pulling down the list triggers loading the next page. In BRV, achieving this behavior requires just one line of code, which is an extension of [SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout).
 
 <img src="https://i.loli.net/2021/08/14/J9ZEOlKGHsQygwV.gif" width="250"/>
 
-> 向下拉取加载更多其实本质上是将rv反转, 再将内容布局反转(此时内容布局就是正常显示的).
+> Loading more by pulling down is essentially achieved by reversing the RecyclerView and reversing the layout of the content view (which is now displayed normally).
 
 ```kotlin hl_lines="8"
 override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -20,17 +17,17 @@ override fun onActivityCreated(savedInstanceState: Bundle?) {
     page.upFetchEnabled = true
 
     page.onRefresh {
-        // 模拟网络请求2秒后成功
+        // Simulating a network request that succeeds after 2 seconds
         postDelayed({
             val data = getData()
             addData(data) { index <= 2 }
         }, 1000)
-    }.showLoading() //  加载中(缺省页)
+    }.showLoading() // Show loading state (default page)
 }
 ```
-除了高亮的一个属性设置, 其他代码和正常一样
+Except for the highlighted property, the rest of the code remains the same as usual.
 
-布局代码
+Layout code:
 
 ```xml
 <com.drake.brv.PageRefreshLayout
@@ -46,10 +43,10 @@ override fun onActivityCreated(savedInstanceState: Bundle?) {
         app:reverseLayout="true"
         app:stackFromEnd="true" />
 
-    <!--stackFromEnd=true 防止UpFetch时数据不满一屏幕的时候, 对齐底部而不是顶部-->
-    <!--reverseLayout=true rv数据排列顺序反转-->
+    <!--stackFromEnd=true ensures that when using UpFetch, the data aligns to the bottom instead of the top if it doesn't fill the screen-->
+    <!--reverseLayout=true reverses the order of the data in the RecyclerView-->
 
 </com.drake.brv.PageRefreshLayout>
 ```
 
-使用`app:page_upFetchEnabled`属性也可以配置
+You can also use the `app:page_upFetchEnabled` attribute to configure the behavior.

@@ -1,19 +1,19 @@
-BRV框架并不影响原有rv功能和组件使用. 这里列举一些常用或者推荐的第三方框架使用案例
+The BRV framework does not affect the functionality and usage of the original RecyclerView and its components. Here are some commonly used or recommended third-party frameworks and their usage examples:
 
 <br>
-<p align="center"><strong>非常欢迎编辑贡献更好的扩展框架, 点击文档右上角小铅笔可直接修订本页面 ↗</strong></p>
+<p align="center"><strong>Contributions to this list of extension frameworks are highly welcome. Click the small pencil icon in the top right corner of the document to directly edit this page ↗</strong></p>
 <br>
 
-| 框架 | 描述 |
+| Framework | Description |
 |-|-|
-| [looping-layout](https://github.com/BeksOmega/looping-layout) | 循环滚动列表
-| [PathLayoutManager](https://github.com/wuyr/PathLayoutManager) | 自定义列表滚动轨迹 |
-| [ZLayoutManager](https://github.com/mcxtzhang/ZLayoutManager) | 仿探探卡片堆叠切换 |
-| [CarouselLayoutManager](https://github.com/Azoft/CarouselLayoutManager) | 卡片垂直/水平堆叠切换 |
-| [FanLayoutManager](https://github.com/simplepeng/FanLayoutManager) | 封面列表 |
-| [PagerGridLayoutManager](https://github.com/shenbengit/PagerGridLayoutManager) | 网格分页列表 |
-| [ZoomRecylerLayout](https://github.com/Spikeysanju/ZoomRecylerLayout) | 滑动时缩放效果列表 |
-| [Linkage-RecyclerView](https://github.com/KunMinX/Linkage-RecyclerView) | 二级联动列表 |
-| [SwipeToActionLayout](https://github.com/st235/SwipeToActionLayout) | 列表侧滑按钮 |
-| [flexbox-layout](https://github.com/google/flexbox-layout) | 谷歌出品的FlexBox流式布局(伸缩布局) |
-| [SpannedGridLayoutManager](https://github.com/jmartinesp/SpannedGridLayoutManager) | 根据SpanSize重新排列列表来填满 |
+| [looping-layout](https://github.com/BeksOmega/looping-layout) | Looping scrollable list |
+| [PathLayoutManager](https://github.com/wuyr/PathLayoutManager) | Customizable path-based scrolling for lists |
+| [ZLayoutManager](https://github.com/mcxtzhang/ZLayoutManager) | Tinder-like card stack switching |
+| [CarouselLayoutManager](https://github.com/Azoft/CarouselLayoutManager) | Card stack switching vertically or horizontally |
+| [FanLayoutManager](https://github.com/simplepeng/FanLayoutManager) | Cover flow list |
+| [PagerGridLayoutManager](https://github.com/shenbengit/PagerGridLayoutManager) | Grid paged list |
+| [ZoomRecylerLayout](https://github.com/Spikeysanju/ZoomRecylerLayout) | Zoom effect on scrolling list |
+| [Linkage-RecyclerView](https://github.com/KunMinX/Linkage-RecyclerView) | Two-level linked list |
+| [SwipeToActionLayout](https://github.com/st235/SwipeToActionLayout) | List with swipe buttons |
+| [flexbox-layout](https://github.com/google/flexbox-layout) | Google's Flexbox flow layout |
+| [SpannedGridLayoutManager](https://github.com/jmartinesp/SpannedGridLayoutManager) | Rearranges the list based on SpanSize to fill the space |

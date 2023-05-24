@@ -1,75 +1,72 @@
-<img src="https://i.loli.net/2021/08/14/9EUvCSnONYixWDT.gif" width="250"/>
-
-为数据模型实现接口`ItemDrag`即可开启拖拽功能
+To enable drag and drop functionality, implement the `ItemDrag` interface for your data model:
 
 ```kotlin
 data class DragModel(override var itemOrientationDrag: Int = ItemOrientation.ALL) : ItemDrag
 ```
 
-> 注意如果你的数据模型被Gson反序列化后, 会删除所有的字段初始化值
-
-这里我们可以重写访问函数来解决问题, 让该值固定返回
+Note that if your data model is deserialized using Gson, it will remove all field initialization values. To ensure the value is always returned, you can override the accessor function:
 
 ```kotlin hl_lines="3"
 class DragModel() : ItemDrag {
     override var itemOrientationDrag: Int = 0
-        get() = ItemOrientation.ALL // 只会返回该值
+        get() = ItemOrientation.ALL // Always return this value
 }
 ```
 
 ## ItemOrientation
 
-该类包含拖拽可配置的方向
+The `ItemOrientation` class includes configurable drag directions:
 
-|  字段  |    描述  |
-| ---- | ---- |
-|   `ALL`   |   全部方向   |
-|   `VERTICAL`   |   垂直方向   |
-|   `HORIZONTAL`   |   水平方向   |
-|   `LEFT`   |   向左   |
-|   `RIGHT`   |   向右   |
-|   `UP`   |   向上   |
-|   `DOWN`   |   向下   |
-|   `NONE`   |   禁用   |
+| Field        | Description          |
+|--------------|----------------------|
+| `ALL`        | All directions       |
+| `VERTICAL`   | Vertical direction   |
+| `HORIZONTAL` | Horizontal direction |
+| `LEFT`       | Left direction       |
+| `RIGHT`      | Right direction      |
+| `UP`         | Up direction         |
+| `DOWN`       | Down direction       |
+| `NONE`       | Disabled             |
 
-## 自定义
+## Customization
 
-如果想要扩展ItemTouchHelper或监听可以给BindingAdapter的变量`itemTouchHelper`赋值
+If you want to extend `ItemTouchHelper` or listen to its events, you can assign a value to the `itemTouchHelper` variable in the `BindingAdapter`:
 
 ```kotlin
 rv.linear().setup {
-  addType<Model>(R.layout.item)
+    addType<Model>(R.layout.item)
 
-  itemTouchHelper = ItemTouchHelper(object : DefaultItemTouchCallback(this) {
+    itemTouchHelper = ItemTouchHelper(object : DefaultItemTouchCallback(this) {
 
-    /**
-     * 当拖拽动作完成且松开手指时触发
-     */
-    open fun onDrag(
-        source: BindingAdapter.BindingViewHolder,
-        target: BindingAdapter.BindingViewHolder
-    ) {
-        // 这是拖拽交换后回调, 这里可以同步服务器
-    }
+        /**
+         * Called when the drag action is completed and the finger is released.
+         */
+        open fun onDrag(
+            source: BindingAdapter.BindingViewHolder,
+            target: BindingAdapter.BindingViewHolder
+        ) {
+            // This is called after the drag and drop operation, you can synchronize with the server here
+        }
 
-  })
+    })
 
 }.models = data
 ```
 
-> `DefaultItemTouchCallback`是BRV内部的触摸事件处理, 你可以覆写他或者直接`ItemTouchHelper.Callback`
+Note that `DefaultItemTouchCallback` is the default touch event handling in BRV. You can override it or directly use `ItemTouchHelper.Callback`.
 
-## 点击拖拽
+## Click and Drag
 
-直接点击Item开始拖拽会存在手势冲突问题, 因为滑动列表和拖拽排序都是移动手势. 所以建议你拖拽item的某个小图标开始拖拽(拖拽item则滑动列表)
+Directly clicking on an item to start dragging can cause gesture conflicts because both scrolling the list and dragging for sorting require movement gestures. Therefore, it is recommended to initiate dragging from a small icon within the item (dragging the icon will scroll the list).
 
-示例代码
+Here's an example code:
+
 ```kotlin
 rv.linear().setup {
     addType<DragModel>(R.layout.item_drag)
     onBind {
         findView<View>(R.id.btnDrag).setOnTouchListener { _, event ->
-            if (event.action == MotionEvent.ACTION_DOWN) { // 如果手指按下则开始拖拽
+            if (event.action == MotionEvent.ACTION_DOWN) { // Start dragging when the finger is pressed
                 itemTouchHelper?.startDrag(this)
             }
             true

@@ -1,7 +1,6 @@
+To implement flexible layouts in BRV, you can add the Google open-source library [flexbox-layout](https://github.com/google/flexbox-layout).
 
-BRV对于伸缩布局的实现可以自行添加Google开源库 [flexbox-layout](https://github.com/google/flexbox-layout)
-
-添加依赖
+Add the dependency to your project:
 
 ```groovy
 dependencies {
@@ -9,10 +8,7 @@ dependencies {
 }
 ```
 
-
-
-然后创建列表
-
+Then, create a list:
 
 <img src="https://i.loli.net/2021/08/14/KYkHmyCrDogiLsS.png" width="250"/>
 
@@ -24,3 +20,4 @@ rv.setup {
 }.models = getData()
 ```
 
+In this example, `FlexboxLayoutManager` is set as the layout manager for the `RecyclerView`. You can then use the `setup` function to configure your list, specifying the type and layout resource for the items. Finally, assign the data to the `models` property to populate the list.

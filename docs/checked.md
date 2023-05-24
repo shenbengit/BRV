@@ -1,89 +1,87 @@
 <img src="https://i.loli.net/2021/08/14/MIe74pdKf5c1hTX.gif" width="250"/>
 
-可编辑/多选列表在开发中很常见, BRV可以短短几行代码就可以实现一个选择模式: [Demo](https://github.com/liangjingkanji/BRV/blob/master/sample/src/main/java/com/drake/brv/sample/ui/fragment/CheckModeFragment.kt)
+Editable/multi-select lists are common in development, and with just a few lines of code, BRV can implement a selection mode: [Demo](https://github.com/liangjingkanji/BRV/blob/master/sample/src/main/java/com/drake/brv/sample/ui/fragment/CheckModeFragment.kt)
 
-## 多选列表
+## Multi-select List
 
-1. 创建列表
+1. Create the list:
     ```kotlin
     rv.linear().setup {
         addType<CheckModel>(R.layout.item_check_mode)
     }.models = getData
     ```
 
-2. 为Model创建一个字段用于保存选择的状态
+2. Add a field to the Model for storing the selection state:
     ```kotlin hl_lines="2"
     data class CheckModel(
         var checked: Boolean = false,
         var visibility: Boolean = false
-    ) : BaseObservable() // BaseObservable 这是DataBinding的数据绑定写法
-    ```
+    ) : BaseObservable() // BaseObservable is used for DataBinding
 
-3. 监听选择事件
+3. Listen for selection events:
     ```kotlin hl_lines="3"
     rv.linear().setup {
        addType<CheckModel>(R.layout.item_check_mode)
        onChecked { position, isChecked, isAllChecked ->
             val model = getModel<CheckModel>(position)
             model.checked = isChecked
-            model.notifyChange() // 通知UI跟随数据变化
+            model.notifyChange() // Notify UI of data changes
        }
     }.models = getData
     ```
 
-4. 触发选择事件
+4. Trigger the selection event:
     ```kotlin hl_lines="11"
     rv.linear().setup {
        addType<CheckModel>(R.layout.item_check_mode)
        onChecked { position, isChecked, isAllChecked ->
             val model = getModel<CheckModel>(position)
             model.checked = isChecked
-            model.notifyChange() // 通知UI跟随数据变化
+            model.notifyChange() // Notify UI of data changes
        }
     
        onClick(R.id.cb, R.id.item) {
             var checked = getModel<CheckModel>().checked
-            setChecked(adapterPosition, !checked) // 在点击事件中触发选择事件, 即点击列表条目就选中
+            setChecked(adapterPosition, !checked) // Trigger the selection event when clicking on a list item to select/deselect it
        }
     }.models = getData
     ```
 
-
 <br>
 
-## 默认选择
+## Default Selection
 
-如果你想默认选中某些Item, 应当使用`setChecked`函数去设置, 而不是直接在Model中设置`isChecked`属性为true(这是不会触发选中回调的)
+If you want to default select certain items, you should use the `setChecked` function instead of directly setting the `isChecked` property to true in the Model (this won't trigger the selection callback).
 
-例如在Demo中就有这么一行代码默认选中第一个Item
+For example, in the Demo, there is a line of code that defaults to selecting the first item:
 
 ```kotlin
-// 切换选择模式
+// Toggle selection mode
 tv_manage.setOnClickListener {
     adapter.toggle()
-    rv.bindingAdapter.setChecked(0, true) // 一开始就选中第一个
+    rv.bindingAdapter.setChecked(0, true) // Select the first item initially
 }
 ```
 
-## 数据变化
+## Data Changes
 
-如果数据位置发生变化, 例如增删, 请使用`BindingAdapter.checkedPosition.clear()`清除选中位置集合(也不一定就是清除), 否则可能发生数据错误导致的无法单选
+If the data positions change, such as with additions or deletions, use `BindingAdapter.checkedPosition.clear()` to clear the selected position collection (or perform necessary operations), otherwise data errors may occur, leading to the inability to single-select.
 
-## 函数
+## Functions
 
-支持选择模式的常用函数
+Common functions for selection mode support:
 
-| 函数 | 描述 |
+| Function | Description |
 |-|-|
-| allChecked | 全选或者全部取消全选 |
-| singleMode | 是否为单选模式 |
-| isCheckedAll | 是否被全选 |
-| checkedReverse | 反选 |
-| setChecked | 指定位置的条目是否选中 |
-| checkedSwitch | 切换选中状态 |
-| setCheckableType | 指定的type才允许选中 |
-| getCheckedModels | 得到选择的数据模型集合 |
-| checkedPosition | 被选择的item的position集合 |
-| checkedCount | 已选择数量 |
-| onChecked | 选择回调 |
+| allChecked | Select or deselect all items |
+| singleMode | Check if it is in single-selection mode |
+| isCheckedAll | Check if all items are selected |
+| checkedReverse | Reverse the selection |
+| setChecked | Set whether the item at the specified position is selected |
+| checkedSwitch | Toggle the selection state |
+| setCheckableType | Specify the type(s) that can be selected |
+| getCheckedModels | Get the collection of selected data models |
+| checkedPosition | Collection of positions of selected items |
+| checkedCount | Number of items selected |
+| onChecked | Selection callback |
 
