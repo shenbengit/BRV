@@ -1,18 +1,16 @@
 <p align="center"><img src="https://i.imgur.com/S0IjjHS.jpg" alt="1600" width="25%"/></p>
 
 <p align="center">
-    <strong>可能是最强大的RecyclerView框架</strong>
+    <strong>Probably the most powerful RecyclerView framework</strong>
     <br>
     <br>
-    <a href="http://liangjingkanji.github.io/BRV/">使用文档</a>
-    | <a href="https://github.com/liangjingkanji/document/blob/master/visit-pages.md">无法访问?</a>
-    | <a href="https://liangjingkanji.github.io/document/">贡献代码</a>
-    | <a href="https://github.com/liangjingkanji/BRV/releases/latest/download/brv-sample.apk">下载体验</a>
+    <a href="https://shenbengit.github.io/BRV/">Documentation</a>
+    | <a href="https://github.com/liangjingkanji/document/blob/master/visit-pages.md">Can't Access?</a>
+    | <a href="https://liangjingkanji.github.io/document/">Contribute Code</a>
+    | <a href="https://github.com/liangjingkanji/BRV/releases/latest/download/brv-sample.apk">Download Demo App</a>
     <br>
     <img src="https://i.imgur.com/G7WYYXb.jpg" width="350"/>
 </p>
-
-
 
 <br>
 
@@ -29,52 +27,50 @@
 
 <p align="center"><img src="https://github.com/liangjingkanji/BRV/blob/master/docs/image/preview.png?raw=true" align="center" width="30%;" /></p>
 
-本框架在不影响RecyclerView的任何函数组件使用基础上开发. 本项目承诺会永远保持社区维护
-
-欢迎将本项目文档/注释进行国际化翻译, 感谢您的支持! <br>
-Welcome to international translation of this project's documents/notes, thank you for your support!
+This framework is developed without affecting any basic functions/components of RecyclerView. This project promises to be maintained by the community forever.
 
 <br>
-<p align="center"><strong>欢迎贡献代码/问题</strong></p>
+<p align="center"><strong>Contribute Code / Report Issues</strong></p>
 <br>
 
-- [x] 开发效率No.1
-- [x] 永远保持社区维护
-- [x] 低代码/高扩展性
-- [x] 优秀的源码/注释/文档/示例
+- [x] Development efficiency No.1
+- [x] Maintained by the community forever
+- [x] Low code/high extensibility
+- [x] Excellent source code/comments/documentation/examples
 
 <br>
 
-## 功能
+## Features
 
-- [x] 快速创建多类型列表
-- [x] 一对一/一对多创建多类型
-- [x] 添加头布局和脚布局
-- [x] 点击(防抖动)/长按事件
-- [x] 分组(展开折叠/递归层次/展开置顶/拖拽/侧滑/多类型/单一展开模式)
-- [x] 悬停/粘性头部
-- [x] 快速创建分割线/间隔
-- [x] 切换模式(例如切换编辑模式)
-- [x] 选择模式(多选/单选/全选/取消全选/反选)
-- [x] 拖拽排序
-- [x] 侧滑删除
-- [x] 下拉刷新(Refresh) | 上拉加载(LoadMore) | 下拉加载(UpFetch), 由[SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout)实现
-- [x] 预加载(Preload)
-- [x] 对比数据更新(Diffs)
-- [x] 自动分页加载数据
-- [x] 列表动画/骨骼图动画
-- [x] 列表缺省页, 由[StateLayout](https://github.com/liangjingkanji/StateLayout)实现
-- [x] 支持DataBinding
-- [x] 支持ViewBinding
-- [x] 可添加[FlexboxLayoutManager](https://github.com/google/flexbox-layout)实现伸缩列表自动换行
-- [x] 可添加[Net](https://github.com/liangjingkanji/Net)(强大的协程网络请求)实现自动化网络请求
+- [x] Quickly create multi-type lists
+- [x] One-to-one/one-to-many multi-type creation
+- [x] Add header and footer views
+- [x] Click (debounce)/long press events
+- [x] Grouping (expand/collapse/recursively/nested/expand and stick/top/ drag and swipe/multi-type/single expand mode)
+- [x] Sticky header
+- [x] Quickly create dividers/spaces
+- [x] Switch mode (e.g., switch to edit mode)
 
 
-## 安装
+- [x] Selection mode (multi-select/single-select/select all/deselect all/invert selection)
+- [x] Drag and drop sorting
+- [x] Swipe to delete
+- [x] Pull-down refresh (Refresh) | Pull-up load more (LoadMore) | Pull-down load more (UpFetch), implemented by [SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout)
+- [x] Preload
+- [x] Data update with diffing
+- [x] Automatic pagination loading
+- [x] List animation/skeleton animation
+- [x] List empty state, implemented by [StateLayout](https://github.com/liangjingkanji/StateLayout)
+- [x] Support DataBinding
+- [x] Support ViewBinding
+- [x] Add [FlexboxLayoutManager](https://github.com/google/flexbox-layout) to automatically wrap flexbox layout
+- [x] Add [Net](https://github.com/liangjingkanji/Net) (powerful coroutine network request) to automate network requests
 
-添加远程仓库根据创建项目的 Android Studio 版本有所不同
+## Installation
 
-Android Studio Arctic Fox以下创建的项目 在项目根目录的 build.gradle 添加仓库
+Add the remote repository to the root build.gradle file, depending on the Android Studio version of your project creation:
+
+For projects created in Android Studio Arctic Fox and below, add the repository to the root build.gradle file:
 
 ```groovy
 allprojects {
@@ -85,9 +81,9 @@ allprojects {
 }
 ```
 
-Android Studio Arctic Fox以上创建的项目 在项目根目录的 settings.gradle 添加仓库
+For projects created in Android Studio Arctic Fox and above, add the repository to the settings.gradle file:
 
-```kotlin
+```groovy
 dependencyResolutionManagement {
     repositories {
         // ...
@@ -96,7 +92,7 @@ dependencyResolutionManagement {
 }
 ```
 
-然后在 module 的 build.gradle 添加依赖框架
+Then, add the framework dependency to the module's build.gradle file:
 
 ```groovy
 dependencies {
@@ -105,7 +101,7 @@ dependencies {
 }
 ```
 
-项目根目录中 gradle.properties 添加
+Add the following lines to the gradle.properties file in the project root directory:
 
 ```
 android.enableJetifier=true
@@ -127,4 +123,3 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
-
